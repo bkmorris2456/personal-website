@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# My Personal Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My implementation of a personal portfolio web application using React.
+
+## Project Status
+
+This project has just started in development. I plan to first structure the webpages and add some initial styling, then I will move towards
+being able to store and access other projects I work on, and having them displayed in the projects page of my website.
 
 ## Available Scripts
 
