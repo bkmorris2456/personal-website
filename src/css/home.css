@@ -1,0 +1,21 @@
+#profile-pic {
+    display: flex;
+    width: 30%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 10vh;
+    border-radius: 5px;
+    border-color: black;
+}
+
+#summary-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    max-width: 40%;
+}
