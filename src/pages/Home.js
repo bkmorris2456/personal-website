@@ -2,6 +2,9 @@ import Navbar from "../components/Navbar";
 import "../css/main.css";
 import "../css/home.css";
 import ProfileImage from '../images/IMG_7940.jpg';
+import Instagram from '../images/insta-icon.jpg'
+import LinkedIn from '../images/linkedin-icon.jpg'
+import Github from '../images/github-icon.png'
 import { Box, Grid, Typography } from "@mui/material";
 
 function Home() {
@@ -33,7 +36,19 @@ function Home() {
 
             <hr></hr>
 
-            <p>Insert social media icons/links here!!</p>
+            <div id="logo-containers">
+
+                    <a href="https://www.instagram.com/bmorris56/">
+                        <img src={Instagram} alt="Instagram Icon" id="insta-icon"/>
+                    </a>
+                    <a href="https://www.linkedin.com/in/blake-morris-942699298/">
+                        <img src={LinkedIn} alt="LinkedIn icon"/>
+                    </a>
+                    <a href="https://github.com/bkmorris2456">
+                        <img src={Github} alt="Github Icon"/>
+                    </a>
+
+            </div>
         </div>
     );
 

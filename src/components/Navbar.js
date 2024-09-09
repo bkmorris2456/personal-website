@@ -22,6 +22,7 @@ function Navbar() {
             <Tab label="Projects"/>
             <Tab label="About"/>
             <Tab label="Resume"/>
+            <Tab label="Applications"/>
           </Tabs>
         </Toolbar>
       </AppBar>
