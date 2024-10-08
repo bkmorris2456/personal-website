@@ -1,0 +1,7 @@
+.tab-label {
+    color: hsl(0, 45%, 47%);
+}
+
+.tab-label:hover {
+    color: #E0E0E0;
+}

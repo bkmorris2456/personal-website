@@ -1,19 +1,28 @@
-import * as React from 'react';
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    Tabs,
-    Tab,
-    Box,
-    useMediaQuery,
-    useTheme,
-  } from "@mui/material";
+import Navbar from "../components/Navbar";
+import "../css/main.css";
+import "../css/home.css";
+import ProfileImage from '../images/IMG_7940.jpg';
+import Instagram from '../images/insta-icon.jfif'
+import LinkedIn from '../images/linkedin-icon.png'
+import Github from '../images/github-icon.png'
+import { Box, Grid, Typography } from "@mui/material";
 
 function Applications() {
 
     return (
-        <div></div>
+        <div id='home-container'>
+
+            <div class='main-content'>
+
+                <Navbar/>
+
+            </div>
+
+            <div id="line">
+                <hr></hr>
+            </div>
+
+        </div>
     );
 
 }

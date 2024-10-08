@@ -1,6 +1,7 @@
 #home-container {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5vh;
 }
 
 .main-content {
@@ -11,4 +12,57 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 4%
+}
+
+#line {
+    width: 80%;
+    justify-content: center;
+    margin: auto;
+}
+
+#logo-containers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    gap: 30vw;
+}
+
+#linked-icon {
+    max-width: 3vw;
+    height: auto;
+}
+
+#linked-link {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#insta-icon {
+    max-width: 4vw;
+    height: auto;
+}
+
+#insta-link {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#git-icon {
+    max-width: 3vw;
+    height: auto;
+}
+
+#github-link {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#logo-containers a img:hover {
+    opacity: 60%;
 }
