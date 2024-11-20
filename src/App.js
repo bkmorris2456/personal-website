@@ -7,8 +7,12 @@ import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 import About from './pages/About';
 import Applications from './pages/Applications';
+import axios from 'axios';
 
 function App() {
+
+  const [message, setMessage] = useState('');
+
   return (
     <div className="App">
       <BrowserRouter>

@@ -1,0 +1,33 @@
+#entry-container {
+    max-width: 85vw;
+    margin: auto;
+    margin-bottom: 5vh;
+    margin-left: 15vw;
+}
+
+#project-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#project-details {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+    max-width: 60%;
+    width: 100%;
+}
+
+#project-divider {
+    max-width: 90%;
+}
+
+#project-list {
+    margin-top: 15vh;
+}
+
+#loading {
+    width: 25vw;
+}

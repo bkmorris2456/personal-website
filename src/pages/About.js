@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import "../css/main.css";
 import "../css/home.css";
 import ProfileImage from '../images/IMG_7940.jpg';
-import Instagram from '../images/insta-icon.jfif'
+import Instagram from '../images/instagram-icon.webp'
 import LinkedIn from '../images/linkedin-icon.png'
 import Github from '../images/github-icon.png'
 import { Box, Grid, Typography } from "@mui/material";

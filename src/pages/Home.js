@@ -4,7 +4,7 @@ import "../css/home.css";
 import ProfileImage from '../images/IMG_7940.jpg';
 import InnovationImage from '../images/Innovation.jpg';
 import ResumeImage from '../images/resume.png';
-import Instagram from '../images/insta-icon.jfif';
+import Instagram from '../images/instagram-icon.webp'
 import LinkedIn from '../images/linkedin-icon.png';
 import Github from '../images/github-icon.png';
 import { Box, Grid, Typography } from "@mui/material";
@@ -36,7 +36,7 @@ function Home() {
                 </Grid>
             </div>
 
-            <div id='projects-content'>
+            {/* <div id='projects-content'>
 
                 <Grid container spacing={2} id='projects-container'>
                     <Grid item>
@@ -50,7 +50,7 @@ function Home() {
                     </Grid>
                 </Grid>
 
-            </div>
+            </div> */}
 
             <div id="line">
                 <hr></hr>
