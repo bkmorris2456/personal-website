@@ -8,7 +8,6 @@ import Prosperity from '../images/Prosperity-.png';
 import Loading from '../images/loading.gif';
 import { Box, Grid, Typography, Link } from "@mui/material";
 import {motion} from 'framer-motion';
-import {} from '../components/variants';
 
 function Home() {
 
