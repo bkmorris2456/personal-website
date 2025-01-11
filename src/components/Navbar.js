@@ -1,10 +1,23 @@
 import * as React from "react";
-import { AppBar, Toolbar, Box, IconButton, Typography } from "@mui/material";
-import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import { GitHub, LinkedIn, Instagram, Menu as MenuIcon, Close } from "@mui/icons-material";
 import { Link as ScrollLink } from "react-scroll";
 
 function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
   // Track scroll position
   React.useEffect(() => {
@@ -29,6 +42,15 @@ function Navbar() {
     alignItems: "center",
   };
 
+  // Menu handlers
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <React.Fragment>
       {/* Main Center Navbar */}
@@ -44,10 +66,39 @@ function Navbar() {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "space-between",
           }}
         >
-          <Box sx={commonNavbarStyles}>
+          {/* Left Side: Social Media Icons */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+            {[
+              { icon: <GitHub />, href: "https://github.com/" },
+              { icon: <LinkedIn />, href: "https://linkedin.com/" },
+              { icon: <Instagram />, href: "https://instagram.com/" },
+            ].map(({ icon, href }, index) => (
+              <IconButton
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: "black",
+                  transition: "color 0.3s",
+                  "&:hover": { color: "#4caf50" },
+                }}
+              >
+                {icon}
+              </IconButton>
+            ))}
+          </Box>
+
+          {/* Center: Navigation Links */}
+          <Box
+            sx={{
+              ...commonNavbarStyles,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
             {["home", "projects", "about"].map((item) => (
               <ScrollLink
                 key={item}
@@ -71,91 +122,147 @@ function Navbar() {
               </ScrollLink>
             ))}
           </Box>
+
+          {/* Right Side: Resume and Contact */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <ScrollLink
+              to="contact"
+              smooth={true}
+              duration={500}
+              spy={true}
+              offset={-70}
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
+                fontSize: "18px",
+                fontWeight: "bold",
+                transition: "color 0.3s",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
+            >
+              Contact
+            </ScrollLink>
+
+            <a
+              href="/path-to-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
+                fontSize: "18px",
+                fontWeight: "bold",
+                transition: "color 0.3s",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
+            >
+              Resume
+            </a>
+          </Box>
+
+          {/* Collapsible Menu for Small Screens */}
+          <IconButton
+            sx={{ display: { xs: "flex", md: "none" } }}
+            onClick={handleMenuOpen}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* Navbar 1: Social Media Icons */}
-      <Box
-        sx={{
-          ...commonNavbarStyles,
-          position: "fixed",
-          top: "4px",
-          left: "16px",
-          zIndex: 1000,
+      {/* Dropdown Menu */}
+      <Menu
+        anchorEl={anchorEl}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+        PaperProps={{
+          sx: { width: 250, padding: 1 },
         }}
       >
-        {/* Social Media Icons */}
-        {[
-          { icon: <GitHub />, href: "https://github.com/" },
-          { icon: <LinkedIn />, href: "https://linkedin.com/" },
-          { icon: <Instagram />, href: "https://instagram.com/" },
-        ].map(({ icon, href }, index) => (
-          <IconButton
-            key={index}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              color: "black",
-              transition: "color 0.3s",
-              "&:hover": { color: "#4caf50" },
-            }}
-          >
-            {icon}
-          </IconButton>
+        <IconButton
+          onClick={handleMenuClose}
+          sx={{ alignSelf: "flex-end", marginBottom: 1 }}
+        >
+          <Close />
+        </IconButton>
+        <Divider />
+
+        {/* Navigation Links */}
+        {["home", "projects", "about", "contact"].map((item) => (
+          <MenuItem key={item} onClick={handleMenuClose}>
+            <ScrollLink
+              to={item}
+              smooth={true}
+              duration={500}
+              spy={true}
+              offset={-70}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                fontSize: "16px",
+                textTransform: "none",
+              }}
+            >
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </ScrollLink>
+          </MenuItem>
         ))}
-      </Box>
-
-      {/* Navbar 2: Extras */}
-      <Box
-        sx={{
-          ...commonNavbarStyles,
-          position: "fixed",
-          top: "5px",
-          right: "16px",
-          zIndex: 1000,
-        }}
-      >
-        {/* Contact Button */}
-        <ScrollLink
-          to="contact"
-          smooth={true}
-          duration={500}
-          spy={true}
-          offset={-70}
-          style={{
-            cursor: "pointer",
-            textDecoration: "none",
-            color: "inherit",
-            fontSize: "18px",
-            fontWeight: "bold",
-            transition: "color 0.3s",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
-        >
-          Contact
-        </ScrollLink>
-
-        {/* Resume Button */}
-        <a
-          href="/path-to-resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            cursor: "pointer",
-            textDecoration: "none",
-            color: "inherit",
-            fontSize: "18px",
-            fontWeight: "bold",
-            transition: "color 0.3s",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
-        >
-          Resume
-        </a>
-      </Box>
+        <MenuItem>
+          <ListItemIcon>
+            <GitHub />
+          </ListItemIcon>
+          <ListItemText>
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              GitHub
+            </a>
+          </ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <LinkedIn />
+          </ListItemIcon>
+          <ListItemText>
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              LinkedIn
+            </a>
+          </ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Instagram />
+          </ListItemIcon>
+          <ListItemText>
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Instagram
+            </a>
+          </ListItemText>
+        </MenuItem>
+      </Menu>
     </React.Fragment>
   );
 }
