@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   AppBar,
   Toolbar,
+  Tooltip,
   Box,
   IconButton,
   Typography,
@@ -11,12 +12,14 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import { GitHub, LinkedIn, Instagram, Menu as MenuIcon, Close } from "@mui/icons-material";
+import { GitHub, LinkedIn, Menu as MenuIcon, Close } from "@mui/icons-material";
+import LeetCode from "../images/leetcode.svg";
 import { Link as ScrollLink } from "react-scroll";
 
 function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showContactInfo, setShowContactInfo] = React.useState(false);
   const isMenuOpen = Boolean(anchorEl);
 
   // Track scroll position
@@ -29,6 +32,11 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Toggle visibility of contact information
+  const handleContactClick = () => {
+    setShowContactInfo(!showContactInfo); // Toggle contact info visibility
+  };
 
   // Common Box styling for navbars
   const commonNavbarStyles = {
@@ -72,9 +80,24 @@ function Navbar() {
           {/* Left Side: Social Media Icons */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
             {[
-              { icon: <GitHub />, href: "https://github.com/" },
-              { icon: <LinkedIn />, href: "https://linkedin.com/" },
-              { icon: <Instagram />, href: "https://instagram.com/" },
+              { icon: <GitHub />, href: "https://github.com/bkmorris2456" },
+              { icon: <LinkedIn />, href: "https://linkedin.com/in/bkmorris2024" },
+              { 
+                icon: (
+                  <Box
+                    component="img"
+                    src={LeetCode}
+                    alt="LeetCode"
+                    sx={{
+                      width: 24, 
+                      height: 24,
+                      transition: "filter 0.3s",
+                      "&:hover": { filter: "brightness(0) saturate(100%) invert(55%) sepia(35%) saturate(1434%) hue-rotate(78deg) brightness(97%) contrast(95%)" }
+                    }}
+                  />
+                ),
+                href: "https://leetcode.com/u/bmorris56/"
+              },
             ].map(({ icon, href }, index) => (
               <IconButton
                 key={index}
@@ -130,6 +153,7 @@ function Navbar() {
               gap: 2,
               alignItems: "center",
             }}
+            onClick={handleContactClick}
           >
             <ScrollLink
               to="contact"
@@ -249,7 +273,7 @@ function Navbar() {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <Instagram />
+            <img src={LeetCode} alt="LeetCode" style={{ width: "24px", height: "24px" }} />
           </ListItemIcon>
           <ListItemText>
             <a

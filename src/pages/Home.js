@@ -7,9 +7,22 @@ import Github from '../images/github-icon.png';
 import Prosperity from '../images/Prosperity-.png';
 import Loading from '../images/loading.gif';
 import { Box, Grid, Typography, Link } from "@mui/material";
+import { useInView } from 'react-intersection-observer';
 import {motion} from 'framer-motion';
 
 function Home() {
+
+    // Inside your "Projects" section
+    const { ref: projectsRef, inView: projectsInView } = useInView({
+        triggerOnce: true, // Trigger only once when it enters the viewport
+        threshold: 0.1, // 10% of the section must be in view
+    });
+
+    // Inside your "Experience" section
+    const { ref: experienceRef, inView: experienceInView } = useInView({
+        triggerOnce: true, // Trigger only once when it enters the viewport
+        threshold: 0.1, // 10% of the section must be in view
+    });
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -278,31 +291,67 @@ function Home() {
                                 variant="h2"
                                 sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh", marginBottom: "8vh" }}
                             >
-                            About Me
+                            Experience 
                             </Typography>
                         </motion.div>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography
-                            sx={{textAlign: 'center', fontSize: {xs: "14px", sm: "18px"}}}
-                        >
-                            Image goes here.
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1 }}
                         >
-                            <Typography
-                                sx={{textAlign: 'justify', fontSize: {xs: "14px", sm: "18px"}}}
+                            <Typography 
+                                variant="h4"
+                                sx={{ textAlign: "center", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
                             >
-                                My journey with programming began in high school. My junior year, they started offering the option to select classes that focused on various topics in computer science. One was based on learning the basics behind web development, using HTML and CSS,
-                                and the other class focused on learning introductory topics in Python. Because I was always known as the tech-savvy kid in my family, and I also held a general curiosity for how games and applications as a whole worked behind the scenes, I decided to
-                                put both classes on my schedule. Almost immediately after I started both classes, I realized that it was the only academic subject in school that I held a huge amount of interest. I loved the opportunity I had to be able to create and build something, 
-                                and it was around then where I realized that I would want a career in this field, although at the time my main focus was becoming a game developer.
+                                Software Developer - Ally Financial, Michigan State University
+                            </Typography>
 
+                            <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center", fontSize: { xs: "12px", sm: "16px" }, marginBottom: "4vh", marginTop: "4vh" }}
+                            >
+                                August 2023 - December 2023
+                            </Typography>
+
+                            <Typography 
+                                variant="body1"
+                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px", maxWidth: "35vw" } }}
+                            >
+                                Assisted on a 5-person team to design and develop a mobile-based web application centered on providing financial education. Built and maintained
+                                essential frontend components to improve overall user experience and application design. Conducted and lead team discussions and product presentations 
+                                with the client Ally Financial.
+                            </Typography>
+                        </motion.div>
+                    </Grid>
+                    <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1 }}
+                        >
+                            <Typography 
+                                variant="h4"
+                                sx={{ textAlign: "center", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
+                            >
+                                Python Tutor - SpartanTutors
+                            </Typography>
+
+                            <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center", fontSize: { xs: "12px", sm: "16px" }, marginBottom: "4vh", marginTop: "4vh" }}
+                            >
+                                September 2023 - April 2024
+                            </Typography>
+
+                            <Typography 
+                                variant="body1"
+                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px", maxWidth: "35vw" } }}
+                            >
+                                Educated and aided first-year university students on foundational programming concepts using Python. Scheduled and facilitated
+                                one-on-one tutoring sessions to address student questions and concerns regarding material. Demonstrated proficiency in efficiently scheduling
+                                and managing multiple tutoring appointments.
                             </Typography>
                         </motion.div>
                     </Grid>
