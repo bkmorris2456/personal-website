@@ -15,6 +15,7 @@ import {
 import { GitHub, LinkedIn, Menu as MenuIcon, Close } from "@mui/icons-material";
 import LeetCode from "../images/leetcode.svg";
 import { Link as ScrollLink } from "react-scroll";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -32,11 +33,6 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // Toggle visibility of contact information
-  const handleContactClick = () => {
-    setShowContactInfo(!showContactInfo); // Toggle contact info visibility
-  };
 
   // Common Box styling for navbars
   const commonNavbarStyles = {
@@ -122,7 +118,7 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
             }}
           >
-            {["home", "projects", "about"].map((item) => (
+            {["home", "projects", "experience"].map((item) => (
               <ScrollLink
                 key={item}
                 to={item}
@@ -152,28 +148,66 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
               gap: 2,
               alignItems: "center",
+              position: "relative"
             }}
-            onClick={handleContactClick}
           >
-            <ScrollLink
-              to="contact"
-              smooth={true}
-              duration={500}
-              spy={true}
-              offset={-70}
-              style={{
+            <Typography
+              onClick={() => setShowContactInfo((prev) => !prev)}
+              sx={{
                 cursor: "pointer",
                 textDecoration: "none",
                 color: "inherit",
                 fontSize: "18px",
                 fontWeight: "bold",
                 transition: "color 0.3s",
+                "&:hover": { color: "#4caf50" },
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
             >
               Contact
-            </ScrollLink>
+            </Typography>
+
+            {/* Animated Contact Info Pop-Up */}
+            <AnimatePresence>
+              {showContactInfo && (
+                <motion.div
+                  key="contact-popup"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    position: "absolute",
+                    top: "100%", // Position below the button
+                    right: 0, // Align to the right
+                    background: "white",
+                    borderRadius: "8px",
+                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                    padding: "16px",
+                    zIndex: 10,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "left",
+                      color: "black",
+                    }}
+                  >
+                    Email: bkmorris2024@gmail.com
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "left",
+                      color: "black",
+                      marginTop: "8px",
+                    }}
+                  >
+                    Phone: (248) 925-8946
+                  </Typography>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <a
               href="/path-to-resume.pdf"
@@ -222,7 +256,7 @@ function Navbar() {
         <Divider />
 
         {/* Navigation Links */}
-        {["home", "projects", "about", "contact"].map((item) => (
+        {["home", "projects", "experience", "contact"].map((item) => (
           <MenuItem key={item} onClick={handleMenuClose}>
             <ScrollLink
               to={item}

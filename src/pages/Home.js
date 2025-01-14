@@ -44,7 +44,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                            Hello. My name is Blake Morris, an aspiring Software Engineer.
+                            Hello. My name is Blake Morris, Aspiring Software Developer.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -73,10 +73,29 @@ function Home() {
                         >
                             <Typography 
                                 variant="body1" 
+                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
+                            >
+                                I have a passion and deep interest for designing and developing applications 
+                                that are not only functional and extremely helpful for everyday use, but also 
+                                assist me in furthering my skills and talents as a developer. I take pride in 
+                                continuously learning and researching new methods and practices that can both 
+                                improve the quality of my projects, as well as my abilities. 
+                            </Typography>
+                            <Typography 
+                                variant="body1" 
+                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
+                            >
+                                Currently, I focus on creating projects and applications centered around problems 
+                                I want to solve in my every-day life, as well as spending time studying data structures 
+                                and algorithms. I prioritize making sure that I improve day by day.
+                            </Typography>
+                            <Typography 
+                                variant="body1" 
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
-                                I have a growing interest and passion in software development, and I take pride in continuously learning and researching methods and practices
-                                that can improve my skills. Below you'll see a collection of the projects I've worked on and am currently working on, and ways to contact me!
+                                In the past couple years however, I’ve had the pleasure of gaining a multitude of experience 
+                                from both my time earning my degree at Michigan State University and working under the company 
+                                Ally Financial. In my free time I read, play videogames, and frequently go to the gym.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -275,7 +294,7 @@ function Home() {
             </Box>
 
             <Box
-                id="about"
+                id="experience"
                 component="about"
                 sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "1200px", mx: "auto", marginTop: "12vh", marginBottom: "12vh" }}
             >
