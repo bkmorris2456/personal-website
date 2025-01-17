@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import Tag from "../components/SkillTag";
 import ProfileImage from '../images/IMG_7940.jpg';
-import Instagram from '../images/instagram-icon.webp';
-import LinkedIn from '../images/linkedin-icon.png';
-import Github from '../images/github-icon.png';
 import Prosperity from '../images/Prosperity-.png';
 import Loading from '../images/loading.gif';
 import { Box, Grid, Typography, Link } from "@mui/material";
@@ -93,7 +91,7 @@ function Home() {
                                 variant="body1" 
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
-                                In the past couple years however, I’ve had the pleasure of gaining a multitude of experience 
+                                In the past couple years, I’ve had the pleasure of gaining a multitude of experience 
                                 from both my time earning my degree at Michigan State University and working under the company 
                                 Ally Financial. In my free time I read, play videogames, and frequently go to the gym.
                             </Typography>
@@ -167,12 +165,7 @@ function Home() {
                             >
                                 Prosperity
                             </Typography>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
+
                             <Typography 
                                 variant="body1"
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
@@ -180,6 +173,21 @@ function Home() {
                                 Prosperity is a web application currently in development, and will focus on providing an efficient, more concise solution to tracking nutrition and macros, as well as be able to structure and plan workouts
                                 accordingly. While development will start with it being a web application, it will eventually be also integrated as a mobile application.
                             </Typography>
+
+                            <Box
+                                sx={{mt: 2}}
+                            >
+                                <Tag label="JavaScript"/>
+                                <Tag label="HTML"/>
+                                <Tag label="CSS"/>
+                                <Tag label="MaterialUI"/>
+                                <Tag label="Python"/>
+                                <Tag label="MySQL"/>
+                                <Tag label="Express"/>
+                                <Tag label="Node.js"/>
+                                <Tag label="React"/>
+                            </Box>
+
                         </motion.div>
                     </Grid>
 
@@ -221,12 +229,7 @@ function Home() {
                             >
                                 Gedara
                             </Typography>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
+
                             <Typography 
                                 variant="body1"
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
@@ -234,6 +237,12 @@ function Home() {
                                 Gedara will be a mobile application focused on assisting with managing and sorting household inventory. From the kitchen to the garage to the bedroom, Gedara
                                 will help homeowners sort thorugh the multitude of items they have within their homes, and take managing their living to the next level.
                             </Typography>
+
+                            <Box
+                                sx={{mt: 2}}
+                            >
+                                <Tag label="React"/>
+                            </Box>
                         </motion.div>
                     </Grid>
 
@@ -342,6 +351,16 @@ function Home() {
                                 essential frontend components to improve overall user experience and application design. Conducted and lead team discussions and product presentations 
                                 with the client Ally Financial.
                             </Typography>
+                            <Box
+                                sx={{mt: 2}}
+                            >
+                                <Tag label="JavaScript"/>
+                                <Tag label="HTML"/>
+                                <Tag label="CSS"/>
+                                <Tag label="MaterialUI"/>
+                                <Tag label="Python"/>
+                                <Tag label="MySQL"/>
+                            </Box>
                         </motion.div>
                     </Grid>
                     <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
@@ -372,6 +391,12 @@ function Home() {
                                 one-on-one tutoring sessions to address student questions and concerns regarding material. Demonstrated proficiency in efficiently scheduling
                                 and managing multiple tutoring appointments.
                             </Typography>
+                            <Box
+                                sx={{mt: 2}}
+                            >
+                                <Tag label="Python"/>
+                                <Tag label="Communication Skills"/>
+                            </Box>
                         </motion.div>
                     </Grid>
                 </Grid>
