@@ -37,7 +37,7 @@ function Navbar() {
   // Common Box styling for navbars
   const commonNavbarStyles = {
     padding: "8px 16px",
-    background: scrolled ? "rgba(255, 255, 255, 0.7)" : "transparent",
+    background: scrolled ? "rgba(0, 0, 0, 0.7)" : "transparent",
     backdropFilter: scrolled ? "blur(10px)" : "none",
     borderRadius: "24px",
     transition: "background 0.3s ease, backdrop-filter 0.3s ease",
