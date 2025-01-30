@@ -87,8 +87,11 @@ function Navbar() {
                     sx={{
                       width: 24, 
                       height: 24,
-                      transition: "filter 0.3s",
-                      "&:hover": { filter: "brightness(0) saturate(100%) invert(55%) sepia(35%) saturate(1434%) hue-rotate(78deg) brightness(97%) contrast(95%)" }
+                      filter: "invert(100%) brightness(200%)", // Make image white
+                      transition: "filter 0.3s ease-in-out", // Ensure smooth transition matching the other icons
+                      "&:hover": {
+                        filter: "invert(55%) sepia(35%) saturate(1434%) hue-rotate(78deg) brightness(97%) contrast(95%)",
+                      },
                     }}
                   />
                 ),
@@ -101,7 +104,7 @@ function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
-                  color: "black",
+                  color: "white",
                   transition: "color 0.3s",
                   "&:hover": { color: "#4caf50" },
                 }}
