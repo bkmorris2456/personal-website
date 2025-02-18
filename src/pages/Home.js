@@ -1,28 +1,13 @@
-import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Tag from "../components/SkillTag";
 import ProfileImage from '../images/IMG_7940.jpg';
 import Prosperity from '../images/Prosperity-.png';
 import Gedara from '../images/Gedara.jpg';
 import BlakeBot from '../images/BlakeBot.jpg';
-import Loading from '../images/loading.gif';
-import { Box, Grid, Typography, Link } from "@mui/material";
-import { useInView } from 'react-intersection-observer';
+import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
 
 function Home() {
-
-    // Inside your "Projects" section
-    const { ref: projectsRef, inView: projectsInView } = useInView({
-        triggerOnce: true, // Trigger only once when it enters the viewport
-        threshold: 0.1, // 10% of the section must be in view
-    });
-
-    // Inside your "Experience" section
-    const { ref: experienceRef, inView: experienceInView } = useInView({
-        triggerOnce: true, // Trigger only once when it enters the viewport
-        threshold: 0.1, // 10% of the section must be in view
-    });
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -325,7 +310,7 @@ function Home() {
                         >
                             <Typography
                                 variant="h2"
-                                sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh", marginBottom: "8vh" }}
+                                sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
                             >
                             Experience 
                             </Typography>
