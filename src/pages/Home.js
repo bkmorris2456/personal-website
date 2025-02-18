@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import Tag from "../components/SkillTag";
 import ProfileImage from '../images/IMG_7940.jpg';
 import Prosperity from '../images/Prosperity-.png';
+import Gedara from '../images/Gedara.jpg';
+import BlakeBot from '../images/BlakeBot.jpg';
 import Loading from '../images/loading.gif';
 import { Box, Grid, Typography, Link } from "@mui/material";
 import { useInView } from 'react-intersection-observer';
@@ -42,7 +44,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                            Hello. My name is Blake Morris, Aspiring Software Developer.
+                            Hello. My name is Blake Morris, and I'm an Aspiring Software Developer/Engineer.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -92,8 +94,9 @@ function Home() {
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
                                 In the past couple years, I’ve had the pleasure of gaining a multitude of experience 
-                                from both my time earning my degree at Michigan State University and working under the company 
-                                Ally Financial. In my free time I read, play videogames, and frequently go to the gym.
+                                in both my time earning my degree at Michigan State University and working under the company 
+                                Ally Financial. When i'm not studying Leetcode or working on project code, some of my favorite
+                                hobbies are gaming, reading, chess, and exercising at the gym!
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -170,8 +173,10 @@ function Home() {
                                 variant="body1"
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
-                                Prosperity is a web application currently in development, and will focus on providing an efficient, more concise solution to tracking nutrition and macros, as well as be able to structure and plan workouts
-                                accordingly. While development will start with it being a web application, it will eventually be also integrated as a mobile application.
+                                Prosperity is a fitness mobile app that I currently have in development, and the goal behind it is to provide a platform to not only
+                                track macros and nutritional information from meals within each day, but to also help with creating and managing workout routines and schedules. I noticed that
+                                with the apps I use now, they either lock most of their features behind a paywall, or they don't have the features I want in general. So, I decided to start developing Prosperity
+                                to provide myself with an option that I can use and enjoy.
                             </Typography>
 
                             <Box
@@ -204,8 +209,8 @@ function Home() {
                             >
                                 <Box
                                     component="img"
-                                    src={Loading}
-                                    alt="Work in Progress"
+                                    src={Gedara}
+                                    alt="Gedara Logo"
                                     sx={{
                                         borderRadius: "20%",
                                         width: { xs: "200px", sm: "300px" },
@@ -234,8 +239,9 @@ function Home() {
                                 variant="body1"
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
-                                Gedara will be a mobile application focused on assisting with managing and sorting household inventory. From the kitchen to the garage to the bedroom, Gedara
-                                will help homeowners sort thorugh the multitude of items they have within their homes, and take managing their living to the next level.
+                                Gedara is another mobile application that I currently have in development, and its main premise is to serve as a platform for the organization and management of
+                                household inventory, such as furniture, appliances, and other valuable items. The goal behind Gedara is to provide users with the opportunity to create a virtual 
+                                catalog of their belongings, which can be useful in various situations, such as moving, renovating, or simply keeping track of possessions.
                             </Typography>
 
                             <Box
@@ -259,8 +265,8 @@ function Home() {
                             >
                                 <Box
                                     component="img"
-                                    src={Loading}
-                                    alt="Work in Progress"
+                                    src={BlakeBot}
+                                    alt="BlakeBot Logo"
                                     sx={{
                                         borderRadius: "20%",
                                         width: { xs: "200px", sm: "300px" },
@@ -289,7 +295,9 @@ function Home() {
                             variant="body1"
                             sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                         >
-                            BlakeBot will be my first attempt at re-educating myself at training an AI model, and basing it off of my own conversations and responses to questions.
+                            BlakeBot will be my first attempt at developing an AI chatbot (name subject to change). I'm mainly working on developing this project to further my understanding
+                            on the topic of artificial intelligence, as well as to gain experience in the topics and information pertaining to AI. My goal for this project is to create a chatbot that mimics
+                            my tendencies and habits regarding not only my writing style, but also my personality and character when answering questions or giving advice. 
                         </Typography>
                         </motion.div>
                     </Grid>

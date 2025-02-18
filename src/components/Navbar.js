@@ -166,7 +166,7 @@ function Navbar() {
                 "&:hover": { color: "#4caf50" },
               }}
             >
-              Contact
+              Contact Me
             </Typography>
 
             {/* Animated Contact Info Pop-Up */}
@@ -212,7 +212,7 @@ function Navbar() {
               )}
             </AnimatePresence>
 
-            <a
+            {/* <a
               href="/path-to-resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
@@ -228,7 +228,7 @@ function Navbar() {
               onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
             >
               Resume
-            </a>
+            </a> */}
           </Box>
 
           {/* Collapsible Menu for Small Screens */}
