@@ -334,7 +334,7 @@ function Home() {
 
                             <Typography 
                                 variant="body1"
-                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px"} }}
+                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px"}, maxWidth: {sm: "35vw" } }}
                             >
                                 Assisted on a 5-person team to design and develop a mobile-based web application centered on providing financial education. Built and maintained
                                 essential frontend components to improve overall user experience and application design. Conducted and lead team discussions and product presentations 
@@ -374,7 +374,7 @@ function Home() {
 
                             <Typography 
                                 variant="body1"
-                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px"} }}
+                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px" }, maxWidth: {sm: "35vw" }}}
                             >
                                 Educated and aided first-year university students on foundational programming concepts using Python. Scheduled and facilitated
                                 one-on-one tutoring sessions to address student questions and concerns regarding material. Demonstrated proficiency in efficiently scheduling
