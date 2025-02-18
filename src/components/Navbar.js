@@ -52,6 +52,7 @@ function Navbar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setShowContactInfo(false); // Close contact pop-up
   };
 
   return (
@@ -181,18 +182,21 @@ function Navbar() {
                     position: "absolute",
                     top: "100%", // Position below the button
                     right: 0, // Align to the right
-                    background: "white",
-                    borderRadius: "8px",
-                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-                    padding: "16px",
-                    zIndex: 10,
+                    background: "rgba(0, 0, 0, 0.6)", // Adjust translucency (lower alpha value for more translucency)
+                    backdropFilter: "blur(10px)", // Same blur effect as the dropdown menu
+                    borderRadius: "16px", // Match dropdown's rounded corners
+                    padding: "16px", // Padding inside the box
+                    zIndex: 10, // Higher stacking order
+                    color: "white", // White text
+                    width: "220px", // Box width
+                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)", // Slightly stronger shadow
                   }}
                 >
                   <Typography
                     sx={{
                       fontSize: "13px",
                       textAlign: "left",
-                      color: "black",
+                      color: "white",
                     }}
                   >
                     Email: bkmorris2024@gmail.com
@@ -201,7 +205,7 @@ function Navbar() {
                     sx={{
                       fontSize: "13px",
                       textAlign: "left",
-                      color: "black",
+                      color: "white",
                       marginTop: "8px",
                     }}
                   >
@@ -210,29 +214,17 @@ function Navbar() {
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* <a
-              href="/path-to-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "inherit",
-                fontSize: "18px",
-                fontWeight: "bold",
-                transition: "color 0.3s",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "#4caf50")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "inherit")}
-            >
-              Resume
-            </a> */}
           </Box>
 
           {/* Collapsible Menu for Small Screens */}
           <IconButton
-            sx={{ display: { xs: "flex", md: "none" } }}
+            sx={{ 
+              display: { xs: "flex", md: "none" },
+              background: "rgba(0, 0, 0, 0.7)", // Translucent black background
+              backdropFilter: "blur(10px)", // Apply blur effect
+              borderRadius: "16px", // Rounded corners
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Optional shadow
+            }}
             onClick={handleMenuOpen}
           >
             <MenuIcon />
@@ -246,7 +238,15 @@ function Navbar() {
         open={isMenuOpen}
         onClose={handleMenuClose}
         PaperProps={{
-          sx: { width: 250, padding: 1 },
+          sx: { 
+            width: 250, 
+            padding: 1,
+            background: "rgba(0, 0, 0, 0.7)", // Translucent black background
+            backdropFilter: "blur(10px)", // Apply blur effect
+            borderRadius: "16px", // Rounded corners
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Optional shadow
+            overflow: "visible", // Ensure the dropdown doesn't clip the content
+          },
         }}
       >
         <IconButton
@@ -258,7 +258,7 @@ function Navbar() {
         <Divider />
 
         {/* Navigation Links */}
-        {["home", "projects", "experience", "contact"].map((item) => (
+        {["home", "projects", "experience"].map((item) => (
           <MenuItem key={item} onClick={handleMenuClose}>
             <ScrollLink
               to={item}
@@ -277,6 +277,53 @@ function Navbar() {
             </ScrollLink>
           </MenuItem>
         ))}
+
+        <MenuItem
+          onClick={() => setShowContactInfo((prev) => !prev)} // Toggle the state
+          sx={{
+            position: "relative", // Required for the pop-up positioning
+            textDecoration: "none",
+            color: "inherit",
+            fontSize: "16px",
+            textTransform: "none",
+          }}
+        >
+          Contact
+
+          {/* Contact Info Pop-Up */}
+          <AnimatePresence>
+            {showContactInfo && (
+              <motion.div
+                key="dropdown-contact-popup"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 10 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: "absolute",
+                  top: 0, // Align with the button
+                  left: "100%", // Position it outside the dropdown width
+                  background: "rgba(0, 0, 0, 0.6)", // Adjust translucency (lower alpha value for more translucency)
+                  backdropFilter: "blur(10px)", // Same blur effect as the dropdown menu
+                  borderRadius: "16px", // Match dropdown's rounded corners
+                  padding: "16px", // Padding inside the box
+                  zIndex: 10, // Higher stacking order
+                  color: "white", // White text
+                  width: "220px", // Box width
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)", // Slightly stronger shadow
+                }}
+              >
+                <Typography sx={{ fontSize: "13px", marginBottom: "4px" }}>
+                  Email: bkmorris2024@gmail.com
+                </Typography>
+                <Typography sx={{ fontSize: "13px" }}>
+                  Phone: (248) 925-8946
+                </Typography>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </MenuItem>
+
         <MenuItem>
           <ListItemIcon>
             <GitHub />
@@ -309,16 +356,16 @@ function Navbar() {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <img src={LeetCode} alt="LeetCode" style={{ width: "24px", height: "24px" }} />
+            <img src={LeetCode} alt="LeetCode" style={{ width: "24px", height: "24px", filter: "invert(100%) brightness(200%)", }} />
           </ListItemIcon>
           <ListItemText>
             <a
-              href="https://instagram.com/"
+              href="https://leetcode.com/u/bmorris56/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              Instagram
+              Leetcode
             </a>
           </ListItemText>
         </MenuItem>
