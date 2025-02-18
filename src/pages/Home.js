@@ -167,15 +167,11 @@ function Home() {
                             <Box
                                 sx={{mt: 2}}
                             >
+                                <Tag label="React"/>
+                                <Tag label="MaterialUI"/>
                                 <Tag label="JavaScript"/>
                                 <Tag label="HTML"/>
                                 <Tag label="CSS"/>
-                                <Tag label="MaterialUI"/>
-                                <Tag label="Python"/>
-                                <Tag label="MySQL"/>
-                                <Tag label="Express"/>
-                                <Tag label="Node.js"/>
-                                <Tag label="React"/>
                             </Box>
 
                         </motion.div>
