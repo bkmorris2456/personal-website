@@ -229,7 +229,11 @@ function Home() {
                             <Box
                                 sx={{mt: 2}}
                             >
-                                <Tag label="React"/>
+                                <Tag label="React Native"/>
+                                <Tag label="JavaScript"/>
+                                <Tag label="HTML"/>
+                                <Tag label="CSS"/>
+                                <Tag label="Expo"/>
                             </Box>
                         </motion.div>
                     </Grid>
