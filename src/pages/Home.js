@@ -6,6 +6,7 @@ import Gedara from '../images/Gedara.jpg';
 import BlakeBot from '../images/BlakeBot.jpg';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
+import ProjectTabs from "../components/ProjectTabs";
 
 function Home() {
 
@@ -29,7 +30,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                            Hello. My name is Blake Morris, and I'm an Aspiring Software Developer/Engineer.
+                            Hello. My name is Blake Morris, and I'm a Software Engineer.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -165,7 +166,7 @@ function Home() {
                             </Typography>
 
                             <Box
-                                sx={{mt: 2}}
+                                sx={{mt: 2,}}
                             >
                                 <Tag label="React"/>
                                 <Tag label="MaterialUI"/>
@@ -284,6 +285,23 @@ function Home() {
                     </Grid>
 
                 </Grid>
+            </Box>
+
+            {/* Horizontal Line */}
+            <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
+                <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
+            </Box>
+            
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    maxWidth: "100%",
+                }}
+            >
+                <ProjectTabs />
             </Box>
 
             {/* Horizontal Line */}
