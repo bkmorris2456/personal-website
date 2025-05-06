@@ -93,209 +93,8 @@ function Home() {
             <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
                 <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
             </Box>
-
-            <Box
-                id="projects"
-                component="projects"
-                sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "1200px", mx: "auto", marginTop: "12vh", marginBottom: "12vh" }}
-            >
-                <Grid container spacing={4} alignItems="left">
-
-                    <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography
-                                variant="h2"
-                                sx={{ textAlign: "justify", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                            My Projects
-                            </Typography>
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <motion.div
-                                whileHover={{ y: -15 }} // Float up by 10px
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }} // Smooth spring animation
-                                style={{ display: 'inline-block' }} // Ensures proper alignment
-                            >
-                                <Box
-                                    component="img"
-                                    src={Prosperity}
-                                    alt="Prosperity"
-                                    sx={{
-                                        borderRadius: "20%",
-                                        width: { xs: "200px", sm: "300px" },
-                                        height: { xs: "200px", sm: "300px" },
-                                        objectFit: "cover",    
-                                    }}
-                                />
-                            </motion.div>
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography 
-                                variant="h4"
-                                sx={{ textAlign: "justify", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                Prosperity
-                            </Typography>
-
-                            <Typography 
-                                variant="body1"
-                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
-                            >
-                                Prosperity is a fitness mobile app that I currently have in development, and the goal behind it is to provide a platform to not only
-                                track macros and nutritional information from meals within each day, but to also help with creating and managing workout routines and schedules. I noticed that
-                                with the apps I use now, they either lock most of their features behind a paywall, or they don't have the features I want in general. So, I decided to start developing Prosperity
-                                to provide myself with an option that I can use and enjoy.
-                            </Typography>
-
-                            <Box
-                                sx={{mt: 2,}}
-                            >
-                                <Tag label="React"/>
-                                <Tag label="MaterialUI"/>
-                                <Tag label="JavaScript"/>
-                                <Tag label="HTML"/>
-                                <Tag label="CSS"/>
-                            </Box>
-
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center'}}>
-                        <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1 }}
-                        >
-                            <motion.div
-                                whileHover={{ y: -15 }} // Float up by 10px
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }} // Smooth spring animation
-                                style={{ display: 'inline-block' }} // Ensures proper alignment
-                            >
-                                <Box
-                                    component="img"
-                                    src={Gedara}
-                                    alt="Gedara Logo"
-                                    sx={{
-                                        borderRadius: "20%",
-                                        width: { xs: "200px", sm: "300px" },
-                                        height: { xs: "200px", sm: "300px" },
-                                        objectFit: "cover",    
-                                    }}
-                                />
-                            </motion.div>
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography 
-                                variant="h4"
-                                sx={{ textAlign: "justify", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                Gedara
-                            </Typography>
-
-                            <Typography 
-                                variant="body1"
-                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
-                            >
-                                Gedara is another mobile application that I currently have in development, and its main premise is to serve as a platform for the organization and management of
-                                household inventory, such as furniture, appliances, and other valuable items. The goal behind Gedara is to provide users with the opportunity to create a virtual 
-                                catalog of their belongings, which can be useful in various situations, such as moving, renovating, or simply keeping track of possessions.
-                            </Typography>
-
-                            <Box
-                                sx={{mt: 2}}
-                            >
-                                <Tag label="React Native"/>
-                                <Tag label="JavaScript"/>
-                                <Tag label="HTML"/>
-                                <Tag label="CSS"/>
-                                <Tag label="Expo"/>
-                            </Box>
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center'}}>
-                        <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1 }}
-                        >
-                            <motion.div
-                                whileHover={{ y: -15 }} // Float up by 10px
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }} // Smooth spring animation
-                                style={{ display: 'inline-block' }} // Ensures proper alignment
-                            >
-                                <Box
-                                    component="img"
-                                    src={BlakeBot}
-                                    alt="BlakeBot Logo"
-                                    sx={{
-                                        borderRadius: "20%",
-                                        width: { xs: "200px", sm: "300px" },
-                                        height: { xs: "200px", sm: "300px" },
-                                        objectFit: "cover",    
-                                    }}
-                                />
-                            </motion.div>
-                        </motion.div>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography 
-                                variant="h4"
-                                sx={{ textAlign: "justify", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                BlakeBot
-                            </Typography>
-
-                        <Typography 
-                            variant="body1"
-                            sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
-                        >
-                            BlakeBot will be my first attempt at developing an AI chatbot (name subject to change). I'm mainly working on developing this project to further my understanding
-                            on the topic of artificial intelligence, as well as to gain experience in the topics and information pertaining to AI. My goal for this project is to create a chatbot that mimics
-                            my tendencies and habits regarding not only my writing style, but also my personality and character when answering questions or giving advice. 
-                        </Typography>
-                        </motion.div>
-                    </Grid>
-
-                </Grid>
-            </Box>
-
-            {/* Horizontal Line */}
-            <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
-                <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
-            </Box>
             
+            {/* Projects Section */}
             <Box
                 sx={{
                     display: "flex",
@@ -305,9 +104,14 @@ function Home() {
                     maxWidth: "100%",
                 }}
             >
+                <Typography
+                    variant="h3"
+                    sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
+                >
+                    My Projects
+                </Typography>
                 <ProjectTabs />
             </Box>
-
             {/* Horizontal Line */}
             <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
                 <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />

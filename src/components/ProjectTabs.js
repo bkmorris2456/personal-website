@@ -1,13 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-
-const projects = [
-    { id: 1, title: "Portfolio Website", status: "Completed", tags: ["React", "MUI"] },
-    { id: 2, title: "Prosperity Wellness App", status: "Upcoming", tags: ["TBD"] },
-    { id: 3, title: "Gedara", status: "In Progress", tags: ["React Native", "JavaScript", "Firebase"] },
-    { id: 4, title: "AI Chatbot", status: "Upcoming", tags: ["TBD"] },
-];
+import projects from "../components/projects.json";
 
 const tabs = ["Completed", "In Progress", "Upcoming"];
 
@@ -25,7 +19,16 @@ export default function ProjectTabs() {
     const filteredProjects = projects.filter(project => project.status === selectedTab);
 
     return (
-        <Box sx={{ maxWidth: "100%", overflow: "hidden", p: 2 }}>
+        <Box 
+        sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            maxWidth: "100%", 
+            margin: "0 auto",
+            p: 2
+        }}
+        >
             {/* Tab bar */}
             <Box
             sx={{
@@ -46,7 +49,6 @@ export default function ProjectTabs() {
                 style={{
                     flexShrink: 0,
                     padding: "6px 16px",
-                    // borderRadius: "999px",
                     cursor: "pointer",
                     background: tab === selectedTab ? "#224730" : "#e0e0e0",
                     color: tab === selectedTab ? "#fff" : "#333",
@@ -68,28 +70,44 @@ export default function ProjectTabs() {
                     key={project.id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
+                    exit={{}}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    whileHover={{y: -5, boxShadow: "0 8px 20px rgba(0,0,0,0.2)"}}
+                    onClick={() => console.log(`Clicked on ${project.title}`)}
                     style={{
-                    border: "1px solid #ccc",
-                    borderRadius: "12px",
-                    padding: "16px",
-                    background: "#1e1e1e",
-                    color: "#ffffff",
-                    }}
+                        border: "1px solid #ccc",
+                        borderRadius: "16px",
+                        padding: "24px",
+                        background: "#1e1e1e",
+                        color: "#ffffff",
+                        cursor: "pointer",
+                        maxWidth: "90%", // Optional, can also use e.g., "700px"
+                        width: "100%",
+                        boxSizing: "border-box",
+                        margin: "0 auto",
+                        fontSize: "1.1rem",
+                      }}
                 >
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant="h5" gutterBottom>
                     {project.title}
                     </Typography>
-                    <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                
+                    
+                    {/* Project Tags */}
+                    <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 2 }}>
                     {project.tags.map((tag, i) => (
                         <Chip 
                         key={i} 
                         label={tag} 
                         variant="outlined" 
                         sx={{
-                            color: "000",
+                            display: "flex",
+                            justifyContent: "center",
+                            color: "#fff",
                             backgroundColor: "224730",
+                            fontSize: "0.9rem",
+                            padding: "4px 10px",
+                            borderRadius: "16px",
                         }} 
                         />
                     ))}
