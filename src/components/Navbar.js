@@ -11,7 +11,8 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import { GitHub, LinkedIn, Menu as MenuIcon, Close } from "@mui/icons-material";
+import { GitHub, LinkedIn,  Menu as MenuIcon, Close } from "@mui/icons-material";
+import ComputerIcon from '@mui/icons-material/Computer';
 import LeetCode from "../images/leetcode.svg";
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,8 +34,8 @@ function Navbar() {
     };
   }, []);
 
-  // Common Box styling for navbars
-  const commonNavbarStyles = {
+  // Translucent Container Styling for Navbar
+  const frostedGlassBox = {
     padding: "8px 16px",
     background: scrolled ? "rgba(0, 0, 0, 0.7)" : "transparent",
     backdropFilter: scrolled ? "blur(10px)" : "none",
@@ -44,6 +45,7 @@ function Navbar() {
     gap: 2,
     alignItems: "center",
   };
+
 
   // Menu handlers
   const handleMenuOpen = (event) => {
@@ -74,29 +76,18 @@ function Navbar() {
           }}
         >
           {/* Left Side: Social Media Icons */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+          <Box sx={{ 
+              ...frostedGlassBox,
+              display: { xs: "none", md: "flex" },
+              width: "auto",
+              padding: "6px 12px",
+              marginTop: "8px",
+              marginLeft: "-1vw",
+          }}>
             {[
               { icon: <GitHub />, href: "https://github.com/bkmorris2456" },
               { icon: <LinkedIn />, href: "https://linkedin.com/in/bkmorris2024" },
-              { 
-                icon: (
-                  <Box
-                    component="img"
-                    src={LeetCode}
-                    alt="LeetCode"
-                    sx={{
-                      width: 24, 
-                      height: 24,
-                      filter: "invert(100%) brightness(200%)", // Make image white
-                      transition: "filter 0.3s ease-in-out", // Ensure smooth transition matching the other icons
-                      "&:hover": {
-                        filter: "invert(55%) sepia(35%) saturate(1434%) hue-rotate(78deg) brightness(97%) contrast(95%)",
-                      },
-                    }}
-                  />
-                ),
-                href: "https://leetcode.com/u/bmorris56/"
-              },
+              { icon: <ComputerIcon/>, href: "https://leetcode.com/u/bmorris56/" }
             ].map(({ icon, href }, index) => (
               <IconButton
                 key={index}
@@ -106,7 +97,7 @@ function Navbar() {
                 sx={{
                   color: "white",
                   transition: "color 0.3s",
-                  "&:hover": { color: "#4caf50" },
+                  "&:hover": { color: "#224730" },
                 }}
               >
                 {icon}
@@ -117,7 +108,7 @@ function Navbar() {
           {/* Center: Navigation Links */}
           <Box
             sx={{
-              ...commonNavbarStyles,
+              ...frostedGlassBox,
               display: { xs: "none", md: "flex" },
             }}
           >
@@ -148,6 +139,7 @@ function Navbar() {
           {/* Right Side: Resume and Contact */}
           <Box
             sx={{
+              ...frostedGlassBox,
               display: { xs: "none", md: "flex" },
               gap: 2,
               alignItems: "center",

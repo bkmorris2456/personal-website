@@ -1,12 +1,9 @@
 import Navbar from "../components/Navbar";
-import Tag from "../components/SkillTag";
 import ProfileImage from '../images/IMG_7940.jpg';
-import Prosperity from '../images/Prosperity-.png';
-import Gedara from '../images/Gedara.jpg';
-import BlakeBot from '../images/BlakeBot.jpg';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
 import ProjectTabs from "../components/ProjectTabs";
+import ExperienceNodes from "../components/ExperienceNodes";
 
 function Home() {
 
@@ -112,111 +109,15 @@ function Home() {
                 </Typography>
                 <ProjectTabs />
             </Box>
+
             {/* Horizontal Line */}
             <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
                 <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
             </Box>
-
-            <Box
-                id="experience"
-                component="about"
-                sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "1200px", mx: "auto", marginTop: "12vh", marginBottom: "12vh" }}
-            >
-
-                <Grid container spacing={4} alignItems="left">
-                    <Grid item xs={12} sm={12}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography
-                                variant="h2"
-                                sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                            Experience 
-                            </Typography>
-                        </motion.div>
-                    </Grid>
-                    <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography 
-                                variant="h4"
-                                sx={{ textAlign: "center", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                Software Developer - Ally Financial, Michigan State University
-                            </Typography>
-
-                            <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center", fontSize: { xs: "12px", sm: "16px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                August 2023 - December 2023
-                            </Typography>
-
-                            <Typography 
-                                variant="body1"
-                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px"}, maxWidth: {sm: "35vw" } }}
-                            >
-                                Assisted on a 5-person team to design and develop a mobile-based web application centered on providing financial education. Built and maintained
-                                essential frontend components to improve overall user experience and application design. Conducted and lead team discussions and product presentations 
-                                with the client Ally Financial.
-                            </Typography>
-                            <Box
-                                sx={{mt: 2}}
-                            >
-                                <Tag label="JavaScript"/>
-                                <Tag label="HTML"/>
-                                <Tag label="CSS"/>
-                                <Tag label="MaterialUI"/>
-                                <Tag label="Python"/>
-                                <Tag label="MySQL"/>
-                            </Box>
-                        </motion.div>
-                    </Grid>
-                    <Grid item xs={12} sm={12} sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <Typography 
-                                variant="h4"
-                                sx={{ textAlign: "center", fontSize: { xs: "24px", sm: "30px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                Python Tutor - SpartanTutors
-                            </Typography>
-
-                            <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center", fontSize: { xs: "12px", sm: "16px" }, marginBottom: "4vh", marginTop: "4vh" }}
-                            >
-                                September 2023 - April 2024
-                            </Typography>
-
-                            <Typography 
-                                variant="body1"
-                                sx={{ textAlign: "justify", mx: "auto", fontSize: { xs: "18px", sm: "20px" }, maxWidth: {sm: "35vw" }}}
-                            >
-                                Educated and aided first-year university students on foundational programming concepts using Python. Scheduled and facilitated
-                                one-on-one tutoring sessions to address student questions and concerns regarding material. Demonstrated proficiency in efficiently scheduling
-                                and managing multiple tutoring appointments.
-                            </Typography>
-                            <Box
-                                sx={{mt: 2}}
-                            >
-                                <Tag label="Python"/>
-                                <Tag label="Communication Skills"/>
-                            </Box>
-                        </motion.div>
-                    </Grid>
-                </Grid>
-
-            </Box>
+            
+            {/* Experiences Section */}
+            <ExperienceNodes/>
+            
         </Box>
     );
 }

@@ -1,0 +1,41 @@
+[
+    {
+        "id": 1,
+        "title": "Software Developer",
+        "location": "East Lansing, MI",
+        "company": "Ally Financial, Michigan State University",
+        "start": "August 2023",
+        "end": "December 2023",
+        "description": [
+            "- Collaborated with a team of 4 other students to design and develop an educational financial web application for the company Ally Financial.",
+            "- Conducted and lead discussions regarding the design and implementation of the Money Moves project.",
+            "- Implemented core aspects of the applications UI/UX using JavaScript, React, HTML, and CSS to create a smooth and seamless experience with navigating and completing content."
+        ],
+        "skills": [
+            "JavaScript",
+            "Python",
+            "HTML",
+            "CSS",
+            "MaterialUI",
+            "SQL"
+        ]
+    },
+    {
+    "id": 2,
+    "title": "Tutor",
+    "location": "Lansing, MI",
+    "company": "SpartanTutors",
+    "start": "September 2023",
+    "end": "April 2024",
+    "description": [
+        "- Educated and aided first-year students on foundational programming concepts using Python, assisting over 50 students throughout the academic year.",
+        "- Facilitated one-on-one tutoring sessions to address student questions and concerns regarding material.",
+        "- Demonstrated proficiency in efficiently scheduling and managing multiple sessions."
+    ],
+    "skills": [
+        "Communication",
+        "Python",
+        "Time Management"
+    ]
+    }
+]
