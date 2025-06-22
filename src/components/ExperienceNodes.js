@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Box, Typography, Chip } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
+import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import experience from "./experience.json";
 import Tag from "./SkillTag";
 

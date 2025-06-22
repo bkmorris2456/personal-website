@@ -49,9 +49,10 @@
         "start": "August 2023",
         "end": "December 2023",
         "description": [
-            "- Collaborated with a team of 4 other students to design and develop an educational financial web application for the company Ally Financial.",
-            "- Conducted and lead discussions regarding the design and implementation of the Money Moves project.",
-            "- Implemented core aspects of the applications UI/UX using JavaScript, React, HTML, and CSS to create a smooth and seamless experience with navigating and completing content."
+            "- Developed Money Moves, a mobile-based web application for Ally Financial, enhancing access to financial education for over 11+ customers.",
+            "- Designed and implemented core UI/UX components using JavaScript, React, HTML, and CSS.",
+            "- Led discussions on design and functionality, ensuring project alignment with user needs.",
+            "- Built key financial tools, assisted with the design of the gameified interactivity of the website, and implementeda reward system to further imrpove user engagement. "
         ],
         "skills": [
             "JavaScript",
