@@ -1,6 +1,48 @@
 [
     {
-        "id": 1,
+    "id": 1,
+    "title": "Software Developer",
+    "location": "Farmington Hills, MI",
+    "company": "Contracting",
+    "start": "May 2024",
+    "end": "Now",
+    "description": [
+        "- Design, develop, and deploy mobile and web applications that address real-world challenges and improve daily life.",
+        "- Research and implement emerging technologies to enhance project functionality, scalability, and user experience.",
+        "- Engage with users and industry professionals to gather insights, refining applications to better meet user needs."
+    ],
+    "skills": [
+        "Communication",
+        "Python",
+        "React",
+        "MaterialUI",
+        "React Native",
+        "Firebase",
+        "JavaScript",
+        "TypeScript",
+        "SQL"
+    ]
+    },
+    {
+    "id": 2,
+    "title": "Programming Tutor",
+    "location": "Lansing, MI",
+    "company": "SpartanTutors",
+    "start": "September 2023",
+    "end": "April 2024",
+    "description": [
+        "- Educated and aided first-year students on foundational programming concepts using Python, assisting over 50 students throughout the academic year.",
+        "- Facilitated one-on-one tutoring sessions to address student questions and concerns regarding material.",
+        "- Demonstrated proficiency in efficiently scheduling and managing multiple sessions."
+    ],
+    "skills": [
+        "Communication",
+        "Python",
+        "Time Management"
+    ]
+    },
+    {
+        "id": 3,
         "title": "Software Developer",
         "location": "East Lansing, MI",
         "company": "Ally Financial, Michigan State University",
@@ -19,23 +61,5 @@
             "MaterialUI",
             "SQL"
         ]
-    },
-    {
-    "id": 2,
-    "title": "Tutor",
-    "location": "Lansing, MI",
-    "company": "SpartanTutors",
-    "start": "September 2023",
-    "end": "April 2024",
-    "description": [
-        "- Educated and aided first-year students on foundational programming concepts using Python, assisting over 50 students throughout the academic year.",
-        "- Facilitated one-on-one tutoring sessions to address student questions and concerns regarding material.",
-        "- Demonstrated proficiency in efficiently scheduling and managing multiple sessions."
-    ],
-    "skills": [
-        "Communication",
-        "Python",
-        "Time Management"
-    ]
     }
 ]

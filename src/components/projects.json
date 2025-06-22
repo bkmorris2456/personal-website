@@ -1,38 +1,13 @@
 [
     {
-        "id": 1,
-        "title": "Portfolio Website",
-        "status": "Completed",
-        "description": "My personal portfolio website showcasing my projects and skills.",
-        "tags": ["HTML", "CSS", "JavaScript", "React", "MaterialUI"],
-        "image": "/images/portfolio-image.png",
-        "link": "https://example.com/project1"
-    },
-    {
         "id": 2,
-        "title": "Gedara",
+        "title": "Roomary",
         "status": "In Progress",
-        "description": "Home Inventory Management App",
+        "label": "Home Inventory Management App",
+        "logo": "",
+        "description": "",
         "tags": ["React Native", "Firebase", "JavaScript"],
         "image": "/images/Gedara.jpg",
         "link": "https://example.com/project2"
-    },
-    {
-        "id": 3,
-        "title": "Prosperity",
-        "status": "Upcoming",
-        "description": "Nutrition and Fitness App",
-        "tags": ["React Native", "Firebase", "TypeScript"],
-        "image": "/images/Prosperity-.png",
-        "link": "https://example.com/project3"
-    },
-    {
-        "id": 4,
-        "title": "AI Chatbot",
-        "status": "Upcoming",
-        "description": "My first attempt at learning AI and building a chatbot.",
-        "tags": ["TBD"],
-        "image": "/images/BlakeBot.jpg",
-        "link": "https://example.com/project4"
     }
 ]

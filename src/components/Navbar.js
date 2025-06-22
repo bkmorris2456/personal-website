@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { GitHub, LinkedIn,  Menu as MenuIcon, Close } from "@mui/icons-material";
 import ComputerIcon from '@mui/icons-material/Computer';
-import LeetCode from "../images/leetcode.svg";
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -348,7 +347,7 @@ function Navbar() {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <img src={LeetCode} alt="LeetCode" style={{ width: "24px", height: "24px", filter: "invert(100%) brightness(200%)", }} />
+            <ComputerIcon />
           </ListItemIcon>
           <ListItemText>
             <a

@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar";
-import ProfileImage from '../images/IMG_7940.jpg';
+import UpdatedPhoto from '../images/linkedin-headshot.jpeg';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
-import ProjectTabs from "../components/ProjectTabs";
+import ProjectList from "../components/ProjectTabs";
 import ExperienceNodes from "../components/ExperienceNodes";
 
 function Home() {
@@ -36,7 +36,7 @@ function Home() {
                     <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center" }}>
                         <Box
                             component="img"
-                            src={ProfileImage}
+                            src={UpdatedPhoto}
                             alt="My Picture"
                             sx={{
                                 borderRadius: "50%",
@@ -58,28 +58,25 @@ function Home() {
                                 variant="body1" 
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
                             >
-                                I have a passion and deep interest for designing and developing applications 
-                                that are not only functional and extremely helpful for everyday use, but also 
-                                assist me in furthering my skills and talents as a developer. I take pride in 
-                                continuously learning and researching new methods and practices that can both 
-                                improve the quality of my projects, as well as my abilities. 
+                                I have a deep passion for designing and developing effective applications that not only assist with problems and make every-day life easier, 
+                                but also help me tackle tough problems that help me learn and improve as a developer. I take great pride in knowing that I continuously improve 
+                                in the work that I do, and I always look for the greatest chances to help me grow.
                             </Typography>
                             <Typography 
                                 variant="body1" 
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
                             >
-                                Currently, I focus on creating projects and applications centered around problems 
-                                I want to solve in my every-day life, as well as spending time studying data structures 
-                                and algorithms. I prioritize making sure that I improve day by day.
+                                Currently, I work as a contracting software developer, actively seeking out clients and individuals who can benefit from tailored software solutions 
+                                to enhance their business or daily lives. I use these opportunities not only to solve real-world problems but also to explore new technologies and build 
+                                innovative products.
                             </Typography>
                             <Typography 
                                 variant="body1" 
                                 sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
                             >
-                                In the past couple years, I’ve had the pleasure of gaining a multitude of experience 
-                                in both my time earning my degree at Michigan State University and working under the company 
-                                Ally Financial. When i'm not studying Leetcode or working on project code, some of my favorite
-                                hobbies are gaming, reading, chess, and exercising at the gym!
+                                In the past couple of years, I've had the pleasure of accruing knowledge and experience during my time studying at Michigan State University, 
+                                working with Ally Financial, and continuing my work with other clients. If I'm not developing projects or studying Data Structures and Algorithms, 
+                                then I'm most likely deep diving into one of my hobbies!
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -98,16 +95,16 @@ function Home() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    maxWidth: "100%",
                 }}
+                id="projects"
             >
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
                 >
-                    My Projects
+                    Projects
                 </Typography>
-                <ProjectTabs />
+                <ProjectList />
             </Box>
 
             {/* Horizontal Line */}
@@ -116,7 +113,7 @@ function Home() {
             </Box>
             
             {/* Experiences Section */}
-            <ExperienceNodes/>
+            <ExperienceNodes id="experience"/>
             
         </Box>
     );
