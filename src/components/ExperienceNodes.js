@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import experience from "./experience.json";
 import Tag from "./SkillTag";
 
-export default function ExperienceNodes() {
+export default function ExperienceNodes({ id }) {
 
     return (
         <Box
+            id={id}
             sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "100%", mx: "auto", marginTop: "1vh", marginBottom: "12vh" }}
         >
             <Box sx={{ textAlign: "center", mb: 8 }}>

@@ -1,13 +1,10 @@
 [
     {
-        "id": 2,
-        "title": "Roomary",
-        "status": "In Progress",
-        "label": "Home Inventory Management App",
-        "logo": "",
-        "description": "",
-        "tags": ["React Native", "Firebase", "JavaScript"],
-        "image": "/images/Gedara.jpg",
-        "link": "https://example.com/project2"
+    "id": 1,
+    "title": "Roomary",
+    "label": "Home Inventory Management App",
+    "description": "Roomary is a mobile app designed to help users efficiently track and manage inventory across all types of owned properties, from homes to businesses, ensuring nothing gets lost in their growing collections. Whether you're moving, renovating, or simply keeping track of your possessions, Roomary can always assist.",
+    "logo": "roomary",
+    "tags": ["React Native", "Firebase", "JavaScript"]
     }
 ]

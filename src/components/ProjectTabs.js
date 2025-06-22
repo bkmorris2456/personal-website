@@ -12,9 +12,15 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material";
 import { motion, AnimatePresence } from "framer-motion";
 import projects from "../components/projects.json";
 
+// Project Logos
+import Roomary from "../images/roomary-logo-with-text.png"
+
+const logoMap = {
+  "roomary": Roomary
+};
+
 export default function ProjectList() {
   const [expanded, setExpanded] = useState(null);
-  const theme = useTheme();
 
   const handleExpandClick = (id) => {
     setExpanded((prev) => (prev === id ? null : id));
@@ -87,35 +93,61 @@ export default function ProjectList() {
                     display: "flex",
                     flexDirection: { xs: "column", sm: "row" },
                     gap: 3,
-                    alignItems: { xs: "flex-start", sm: "center" },
+                    alignItems: { xs: "flex-start", sm: "flex-start" },
                   }}
                 >
-                  {project.logo && (
+                  {/* Image */}
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "35%" },
+                      maxWidth: "20vw",
+                      height: "auto",
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      backgroundColor: "#fff",
+                      alignSelf: "center",
+                      margin: {lg: "50px" }
+                    }}
+                  >
                     <Box
                       component="img"
-                      src={project.logo}
+                      src={logoMap[project.logo]}
                       alt={`${project.title} logo`}
                       sx={{
-                        width: "80px",
-                        height: "80px",
-                        objectFit: "contain",
-                        mt: { xs: 1, sm: 0 },
-                        flexShrink: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
                       }}
                     />
-                  )}
-                  <Box sx={{ flex: 1 }}>
+                  </Box>
+
+                  {/* Text + Tags Wrapper */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: { xs: "flex-start", sm: "center" }, // ⬅️ center vertically on sm+
+                      alignItems: { xs: "flex-start", lg: "center" },
+                      textAlign: { xs: "left", lg: "center" },
+                      px: { xs: 0, sm: 2 },
+                      height: "100%", // ⬅️ ensure it stretches fully
+                    }}
+                  >
                     <Typography
                       variant="body2"
                       sx={{
-                        fontSize: "0.95rem",
+                        fontSize: { xs: "18px", sm: "20px" },
                         mb: 2,
-                        textAlign: "justify",
+                        maxWidth: "600px",
+                        textAlign: "left",
+                        justifyContent: "center",
+                        marginTop: "5vh",
                       }}
                     >
                       {project.description}
                     </Typography>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: { xs: "flex-start", lg: "center" }, gap: 1 }}>
                       {project.tags.map((tag, i) => (
                         <Chip
                           key={i}

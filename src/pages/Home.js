@@ -27,7 +27,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                            Hello. My name is Blake Morris, and I'm a Software Engineer.
+                            Hello. My name is Blake Morris, and I'm a Software Developer.
                             </Typography>
                         </motion.div>
                     </Grid>
