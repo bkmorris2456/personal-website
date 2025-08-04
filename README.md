@@ -13,7 +13,7 @@ This site showcases my background, technical skills, and projects I've built as 
 
 ## 🖼 Preview
 
-![Screenshot of homepage](./images/portfolio-homepage.png)
+![Screenshot of homepage](../src/images/portfolio-homepage.png)
 
 ## 🔧 Tech Stack
 
