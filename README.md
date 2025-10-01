@@ -1,32 +1,33 @@
-# My Personal Portfolio Website
+# 🧑‍💻 Blake's Portfolio
 
-Portfolio Website showcasing personal projects, details about me, and more.
+Welcome to my personal portfolio website!  
+This site showcases my background, technical skills, and projects I've built as a software developer.
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
+👉 **Live Site:** [portfolio website](https://bkmorris2456.github.io/personal-website/)
 
-## Project Status
+## ✨ Features
 
-Project is currently in development, with a few more features left to be implemented
+- 🌐 Clean and responsive design for all devices
+- 🛠️ Projects with descriptions and links to source code/live demos
+- 📜 List of prior experience and what I am currently doing
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Screenshots](#screenshots)
-4. [Contact](#contact)
+## 🖼 Preview
 
-## Introduction
-This project aims to be the central place for where I will start storing all of my information regarding resume information, project plans and details, more details
-about me, and more. 
+![Screenshot of homepage](../src/images/portfolio-homepage.png)
 
-## Features
-- Homepage containing most of the information (project details, initial introduction, etc.)
-- Organized navbar that allows traversal throughout the homepage, redirection to social media accounts,
-as well as redirection to alternate webpages displaying more relevant information
+## 🔧 Tech Stack
 
-## Screenshots
+- **Frontend:** React, HTML, CSS, JavaScript  
+- **UI Frameworks:** Material UI / Framer Motion
+- **Hosting:** GitHub Pages
 
-## Contact
-- [Blake Morris](https://github.com/bkmorris2456)
-- Email: bkmorris2024@gmail.com
-- LinkedIn: [Blake Morris](https://www.linkedin.com/in/bkmorris2024/)
+## 🚀 Getting Started Locally
+
+To run this project on your machine:
+
+```bash
+git clone https://github.com/yourusername/portfolio.git
+cd personal-website
+npm install
+npm start
+```
