@@ -1,58 +1,64 @@
 [
     {
-    "id": 1,
-    "title": "Software Developer",
-    "location": "Farmington Hills, MI",
-    "company": "Contracting",
-    "start": "May 2024",
-    "end": "Now",
-    "description": [
-        "- Design, develop, and deploy mobile and web applications that address real-world challenges and improve daily life.",
-        "- Research and implement emerging technologies to enhance project functionality, scalability, and user experience.",
-        "- Engage with users and industry professionals to gather insights, refining applications to better meet user needs."
-    ],
-    "skills": [
-        "Communication",
-        "Python",
-        "React",
-        "MaterialUI",
-        "React Native",
-        "Firebase",
-        "JavaScript",
-        "TypeScript",
-        "SQL"
-    ]
+        "id": 1,
+        "title": "Software Developer",
+        "location": "Farmington Hills, MI",
+        "company": "Self Employed | Freelance",
+        "start": "May 2024",
+        "end": "Present",
+        "description": [
+            "- Designed, developed, and deployed responsive mobile and web applications to address real-world needs for personal, family, and small business-use cases.",
+            "- Collaborated with end users to gather and document requirements, and translated feedback into technical specifications and user-focused features.",
+            "- Utilized React, HTML, CSS, JavaScript, and Firebase to build scalable full-stack solutions, applying best practices in code structure, testing, and deployment.",
+            "- Handled post-deployment maintenance, including debugging in VSCode, optimizing performance, and adding new features to improve usability and functionality."
+        ]
     },
     {
-    "id": 2,
-    "title": "Programming Tutor",
-    "location": "Lansing, MI",
-    "company": "SpartanTutors",
-    "start": "September 2023",
-    "end": "April 2024",
-    "description": [
-        "- Educated and aided first-year students on foundational programming concepts using Python, assisting over 50 students throughout the academic year.",
-        "- Facilitated one-on-one tutoring sessions to address student questions and concerns regarding material.",
-        "- Demonstrated proficiency in efficiently scheduling and managing multiple sessions."
-    ],
-    "skills": [
-        "Communication",
-        "Python",
-        "Time Management"
-    ]
+        "id": 2,
+        "title": "Software Developer",
+        "location": "Southfield, MI",
+        "company": "BkRobs Consulting",
+        "start": "Oct 2024",
+        "end": "Present",
+        "description": [
+            "- Assisted in the implementation of a digital portal application for a property and casualty insurance company, contributing to improved internal processing efficiency and customer satisfaction. ",
+            "- Collaborated in an Agile development environment, participating in Scrum meetings and iterative development cycles to ensure timely delivery of project milestones. Utilized SharePoint to manage deliverables.",
+            "- Utilized React, HTML, CSS, JavaScript, and MySQL to design responsive, scalable solutions that improved system usability and customer satisfaction.",
+            "- Utilized best practices and standards as defined by the product company."
+
+        ]
     },
     {
         "id": 3,
+        "title": "Python Tutor",
+        "location": "Lansing, MI",
+        "company": "SpartanTutors",
+        "start": "September 2023",
+        "end": "April 2024",
+        "description": [
+            "- Tutored first-year Michigan State University students in foundational Python programming concepts.",
+            "- Conducted personalized one-on-one and small group sessions to reinforce understanding of coding principles and problem-solving strategies.",
+            "- Developed custom examples and exercises covering topics such as class creation, function design, data structures, and string manipulation.",
+            "- Managed and organized weekly tutoring schedules to accommodate student needs while maintaining consistent session quality and engagement."
+        ],
+        "skills": [
+            "Communication",
+            "Python",
+            "Time Management"
+        ]
+    },
+    {
+        "id": 4,
         "title": "Software Developer",
         "location": "East Lansing, MI",
         "company": "Ally Financial, Michigan State University",
         "start": "August 2023",
         "end": "December 2023",
         "description": [
-            "- Developed Money Moves, a mobile-based web application for Ally Financial, enhancing access to financial education for over 11+ customers.",
-            "- Designed and implemented core UI/UX components using JavaScript, React, HTML, and CSS.",
-            "- Led discussions on design and functionality, ensuring project alignment with user needs.",
-            "- Built key financial tools, assisted with the design of the gameified interactivity of the website, and implementeda reward system to further imrpove user engagement. "
+            "- Collaborated with a team of four to design and develop Money Moves, a mobile-based web application for Ally Financial aimed at promoting financial literacy among over 11 million customers.",
+            "- Designed and implemented accessible, responsive UI/UX components using React, JavaScript, HTML, and CSS, ensuring user engagement and inclusivity across devices.",
+            "- Gathered requirements from Ally Senior Software Team, translating them into functional modules such as mortgage and interest calculators and interactive course quizzes.",
+            "- Delivered structured business presentations to stakeholders, demonstrating design decisions, technical progress, and measurable outcomes."
         ],
         "skills": [
             "JavaScript",

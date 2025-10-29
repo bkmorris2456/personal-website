@@ -16,7 +16,7 @@ function Home() {
             <Box 
                 id="home"
                 component="main" 
-                sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "1200px", mx: "auto", marginBottom: "20vh" }}
+                sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "1200px", mx: "auto", marginBottom: "10vh" }}
             >
                 <Grid container spacing={4} alignItems="center">
 
@@ -27,7 +27,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                            Hello. My name is Blake Morris, and I'm a Software Developer.
+                                Hello. My name is Blake Morris, and I'm a Software Developer.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -56,7 +56,7 @@ function Home() {
                         >
                             <Typography 
                                 variant="body1" 
-                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
+                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "5vh" }}
                             >
                                 I have a deep passion for designing and developing effective applications that not only assist with problems and make every-day life easier, 
                                 but also help me tackle tough problems that help me learn and improve as a developer. I take great pride in knowing that I continuously improve 
@@ -64,7 +64,7 @@ function Home() {
                             </Typography>
                             <Typography 
                                 variant="body1" 
-                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" }, marginBottom: "5vh" }}
+                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "5vh" }}
                             >
                                 Currently, I work as a contracting software developer, actively seeking out clients and individuals who can benefit from tailored software solutions 
                                 to enhance their business or daily lives. I use these opportunities not only to solve real-world problems but also to explore new technologies and build 
@@ -72,7 +72,7 @@ function Home() {
                             </Typography>
                             <Typography 
                                 variant="body1" 
-                                sx={{ textAlign: "justify", fontSize: { xs: "18px", sm: "20px" } }}
+                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" } }}
                             >
                                 In the past couple of years, I've had the pleasure of accruing knowledge and experience during my time studying at Michigan State University, 
                                 working with Ally Financial, and continuing my work with other clients. If I'm not developing projects or studying Data Structures and Algorithms, 
@@ -83,9 +83,38 @@ function Home() {
                 </Grid>
             </Box>
 
-            {/* Horizontal Line */}
-            <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
-                <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
+            {/* Experiences Section */}
+            <ExperienceNodes id="experience"/>
+
+            {/* Skills Section */}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+                id="projects"
+            >
+                <Typography
+                    variant="h3"
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
+                >
+                    Skills
+                </Typography>
+
+                <Typography
+                    variant="h4"
+                    sx={{textAlign: "left", fontSize: {xs: "25px", sm: "30px"}}}
+                >
+                    Programming Languages:
+                </Typography>
+                <Typography
+                    variant="h4"
+                    sx={{textAlign: "left", fontSize: {xs: "25px", sm: "30px"}}}
+                >
+                    Technologies:
+                </Typography>
             </Box>
             
             {/* Projects Section */}
@@ -100,20 +129,12 @@ function Home() {
             >
                 <Typography
                     variant="h3"
-                    sx={{ textAlign: "center", fontSize: { xs: "30px", sm: "40px" }, marginBottom: "4vh", marginTop: "4vh" }}
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
                 >
                     Projects
                 </Typography>
-                <ProjectList />
+                {/* <ProjectList /> */}
             </Box>
-
-            {/* Horizontal Line */}
-            <Box sx={{ width: "97%", my: 2, px: { xs: 2, sm: 4 } }}>
-                <Box component="hr" sx={{ border: "none", height: "1px", backgroundColor: "#ccc" }} />
-            </Box>
-            
-            {/* Experiences Section */}
-            <ExperienceNodes id="experience"/>
             
         </Box>
     );
