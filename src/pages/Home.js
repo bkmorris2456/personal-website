@@ -33,22 +33,22 @@ function Home() {
                     </Grid>
 
                     {/* Profile Image */}
-                    <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center" }}>
+                    <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center" }}>
                         <Box
                             component="img"
                             src={UpdatedPhoto}
                             alt="My Picture"
                             sx={{
                                 borderRadius: "50%",
-                                width: { xs: "200px", sm: "300px" },
-                                height: { xs: "200px", sm: "300px" },
+                                width: { xs: "200px", sm: "350px" },
+                                height: { xs: "200px", sm: "350px" },
                                 objectFit: "cover",
                             }}
                         />
                     </Grid>
 
                     {/* Summary Text */}
-                    <Grid item xs={12} sm={8}>
+                    <Grid item xs={12} sm={6}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ function Home() {
                         >
                             <Typography 
                                 variant="body1" 
-                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "5vh" }}
+                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "2vh" }}
                             >
                                 I have a deep passion for designing and developing effective applications that not only assist with problems and make every-day life easier, 
                                 but also help me tackle tough problems that help me learn and improve as a developer. I take great pride in knowing that I continuously improve 
@@ -64,7 +64,7 @@ function Home() {
                             </Typography>
                             <Typography 
                                 variant="body1" 
-                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "5vh" }}
+                                sx={{ textAlign: "justify", fontSize: { xs: "14px", sm: "16px" }, marginBottom: "2vh" }}
                             >
                                 Currently, I work as a contracting software developer, actively seeking out clients and individuals who can benefit from tailored software solutions 
                                 to enhance their business or daily lives. I use these opportunities not only to solve real-world problems but also to explore new technologies and build 
