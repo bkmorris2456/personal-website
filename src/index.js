@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import ReactDOM from 'react-dom/client';
+import './fonts/fonts.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './fonts/fonts.css';
 import { ThemeProvider, createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -37,7 +37,34 @@ function RootComponent() {
           },
         },
         typography: {
-          fontFamily: '"CustomFont", sans-serif',
+          fontFamily: '"ClashDisplay"',
+
+          h1: {
+            fontWeight: 700, // bold Inter
+            fontSize: '2.5rem',
+          },
+          h2: {
+            fontWeight: 700,
+            fontSize: '2rem',
+          },
+          h3: {
+            fontWeight: 700,
+            fontSize: '1.75rem',
+          },
+          body1: {
+            fontWeight: 400, // normal Inter
+            fontSize: '1rem',
+            opacity: 0.8,
+          },
+          body2: {
+            fontWeight: 400,
+            fontSize: '0.9rem',
+            opacity: 0.8,
+          },
+          button: {
+            fontWeight: 700,
+            textTransform: 'none',
+          },
         },
       }),
     [mode]

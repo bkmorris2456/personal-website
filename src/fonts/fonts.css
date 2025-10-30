@@ -1,10 +1,13 @@
 @font-face {
-    font-family: 'CustomFont';
-    src: url('./Ubuntu-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-family: 'ClashDisplay';
+    src: url('./clash-display/ClashDisplay-Semibold.otf') format('opentype');
+    font-weight: bold;
     font-style: normal;
   }
 
-body {
-    font-family: 'CustomFont', sans-serif;
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('./clash-display/ClashDisplay-Light.otf') format('opentype');
+  font-weight: lighter;
+  font-style: normal;
 }

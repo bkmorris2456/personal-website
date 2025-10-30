@@ -26,7 +26,7 @@ function Home() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1 }}
                         >
-                            <Typography variant="h2" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
+                            <Typography variant="h1" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
                                 Hello. My name is Blake Morris, and I'm a Software Developer.
                             </Typography>
                         </motion.div>
@@ -94,26 +94,13 @@ function Home() {
                     alignItems: "center",
                     justifyContent: "center",
                 }}
-                id="projects"
+                id="skills"
             >
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
                 >
                     Skills
-                </Typography>
-
-                <Typography
-                    variant="h4"
-                    sx={{textAlign: "left", fontSize: {xs: "25px", sm: "30px"}}}
-                >
-                    Programming Languages:
-                </Typography>
-                <Typography
-                    variant="h4"
-                    sx={{textAlign: "left", fontSize: {xs: "25px", sm: "30px"}}}
-                >
-                    Technologies:
                 </Typography>
             </Box>
             
@@ -135,6 +122,27 @@ function Home() {
                 </Typography>
                 {/* <ProjectList /> */}
             </Box>
+
+            {/* Contact Section */}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+                id="contact"
+            >
+                <Typography
+                    variant="h3"
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
+                >
+                    Contact Me
+                </Typography>
+                {/* <ProjectList /> */}
+            </Box>
+
+            
             
         </Box>
     );

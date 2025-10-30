@@ -75,7 +75,7 @@ function Navbar() {
           }}
         >
           {/* Left Side: Social Media Icons */}
-          <Box sx={{ 
+          {/* <Box sx={{ 
               ...frostedGlassBox,
               display: { xs: "none", md: "flex" },
               width: "auto",
@@ -102,7 +102,7 @@ function Navbar() {
                 {icon}
               </IconButton>
             ))}
-          </Box>
+          </Box> */}
 
           {/* Center: Navigation Links */}
           <Box
@@ -111,7 +111,7 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
             }}
           >
-            {["home", "projects", "experience"].map((item) => (
+            {["home", "experience", "skills", "projects", "contact"].map((item) => (
               <ScrollLink
                 key={item}
                 to={item}
@@ -145,7 +145,7 @@ function Navbar() {
               position: "relative"
             }}
           >
-            <Typography
+            {/* <Typography
               onClick={() => setShowContactInfo((prev) => !prev)}
               sx={{
                 cursor: "pointer",
@@ -158,10 +158,10 @@ function Navbar() {
               }}
             >
               Contact Me
-            </Typography>
+            </Typography> */}
 
             {/* Animated Contact Info Pop-Up */}
-            <AnimatePresence>
+            {/* <AnimatePresence>
               {showContactInfo && (
                 <motion.div
                   key="contact-popup"
@@ -204,7 +204,7 @@ function Navbar() {
                   </Typography>
                 </motion.div>
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
           </Box>
 
           {/* Collapsible Menu for Small Screens */}
