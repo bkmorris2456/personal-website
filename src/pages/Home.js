@@ -2,8 +2,8 @@ import Navbar from "../components/Navbar";
 import UpdatedPhoto from '../images/linkedin-headshot.jpeg';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
-import ProjectList from "../components/ProjectTabs";
 import ExperienceNodes from "../components/ExperienceNodes";
+import ContactForm from "../components/ContactForm";
 
 function Home() {
 
@@ -27,7 +27,7 @@ function Home() {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="h1" sx={{ textAlign: "center", marginTop: "10vh", marginBottom: "10vh", fontSize: { xs: "35px", sm: "45px" } }}>
-                                Hello. My name is Blake Morris, and I'm a Software Developer.
+                                My name is Blake Morris, and I'm a Software Developer.
                             </Typography>
                         </motion.div>
                     </Grid>
@@ -130,6 +130,8 @@ function Home() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
+                    marginBottom: "16vh",
+                    marginTop: "8vh",
                 }}
                 id="contact"
             >
@@ -139,7 +141,7 @@ function Home() {
                 >
                     Contact Me
                 </Typography>
-                {/* <ProjectList /> */}
+                <ContactForm/>
             </Box>
 
             
