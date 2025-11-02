@@ -28,10 +28,10 @@ const ContactForm = () => {
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail} style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "400px", margin: "auto" }}>
+    <form ref={form} onSubmit={sendEmail} style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "400px", width: "100%", margin: "auto" }}>
       <TextField name="name" label="Your Name" required fullWidth />
       <TextField name="email" label="Your Email" required fullWidth />
-      <TextField name="message" label="Your Message" multiline rows={4} required fullWidth />
+      <TextField name="message" label="Your Message" multiline rows={8} required fullWidth />
       <Button variant="contained" type="submit" color="primary">
         Send Message
       </Button>

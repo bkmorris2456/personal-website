@@ -74,37 +74,8 @@ function Navbar() {
             justifyContent: "space-between",
           }}
         >
-          {/* Left Side: Social Media Icons */}
-          {/* <Box sx={{ 
-              ...frostedGlassBox,
-              display: { xs: "none", md: "flex" },
-              width: "auto",
-              padding: "6px 12px",
-              marginTop: "8px",
-              marginLeft: "-1vw",
-          }}>
-            {[
-              { icon: <GitHub />, href: "https://github.com/bkmorris2456" },
-              { icon: <LinkedIn />, href: "https://linkedin.com/in/bkmorris2024" },
-              { icon: <ComputerIcon/>, href: "https://leetcode.com/u/bmorris56/" }
-            ].map(({ icon, href }, index) => (
-              <IconButton
-                key={index}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "white",
-                  transition: "color 0.3s",
-                  "&:hover": { color: "#224730" },
-                }}
-              >
-                {icon}
-              </IconButton>
-            ))}
-          </Box> */}
 
-          {/* Center: Navigation Links */}
+          {/* Navigation Links */}
           <Box
             sx={{
               ...frostedGlassBox,
@@ -133,78 +104,6 @@ function Navbar() {
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </ScrollLink>
             ))}
-          </Box>
-
-          {/* Right Side: Resume and Contact */}
-          <Box
-            sx={{
-              ...frostedGlassBox,
-              display: { xs: "none", md: "flex" },
-              gap: 2,
-              alignItems: "center",
-              position: "relative"
-            }}
-          >
-            {/* <Typography
-              onClick={() => setShowContactInfo((prev) => !prev)}
-              sx={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "inherit",
-                fontSize: "18px",
-                fontWeight: "bold",
-                transition: "color 0.3s",
-                "&:hover": { color: "#4caf50" },
-              }}
-            >
-              Contact Me
-            </Typography> */}
-
-            {/* Animated Contact Info Pop-Up */}
-            {/* <AnimatePresence>
-              {showContactInfo && (
-                <motion.div
-                  key="contact-popup"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    position: "absolute",
-                    top: "100%", // Position below the button
-                    right: 0, // Align to the right
-                    background: "rgba(0, 0, 0, 0.6)", // Adjust translucency (lower alpha value for more translucency)
-                    backdropFilter: "blur(10px)", // Same blur effect as the dropdown menu
-                    borderRadius: "16px", // Match dropdown's rounded corners
-                    padding: "16px", // Padding inside the box
-                    zIndex: 10, // Higher stacking order
-                    color: "white", // White text
-                    width: "220px", // Box width
-                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)", // Slightly stronger shadow
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "13px",
-                      textAlign: "left",
-                      color: "white",
-                    }}
-                  >
-                    Email: bkmorris2024@gmail.com
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: "13px",
-                      textAlign: "left",
-                      color: "white",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Phone: (248) 925-8946
-                  </Typography>
-                </motion.div>
-              )}
-            </AnimatePresence> */}
           </Box>
 
           {/* Collapsible Menu for Small Screens */}

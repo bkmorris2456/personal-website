@@ -137,7 +137,7 @@ function Home() {
             >
                 <Typography
                     variant="h3"
-                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "8vh", marginTop: "2vh" }}
                 >
                     Contact Me
                 </Typography>
