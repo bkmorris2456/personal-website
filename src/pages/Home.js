@@ -11,10 +11,12 @@ function Home() {
     const skills = [
     { name: "React", iconClass: "devicon-react-original colored" },
     { name: "JavaScript", iconClass: "devicon-javascript-plain colored" },
-    { name: "Node.js", iconClass: "devicon-nodejs-plain colored" },
     { name: "HTML5", iconClass: "devicon-html5-plain colored" },
     { name: "CSS3", iconClass: "devicon-css3-plain colored" },
     { name: "GitHub", iconClass: "devicon-github-original" },
+    { name: "Python", iconClass: "devicon-python-plain colored" },
+    { name: "Node.js", iconClass: "devicon-nodejs-plain colored" },
+    { name: "MySQL", iconClass: "devicon-mysql-plain colored" },
     ];
 
     return (
