@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
 import ExperienceNodes from "../components/ExperienceNodes";
 import ContactForm from "../components/ContactForm";
-import SkillCard from "../components/SkillCard";
+import SkillsSection from "../components/SkillsSection";
 
 function Home() {
 
@@ -112,28 +112,12 @@ function Home() {
             >
                 <Typography
                     variant="h3"
-                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "8vh", marginTop: "2vh" }}
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
                 >
                     Skills
                 </Typography>
 
-                <Grid 
-                container 
-                spacing={2} 
-                justifyContent="center"
-                alignItems="center"
-                sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    maxWidth: "800px",
-                }}
-                >
-                {skills.map((skill) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={skill.name}>
-                    <SkillCard name={skill.name} iconClass={skill.iconClass} />
-                    </Grid>
-                ))}
-                </Grid>
+                <SkillsSection skills={skills} />
             </Box>
             
             {/* Projects Section */}
@@ -152,6 +136,9 @@ function Home() {
                 >
                     Projects
                 </Typography>
+
+                
+
             </Box>
 
             {/* Contact Section */}
