@@ -4,11 +4,21 @@ import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
 import ExperienceNodes from "../components/ExperienceNodes";
 import ContactForm from "../components/ContactForm";
+import SkillCard from "../components/SkillCard";
 
 function Home() {
 
+    const skills = [
+    { name: "React", iconClass: "devicon-react-original colored" },
+    { name: "JavaScript", iconClass: "devicon-javascript-plain colored" },
+    { name: "Node.js", iconClass: "devicon-nodejs-plain colored" },
+    { name: "HTML5", iconClass: "devicon-html5-plain colored" },
+    { name: "CSS3", iconClass: "devicon-css3-plain colored" },
+    { name: "GitHub", iconClass: "devicon-github-original" },
+    ];
+
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", alignItems: "center" }}>
             {/* Navbar */}
             <Navbar />
 
@@ -93,15 +103,35 @@ function Home() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
+                    maxWidth: "800px",
+                    marginBottom: "8vh",
                 }}
                 id="skills"
             >
                 <Typography
                     variant="h3"
-                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "2vh", marginTop: "2vh" }}
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "8vh", marginTop: "2vh" }}
                 >
                     Skills
                 </Typography>
+
+                <Grid 
+                container 
+                spacing={2} 
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    maxWidth: "800px",
+                }}
+                >
+                {skills.map((skill) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={skill.name}>
+                    <SkillCard name={skill.name} iconClass={skill.iconClass} />
+                    </Grid>
+                ))}
+                </Grid>
             </Box>
             
             {/* Projects Section */}
@@ -120,7 +150,6 @@ function Home() {
                 >
                     Projects
                 </Typography>
-                {/* <ProjectList /> */}
             </Box>
 
             {/* Contact Section */}

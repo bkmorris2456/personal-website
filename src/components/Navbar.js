@@ -11,12 +11,12 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import { GitHub, LinkedIn,  Menu as MenuIcon, Close } from "@mui/icons-material";
+import { GitHub, LinkedIn,  Menu as MenuIcon, Close, LightMode, DarkMode } from "@mui/icons-material";
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Navbar() {
+function Navbar({toggleTheme, mode}) {
   const [scrolled, setScrolled] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [showContactInfo, setShowContactInfo] = React.useState(false);

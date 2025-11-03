@@ -1,26 +1,39 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 
-const Tag = ({ label }) => {
-  const theme = useTheme(); // Access the theme
-
+const SkillCard = ({ name, iconClass }) => {
   return (
-    <Box
+    <Card
       sx={{
-        display: "inline-block",
-        padding: "4px 12px",
-        borderRadius: "16px",
-        backgroundColor: theme.palette.primary.main, // Use theme color
-        color: theme.palette.bright.main, // White text color
-        fontSize: { xs: "12px", sm: "14px" },
-        fontWeight: 500,
-        border: `1px solid ${theme.palette.primary.dark || "#183924"}`, // Slightly darker green border
-        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "#1e1e1e",
+        color: "#fff",
+        borderRadius: 3,
+        boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
+        p: 2,
+        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0px 4px 12px rgba(0,0,0,0.5)",
+        },
       }}
     >
-      {label}
-    </Box>
+      <Box
+        component="i"
+        className={iconClass}
+        sx={{
+          fontSize: 40,
+          mr: 2,
+        }}
+      />
+      <CardContent sx={{ p: 0 }}>
+        <Typography variant="h6" fontWeight={100}>
+          {name}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
-export default Tag;
+export default SkillCard;
