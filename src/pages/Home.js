@@ -5,6 +5,7 @@ import {motion} from 'framer-motion';
 import ExperienceNodes from "../components/ExperienceNodes";
 import ContactForm from "../components/ContactForm";
 import SkillsSection from "../components/SkillsSection";
+import ProjectTabs from "../components/ProjectTabs";
 
 function Home() {
 
@@ -137,7 +138,7 @@ function Home() {
                     Projects
                 </Typography>
 
-                
+                <ProjectTabs/>
 
             </Box>
 
@@ -155,7 +156,7 @@ function Home() {
             >
                 <Typography
                     variant="h3"
-                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "8vh", marginTop: "2vh" }}
+                    sx={{ textAlign: "center", fontSize: { xs: "35px", sm: "45px" }, marginBottom: "4vh", marginTop: "2vh" }}
                 >
                     Contact Me
                 </Typography>

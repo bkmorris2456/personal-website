@@ -1,10 +1,16 @@
 [
     {
-    "id": 1,
-    "title": "Roomary",
-    "label": "Home Inventory Management App",
-    "description": "Roomary is a mobile app designed to help users efficiently track and manage inventory across all types of owned properties, from homes to businesses, ensuring nothing gets lost in their growing collections. Whether you're moving, renovating, or simply keeping track of your possessions, Roomary can always assist.",
-    "logo": "roomary",
-    "tags": ["React Native", "Firebase", "JavaScript"]
+        "title": "Roomary",
+        "image": "images/roomary-logo.png",
+        "description":"A mobile application that helps users organize and track household items and belongings across rooms and multiple properties, with categorized inventory management.",
+        "technologies": ["React Native", "HTML", "CSS", "JavaScript", "Firebase"],
+        "link": "https://github.com/bkmorris2456/Gedara"
+    },
+    {
+        "title": "Money Moves",
+        "image": "images/money-moves-demo.png",
+        "description": "A financial education web application developed for Ally Financial through MSU's CSE Capstone Program, featuring interactive tools and gamified lessons.",
+        "technologies": ["React", "JavaScript", "HTML", "CSS", "Python", "MySQL"],
+        "link": ""
     }
 ]

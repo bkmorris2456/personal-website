@@ -37,7 +37,6 @@ const ContactForm = () => {
         gap: "1.5rem",
         width: "100%",
         margin: "auto",
-        maxWidth: "90vw",
         padding: "1rem",
       }}
     >
