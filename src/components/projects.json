@@ -1,14 +1,14 @@
 [
     {
         "title": "Roomary",
-        "image": "images/roomary-logo.png",
+        "id": "roomary",
         "description":"A mobile application that helps users organize and track household items and belongings across rooms and multiple properties, with categorized inventory management.",
         "technologies": ["React Native", "HTML", "CSS", "JavaScript", "Firebase"],
         "link": "https://github.com/bkmorris2456/Gedara"
     },
     {
         "title": "Money Moves",
-        "image": "images/money-moves-demo.png",
+        "id": "moneymoves",
         "description": "A financial education web application developed for Ally Financial through MSU's CSE Capstone Program, featuring interactive tools and gamified lessons.",
         "technologies": ["React", "JavaScript", "HTML", "CSS", "Python", "MySQL"],
         "link": ""

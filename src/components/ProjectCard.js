@@ -27,6 +27,9 @@ const ProjectCard = ({
         "&:hover": {
           transform: "translateY(-5px)",
           boxShadow: 8
+        },
+        "&:hover .project-image": {
+          filter: "brightness(0.6)"
         }
       }}
     >

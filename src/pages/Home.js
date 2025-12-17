@@ -151,6 +151,7 @@ function Home() {
                     justifyContent: "center",
                     marginBottom: "16vh",
                     marginTop: "8vh",
+                    width: "100%",
                 }}
                 id="contact"
             >
@@ -160,7 +161,14 @@ function Home() {
                 >
                     Contact Me
                 </Typography>
-                <ContactForm/>
+                <Box
+                    sx={{
+                        width: {xs: "90%", sm: "70%", md: "50%"},
+                        maxWidth: "450px",
+                    }}
+                >
+                    <ContactForm/>
+                </Box>
             </Box>
 
             
