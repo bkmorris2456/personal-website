@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import experience from "./experience.json";
+import experience from "../data/experience.json";
 
 export default function ExperienceNodes({ id }) {
 

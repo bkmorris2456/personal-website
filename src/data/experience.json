@@ -1,6 +1,17 @@
 [
     {
         "id": 1,
+        "title": "Full-Stack Development Intern",
+        "location": "Auburn Hills, MI",
+        "company": "Results at Hand",
+        "start": "March 2026",
+        "end": "Present",
+        "description": [
+            "Contributed to the development and improvement of web application features in a staging environment using HTML, Bootstrap, PHP, and MySQL, implementing updates that were later integrated into production, while collaborating with team members to refine requirements, iterate on features, and support the deployment pipeline."
+        ]
+    },
+    {
+        "id": 2,
         "title": "Software Developer",
         "location": "Farmington Hills, MI",
         "company": "Contracting | Freelance",
@@ -11,18 +22,18 @@
         ]
     },
     {
-        "id": 2,
+        "id": 3,
         "title": "Software Developer",
         "location": "Southfield, MI",
         "company": "BkRobs Consulting",
         "start": "Oct 2024",
-        "end": "Present",
+        "end": "Dec 2025",
         "description": [
             "I contributed to the development of a digital portal for a property and casualty insurance company, enhancing internal processes and customer satisfaction. Working in an Agile environment, I participated in Scrum meetings and iterative development cycles, managing deliverables via SharePoint. Using React, HTML, CSS, JavaScript, and MySQL, I designed responsive, scalable solutions that improved system usability, following the product company’s established best practices and standards."
         ]
     },
     {
-        "id": 3,
+        "id": 4,
         "title": "Python Tutor",
         "location": "Lansing, MI",
         "company": "SpartanTutors",
@@ -38,7 +49,7 @@
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "title": "Software Developer",
         "location": "East Lansing, MI",
         "company": "Ally Financial",

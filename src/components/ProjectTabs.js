@@ -2,7 +2,7 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import ProjectCard from "./ProjectCard";
-import projects from "../components/projects.json";
+import projects from "../data/projects.json";
 import projectImages from "../components/projectImages";
 
 const ProjectTabs = () => {
