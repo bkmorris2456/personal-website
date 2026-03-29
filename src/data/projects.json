@@ -11,6 +11,6 @@
         "id": "moneymoves",
         "description": "A financial education web application developed for Ally Financial through MSU's CSE Capstone Program, featuring interactive tools and gamified lessons.",
         "technologies": ["React", "JavaScript", "HTML", "CSS", "Python", "MySQL"],
-        "link": ""
+        "link": "https://capstone.cse.msu.edu/2023-08/projects/ally/#:~:text=To%20achieve%20this%20goal%2C%20Ally,as%20interest%20and%20loan%20calculators."
     }
 ]
