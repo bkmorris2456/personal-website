@@ -1,8 +1,21 @@
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import experience from "../data/experience.json";
+import { getPositions } from "../firebase/firestoreService";
 
 export default function ExperienceNodes({ id }) {
+
+    const [positions, setPositions] = useState([]);
+
+    useEffect(() => {
+        const loadData = async () => {
+            const data = await getPositions();
+            setPositions(data);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <Box
@@ -57,7 +70,7 @@ export default function ExperienceNodes({ id }) {
                         </Box>
                     </motion.div>
                 </Box>
-            ))}
+            ))} 
         </Box>
     );
 
