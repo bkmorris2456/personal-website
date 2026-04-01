@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import experience from "../data/experience.json";
 import { getPositions } from "../firebase/firestoreService";
 
 export default function ExperienceNodes({ id }) {

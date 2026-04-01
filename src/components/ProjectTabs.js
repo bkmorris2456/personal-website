@@ -1,11 +1,35 @@
 // src/components/ProjectTabs.js
 import React from "react";
 import { Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import projects from "../data/projects.json";
 import projectImages from "../components/projectImages";
+import { getProjects } from "../firebase/firestoreService";
+
+// Images
+import roomaryImage from "../images/roomary-logo.png";
+import moneyMovesImage from "../images/money-moves-demo.png";
+import cheatDayImage from "../images/cheat-day-image.png";
 
 const ProjectTabs = () => {
+
+    const [projects, setProjects] = useState([]);
+
+    const projectImages = {
+      roomary: roomaryImage,
+      moneymoves: moneyMovesImage,
+      cheatday: cheatDayImage,
+    };
+
+    useEffect(() => {
+        const loadData = async () => {
+            const data = await getProjects();
+            setProjects(data);
+        };
+
+        loadData();
+    }, []);
+
   return (
     <div style={{ padding: "2rem" }}>
 
@@ -13,7 +37,7 @@ const ProjectTabs = () => {
         {projects.map((project, index) => (
           <Grid item key={index}>
             <ProjectCard
-              image={projectImages[project.id]}
+              image={projectImages[project.imageKey]}
               title={project.title}
               description={project.description}
               technologies={project.technologies}

@@ -47,7 +47,7 @@ const ProjectCard = ({
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           {description}
         </Typography>
-        <Stack direction="row" spacing={1} flexWrap="wrap">
+        {/* <Stack direction="row" spacing={1} flexWrap="wrap">
           {technologies.map((tech, index) => (
             <Chip
               key={index}
@@ -57,7 +57,7 @@ const ProjectCard = ({
               sx={{ mb: 0.5 }}
             />
           ))}
-        </Stack>
+        </Stack> */}
       </CardContent>
 
       <CardActions>
