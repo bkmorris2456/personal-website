@@ -37,7 +37,7 @@ export default function ExperienceNodes({ id }) {
                 </motion.div>
             </Box>
 
-            {experience.map((exp, idx) => (
+            {positions.map((exp, idx) => (
                 <Box key={exp.id} sx={{ mb: 8, display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -54,10 +54,16 @@ export default function ExperienceNodes({ id }) {
                             variant="h4"
                             sx={{ textAlign: "left", fontSize: { xs: "14px", sm: "16px" }, mb: "1vh" }}
                         >
-                            {exp.title},                             {exp.start} - {exp.end}
+                            {exp.title}
+                        </Typography>
+                        <Typography
+                            variant="h4"
+                            sx={{ textAlign: "left", fontSize: { xs: "14px", sm: "16px" }, mb: "1vh" }}
+                        >
+                            {exp.start}{exp.end ? ` - ${exp.end}` : " - Present"}
                         </Typography>
 
-                        <Box sx={{ maxWidth: { sm: "35vw" }, mx: "auto" }}>
+                        <Box sx={{ maxWidth: { sm: "25vw" }, minWidth: {sm: "350px"}, mx: "auto" }}>
                             {exp.description.map((desc, i) => (
                                 <Typography
                                     key={i}
