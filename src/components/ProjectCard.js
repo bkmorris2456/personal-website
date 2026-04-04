@@ -6,8 +6,6 @@ import {
   CardActions,
   Typography,
   Button,
-  Chip,
-  Stack
 } from "@mui/material";
 
 const ProjectCard = ({
