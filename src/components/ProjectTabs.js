@@ -1,9 +1,8 @@
 // src/components/ProjectTabs.js
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import projectImages from "../components/projectImages";
 import { getProjects } from "../firebase/firestoreService";
 
 // Images
