@@ -1,6 +1,7 @@
 import './App.css';
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 import './fonts/fonts.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route index element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </HashRouter>
     </div>
