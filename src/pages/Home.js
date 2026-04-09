@@ -2,10 +2,10 @@ import Navbar from "../components/Navbar";
 import UpdatedPhoto from '../images/linkedin-headshot.jpeg';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
-import ExperienceNodes from "../components/ExperienceNodes";
-import ContactForm from "../components/ContactForm";
-import SkillsSection from "../components/SkillsSection";
-import ProjectTabs from "../components/ProjectTabs";
+import ExperienceNodes from "../components/experience/ExperienceNodes";
+import ContactForm from "../components/contact/ContactForm";
+import SkillsSection from "../components/skills/SkillsSection";
+import ProjectTabs from "../components/projects/ProjectTabs";
 
 function Home() {
 

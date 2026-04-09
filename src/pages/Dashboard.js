@@ -8,7 +8,7 @@ export default function Dashboard() {
             <Grid container spacing={4} id="dashboard-grid">
                 {/* Mini Cards for displaying total # of projects, skills, etc. */}
                 <Grid item xs={6} sm={4}>
-
+                    
                 </Grid>
                 <Grid item xs={6} sm={4}>
 
