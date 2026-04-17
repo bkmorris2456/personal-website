@@ -28,3 +28,11 @@ export const getProjects = async () => {
     ...doc.data(),
   }));
 };
+
+export const getSkills = async () => {
+  const snapshot = await getDocs(collection(db, "skills"));
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+};

@@ -15,6 +15,7 @@ import { GitHub, LinkedIn,  Menu as MenuIcon, Close } from "@mui/icons-material"
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link as RouterLink } from "react-router-dom";
 
 function Navbar({toggleTheme, mode}) {
   const [scrolled, setScrolled] = React.useState(false);
@@ -95,15 +96,26 @@ function Navbar({toggleTheme, mode}) {
                   textDecoration: "none",
                   color: "inherit",
                   fontSize: "18px",
-                  textTransform: "none",
                   fontWeight: "bold",
-                  transition: "color 0.3s",
                 }}
                 activeStyle={{ color: "#4caf50" }}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </ScrollLink>
             ))}
+
+            {/* ✅ Dashboard (NOT ScrollLink) */}
+            <RouterLink
+              to="/dashboard"
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                fontSize: "18px",
+                fontWeight: "bold",
+              }}
+            >
+              Dashboard
+            </RouterLink>
           </Box>
 
           {/* Collapsible Menu for Small Screens */}

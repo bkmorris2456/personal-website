@@ -5,10 +5,8 @@ import {
   Typography,
   Card,
   CardContent,
-  IconButton,
   Stack,
   Button,
-  Divider,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -17,15 +15,14 @@ import {
   CircularProgress,
 } from "@mui/material";
 
+// Icon Imports
 import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 import FolderOpenRoundedIcon from "@mui/icons-material/FolderOpenRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import CircleIcon from "@mui/icons-material/Circle";
 
+// Firebase Imports
 import {
   collection,
   getDocs,
@@ -37,8 +34,11 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-
 import { db } from "../firebase/firebase"; // adjust path if needed
+
+// Component Imports
+import {StatCard} from '../components/dashboard/StatCard';
+import {TableCard} from '../components/dashboard/TableCard';
 
 const dashboardCardSx = {
   backgroundColor: "#0b0b0b",
@@ -125,203 +125,6 @@ function toTimestamp(dateString) {
   if (Number.isNaN(date.getTime())) return null;
 
   return Timestamp.fromDate(date);
-}
-
-function StatCard({ title, value, subtitle, icon }) {
-  return (
-    <Card sx={{ ...dashboardCardSx, height: "100%" }}>
-      <CardContent sx={{ p: 3 }}>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <Box
-            sx={{
-              width: 54,
-              height: 54,
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#6BA36E",
-              backgroundColor: "rgba(107,163,110,0.08)",
-              border: "1px solid rgba(107,163,110,0.18)",
-            }}
-          >
-            {icon}
-          </Box>
-
-          <Box>
-            <Typography
-              sx={{
-                color: "#f3f3f3",
-                fontWeight: 700,
-                fontSize: "2rem",
-                lineHeight: 1,
-              }}
-            >
-              {value}
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "#f3f3f3",
-                fontWeight: 600,
-                fontSize: "1rem",
-              }}
-            >
-              {title}
-            </Typography>
-
-            <Typography sx={{ ...mutedText, fontSize: "0.9rem" }}>
-              {subtitle}
-            </Typography>
-          </Box>
-        </Stack>
-      </CardContent>
-    </Card>
-  );
-}
-
-function TableCard({
-  title,
-  subtitle,
-  headers,
-  rows,
-  viewAllText,
-  onAdd,
-  onEdit,
-  onDelete,
-  emptyMessage = "No records yet.",
-  addDisabled = false,
-}) {
-  return (
-    <Card sx={{ ...dashboardCardSx, height: "100%" }}>
-      <CardContent sx={{ p: 0 }}>
-        <Box
-          sx={{
-            p: 3,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          <Box>
-            <Typography sx={{ color: "#f3f3f3", fontWeight: 700, fontSize: "1.3rem" }}>
-              {title}
-            </Typography>
-            <Typography sx={{ ...mutedText, fontSize: "0.92rem" }}>
-              {subtitle}
-            </Typography>
-          </Box>
-
-          <Button
-            startIcon={<AddRoundedIcon />}
-            onClick={onAdd}
-            disabled={addDisabled}
-            sx={{
-              color: addDisabled ? "rgba(255,255,255,0.35)" : "#6BA36E",
-              textTransform: "none",
-              borderRadius: "12px",
-              border: "1px solid rgba(107,163,110,0.18)",
-              backgroundColor: "rgba(107,163,110,0.06)",
-              px: 1.6,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Add
-          </Button>
-        </Box>
-
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)" }} />
-
-        <Box sx={{ px: 3, py: 2 }}>
-          <Grid container sx={{ mb: 1.5 }}>
-            {headers.map((header) => (
-              <Grid item xs key={header}>
-                <Typography
-                  sx={{
-                    color: "rgba(255,255,255,0.42)",
-                    fontSize: "0.74rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  {header}
-                </Typography>
-              </Grid>
-            ))}
-          </Grid>
-
-          {rows.length === 0 ? (
-            <Typography sx={{ color: "rgba(255,255,255,0.45)", py: 2 }}>
-              {emptyMessage}
-            </Typography>
-          ) : (
-            rows.map((row, index) => (
-              <Box key={row.id ?? index}>
-                <Grid container alignItems="center" sx={{ py: 1.4 }}>
-                  {row.columns.map((value, valueIndex) => (
-                    <Grid item xs key={`${row.id}-${valueIndex}`}>
-                      <Typography
-                        sx={{
-                          color: valueIndex === 0 ? "#f3f3f3" : "rgba(255,255,255,0.6)",
-                          fontSize: "0.92rem",
-                          pr: 1,
-                        }}
-                      >
-                        {value}
-                      </Typography>
-                    </Grid>
-                  ))}
-
-                  <Grid item xs>
-                    <Stack direction="row" spacing={0.5}>
-                      <IconButton
-                        size="small"
-                        sx={{ color: "rgba(255,255,255,0.65)" }}
-                        onClick={() => onEdit?.(row.raw)}
-                        disabled={!onEdit}
-                      >
-                        <EditRoundedIcon fontSize="small" />
-                      </IconButton>
-
-                      <IconButton
-                        size="small"
-                        sx={{ color: "rgba(255,255,255,0.65)" }}
-                        onClick={() => onDelete?.(row.raw)}
-                        disabled={!onDelete}
-                      >
-                        <DeleteOutlineRoundedIcon fontSize="small" />
-                      </IconButton>
-                    </Stack>
-                  </Grid>
-                </Grid>
-
-                {index !== rows.length - 1 && (
-                  <Divider sx={{ borderColor: "rgba(255,255,255,0.05)" }} />
-                )}
-              </Box>
-            ))
-          )}
-        </Box>
-
-        <Box
-          sx={{
-            px: 3,
-            py: 2,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            color: "#6BA36E",
-          }}
-        >
-          <Typography sx={{ fontSize: "0.92rem", fontWeight: 500 }}>
-            {viewAllText}
-          </Typography>
-          <ChevronRightRoundedIcon fontSize="small" />
-        </Box>
-      </CardContent>
-    </Card>
-  );
 }
 
 export default function Dashboard() {
@@ -621,7 +424,7 @@ export default function Dashboard() {
             </Grid>
           ))}
 
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={12}>
             <Card sx={{ ...dashboardCardSx, minHeight: 320 }}>
               <CardContent sx={{ p: 3 }}>
                 <Box
@@ -705,95 +508,8 @@ export default function Dashboard() {
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <Card sx={{ ...dashboardCardSx, minHeight: 320 }}>
-              <CardContent sx={{ p: 3 }}>
-                <Typography sx={{ color: "#f3f3f3", fontWeight: 700, fontSize: "1.3rem" }}>
-                  Recent Activity
-                </Typography>
-
-                <Typography sx={{ ...mutedText, fontSize: "0.92rem", mb: 3 }}>
-                  See what’s been updated.
-                </Typography>
-
-                <Stack spacing={2.2}>
-                  {activity.length === 0 ? (
-                    <Typography sx={{ color: "rgba(255,255,255,0.45)" }}>
-                      No recent activity yet.
-                    </Typography>
-                  ) : (
-                    activity.map((item, index) => (
-                      <Box
-                        key={index}
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          gap: 2,
-                        }}
-                      >
-                        <Stack direction="row" spacing={1.4} alignItems="center">
-                          <Box
-                            sx={{
-                              width: 34,
-                              height: 34,
-                              borderRadius: "50%",
-                              backgroundColor: "rgba(107,163,110,0.08)",
-                              border: "1px solid rgba(107,163,110,0.18)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#6BA36E",
-                              flexShrink: 0,
-                            }}
-                          >
-                            <AddRoundedIcon sx={{ fontSize: 18 }} />
-                          </Box>
-
-                          <Typography
-                            sx={{
-                              color: "#f3f3f3",
-                              fontSize: "0.92rem",
-                              lineHeight: 1.5,
-                            }}
-                          >
-                            {item.text}
-                          </Typography>
-                        </Stack>
-
-                        <Typography
-                          sx={{
-                            color: "rgba(255,255,255,0.42)",
-                            fontSize: "0.8rem",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {item.time}
-                        </Typography>
-                      </Box>
-                    ))
-                  )}
-                </Stack>
-
-                <Button
-                  sx={{
-                    mt: 4,
-                    color: "#f3f3f3",
-                    textTransform: "none",
-                    borderRadius: "12px",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    px: 2,
-                  }}
-                >
-                  View All Activity
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
             <TableCard
               title="Positions"
-              subtitle="Manage your work experience."
               headers={["TITLE", "COMPANY", "DATES", "ACTIONS"]}
               rows={positionRows}
               viewAllText="View all positions"
@@ -807,7 +523,6 @@ export default function Dashboard() {
           <Grid item xs={12} md={4}>
             <TableCard
               title="Projects"
-              subtitle="Showcase what you've built."
               headers={["PROJECT", "STACK", "DATE", "ACTIONS"]}
               rows={projectRows}
               viewAllText="View all projects"
@@ -822,7 +537,6 @@ export default function Dashboard() {
           <Grid item xs={12} md={4}>
             <TableCard
               title="Skills"
-              subtitle="Highlight your technical skills."
               headers={["SKILL", "CATEGORY", "ACTIONS"]}
               rows={skillRows}
               viewAllText="View all skills"
