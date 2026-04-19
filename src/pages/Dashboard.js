@@ -19,27 +19,25 @@ import {
 import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 import FolderOpenRoundedIcon from "@mui/icons-material/FolderOpenRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import CircleIcon from "@mui/icons-material/Circle";
 
 // Firebase Imports
 import {
   collection,
-  getDocs,
   addDoc,
   updateDoc,
   deleteDoc,
   doc,
   Timestamp,
-  orderBy,
-  query,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase"; // adjust path if needed
+import { db } from "../firebase/firebase";
+import { getPositions, getProjects, getSkills } from "../firebase/firestoreService";
 
 // Component Imports
-import {StatCard} from '../components/dashboard/StatCard';
-import {TableCard} from '../components/dashboard/TableCard';
+import { StatCard } from "../components/dashboard/StatCard";
+import { TableCard } from "../components/dashboard/TableCard";
 
+// Dashboard Styling variables
 const dashboardCardSx = {
   backgroundColor: "#0b0b0b",
   border: "1px solid rgba(255,255,255,0.06)",
@@ -74,15 +72,42 @@ const inputSx = {
   },
 };
 
-const emptyPositionForm = {
-  title: "",
-  company: "",
-  description: "",
-  location: "",
-  start: "",
-  end: "",
+const modalPaperSx = {
+  backgroundColor: "#0b0b0b",
+  color: "#f3f3f3",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "20px",
 };
 
+const collectionMap = {
+  position: "positions",
+  project: "projects",
+  skill: "skills",
+};
+
+const emptyForms = {
+  position: {
+    title: "",
+    company: "",
+    description: "",
+    location: "",
+    start: "",
+    end: "",
+  },
+  project: {
+    title: "",
+    stack: "",
+    description: "",
+    date: "",
+    status: "",
+  },
+  skill: {
+    name: "",
+    category: "",
+  },
+};
+
+// Formats datetime to something readable
 function formatDate(value) {
   if (!value) return "Present";
 
@@ -100,6 +125,7 @@ function formatDate(value) {
   }
 }
 
+// Utility formatter, converting date value to HTML string compatible with HTML date inputs
 function formatDateForInput(value) {
   if (!value) return "";
 
@@ -118,6 +144,7 @@ function formatDateForInput(value) {
   }
 }
 
+// Takes date string from input, converts to Firestore Timestamp
 function toTimestamp(dateString) {
   if (!dateString) return null;
 
@@ -127,6 +154,270 @@ function toTimestamp(dateString) {
   return Timestamp.fromDate(date);
 }
 
+function getEditFormValues(entity, item) {
+  switch (entity) {
+    case "position":
+      return {
+        title: item.title || "",
+        company: item.company || "",
+        description: Array.isArray(item.description)
+          ? item.description.join("\n")
+          : item.description || "",
+        location: item.location || "",
+        start: formatDateForInput(item.start),
+        end: formatDateForInput(item.end),
+      };
+
+    case "project":
+      return {
+        title: item.title || item.project || "",
+        stack: item.stack || item.techStack || item.technologies || "",
+        description: Array.isArray(item.description)
+          ? item.description.join("\n")
+          : item.description || "",
+        date: formatDateForInput(item.date || item.createdAt),
+        status: item.status || "",
+      };
+
+    case "skill":
+      return {
+        name: item.name || item.skill || "",
+        category: item.category || "",
+      };
+
+    default:
+      return {};
+  }
+}
+
+function getEntityDisplayName(entity) {
+  switch (entity) {
+    case "position":
+      return "Position";
+    case "project":
+      return "Project";
+    case "skill":
+      return "Skill";
+    default:
+      return "Item";
+  }
+}
+
+function getItemLabel(entity, item) {
+  if (!item) return "this item";
+
+  switch (entity) {
+    case "position":
+      return item.title || "this position";
+    case "project":
+      return item.title || item.project || "this project";
+    case "skill":
+      return item.name || item.skill || "this skill";
+    default:
+      return "this item";
+  }
+}
+
+function buildPayload(entity, formState) {
+  switch (entity) {
+    case "position":
+      return {
+        title: formState.title.trim(),
+        company: formState.company.trim(),
+        description: formState.description.trim(),
+        location: formState.location.trim(),
+        start: toTimestamp(formState.start),
+        end: toTimestamp(formState.end),
+      };
+
+    case "project":
+      return {
+        title: formState.title.trim(),
+        stack: formState.stack.trim(),
+        description: formState.description.trim(),
+        date: toTimestamp(formState.date),
+        status: formState.status.trim(),
+      };
+
+    case "skill":
+      return {
+        name: formState.name.trim(),
+        category: formState.category.trim(),
+      };
+
+    default:
+      return {};
+  }
+}
+
+function validateForm(entity, formState) {
+  if (entity === "position") {
+    if (!formState.title.trim() || !formState.company.trim()) {
+      return "Title and company are required.";
+    }
+
+    if (formState.start && formState.end) {
+      const startDate = new Date(formState.start);
+      const endDate = new Date(formState.end);
+
+      if (startDate > endDate) {
+        return "Start date cannot be after end date.";
+      }
+    }
+  }
+
+  if (entity === "project") {
+    if (!formState.title.trim()) {
+      return "Project title is required.";
+    }
+  }
+
+  if (entity === "skill") {
+    if (!formState.name.trim()) {
+      return "Skill name is required.";
+    }
+  }
+
+  return "";
+}
+
+function renderModalFields(entity, formState, handleFormChange) {
+  switch (entity) {
+    case "position":
+      return (
+        <Stack spacing={2} sx={{ mt: 1 }}>
+          <TextField
+            label="Title"
+            value={formState.title}
+            onChange={(e) => handleFormChange("title", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Company"
+            value={formState.company}
+            onChange={(e) => handleFormChange("company", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Location"
+            value={formState.location}
+            onChange={(e) => handleFormChange("location", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Start Date"
+            type="date"
+            value={formState.start}
+            onChange={(e) => handleFormChange("start", e.target.value)}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            sx={inputSx}
+          />
+
+          <TextField
+            label="End Date"
+            type="date"
+            value={formState.end}
+            onChange={(e) => handleFormChange("end", e.target.value)}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Description"
+            value={formState.description}
+            onChange={(e) => handleFormChange("description", e.target.value)}
+            fullWidth
+            multiline
+            minRows={4}
+            sx={inputSx}
+          />
+        </Stack>
+      );
+
+    case "project":
+      return (
+        <Stack spacing={2} sx={{ mt: 1 }}>
+          <TextField
+            label="Project Title"
+            value={formState.title}
+            onChange={(e) => handleFormChange("title", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Tech Stack"
+            value={formState.stack}
+            onChange={(e) => handleFormChange("stack", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Status"
+            value={formState.status}
+            onChange={(e) => handleFormChange("status", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Date"
+            type="date"
+            value={formState.date}
+            onChange={(e) => handleFormChange("date", e.target.value)}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Description"
+            value={formState.description}
+            onChange={(e) => handleFormChange("description", e.target.value)}
+            fullWidth
+            multiline
+            minRows={4}
+            sx={inputSx}
+          />
+        </Stack>
+      );
+
+    case "skill":
+      return (
+        <Stack spacing={2} sx={{ mt: 1 }}>
+          <TextField
+            label="Skill Name"
+            value={formState.name}
+            onChange={(e) => handleFormChange("name", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+
+          <TextField
+            label="Category"
+            value={formState.category}
+            onChange={(e) => handleFormChange("category", e.target.value)}
+            fullWidth
+            sx={inputSx}
+          />
+        </Stack>
+      );
+
+    default:
+      return null;
+  }
+}
+
+// Dashboard Page
 export default function Dashboard() {
   const [positions, setPositions] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -134,70 +425,36 @@ export default function Dashboard() {
   const [activity, setActivity] = useState([]);
 
   const [loading, setLoading] = useState(true);
-  const [savingPosition, setSavingPosition] = useState(false);
-  const [deletingPosition, setDeletingPosition] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
 
-  const [openPositionModal, setOpenPositionModal] = useState(false);
-  const [positionModalMode, setPositionModalMode] = useState("add");
-  const [selectedPosition, setSelectedPosition] = useState(null);
-  const [positionForm, setPositionForm] = useState(emptyPositionForm);
+  const [modalState, setModalState] = useState({
+    open: false,
+    entity: null, // "position" | "project" | "skill"
+    mode: null, // "add" | "edit" | "delete"
+    selectedItem: null,
+  });
 
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [formState, setFormState] = useState({});
 
-  const fetchPositions = async () => {
-    try {
-      const positionsQuery = query(collection(db, "positions"), orderBy("start", "desc"));
-      const snapshot = await getDocs(positionsQuery);
-
-      const data = snapshot.docs.map((docSnap) => ({
-        id: docSnap.id,
-        ...docSnap.data(),
-      }));
-
-      setPositions(data);
-    } catch (error) {
-      console.error("Error fetching positions:", error);
-      setPositions([]);
-    }
-  };
-
-  const fetchProjects = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "projects"));
-
-      const data = snapshot.docs.map((docSnap) => ({
-        id: docSnap.id,
-        ...docSnap.data(),
-      }));
-
-      setProjects(data);
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-      setProjects([]);
-    }
-  };
-
-  const fetchSkills = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "skills"));
-
-      const data = snapshot.docs.map((docSnap) => ({
-        id: docSnap.id,
-        ...docSnap.data(),
-      }));
-
-      setSkills(data);
-    } catch (error) {
-      console.error("Error fetching skills:", error);
-      setSkills([]);
-    }
-  };
-
+  // Function retrieving all relevant data from Firestore database
   const fetchAllData = async () => {
     setLoading(true);
 
     try {
-      await Promise.all([fetchPositions(), fetchProjects(), fetchSkills()]);
+      const [positionsData, projectsData, skillsData] = await Promise.all([
+        getPositions(),
+        getProjects(),
+        getSkills(),
+      ]);
+
+      setPositions(positionsData);
+      setProjects(projectsData);
+      setSkills(skillsData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setPositions([]);
+      setProjects([]);
+      setSkills([]);
     } finally {
       setLoading(false);
     }
@@ -259,8 +516,8 @@ export default function Dashboard() {
       id: item.id,
       columns: [
         item.project || item.title || "Untitled Project",
-        item.stack || item.techStack || item.technologies || "",
-        item.date || formatDate(item.createdAt) || "",
+        item.stack || item.techStack || item.technologies || item.status || "",
+        formatDate(item.date || item.createdAt) || "",
       ],
       raw: item,
     }));
@@ -274,114 +531,133 @@ export default function Dashboard() {
     }));
   }, [skills]);
 
-  const handlePositionFormChange = (field, value) => {
-    setPositionForm((prev) => ({
+  const handleFormChange = (field, value) => {
+    setFormState((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
 
-  const handleOpenAddPosition = () => {
-    setPositionModalMode("add");
-    setSelectedPosition(null);
-    setPositionForm(emptyPositionForm);
-    setOpenPositionModal(true);
-  };
-
-  const handleOpenEditPosition = (position) => {
-    setPositionModalMode("edit");
-    setSelectedPosition(position);
-    setPositionForm({
-      title: position.title || "",
-      company: position.company || "",
-      description: position.description || "",
-      location: position.location || "",
-      start: formatDateForInput(position.start),
-      end: formatDateForInput(position.end),
+  const handleOpenAdd = (entity) => {
+    setModalState({
+      open: true,
+      entity,
+      mode: "add",
+      selectedItem: null,
     });
-    setOpenPositionModal(true);
+
+    setFormState(emptyForms[entity]);
   };
 
-  const handleClosePositionModal = () => {
-    if (savingPosition) return;
+  const handleOpenEdit = (entity, item) => {
+    setModalState({
+      open: true,
+      entity,
+      mode: "edit",
+      selectedItem: item,
+    });
 
-    setOpenPositionModal(false);
-    setSelectedPosition(null);
-    setPositionForm(emptyPositionForm);
+    setFormState(getEditFormValues(entity, item));
   };
 
-  const handleSubmitPosition = async () => {
-    if (!positionForm.title.trim() || !positionForm.company.trim()) {
-      alert("Title and company are required.");
+  const handleOpenDelete = (entity, item) => {
+    setModalState({
+      open: true,
+      entity,
+      mode: "delete",
+      selectedItem: item,
+    });
+
+    setFormState({});
+  };
+
+  const handleCloseModal = () => {
+    if (modalLoading) return;
+
+    setModalState({
+      open: false,
+      entity: null,
+      mode: null,
+      selectedItem: null,
+    });
+
+    setFormState({});
+  };
+
+  const handleSubmitModal = async () => {
+    const { entity, mode, selectedItem } = modalState;
+    if (!entity || !mode) return;
+
+    if (mode === "delete") {
+      if (!selectedItem?.id) return;
+
+      setModalLoading(true);
+
+      try {
+        await deleteDoc(doc(db, collectionMap[entity], selectedItem.id));
+        await fetchAllData();
+        handleCloseModal();
+      } catch (error) {
+        console.error(`Error deleting ${entity}:`, error);
+        alert(`There was an error deleting the ${entity}.`);
+      } finally {
+        setModalLoading(false);
+      }
+
       return;
     }
 
-    if (positionForm.start && positionForm.end) {
-      const startDate = new Date(positionForm.start);
-      const endDate = new Date(positionForm.end);
-
-      if (startDate > endDate) {
-        alert("Start date cannot be after end date.");
-        return;
-      }
+    const validationError = validateForm(entity, formState);
+    if (validationError) {
+      alert(validationError);
+      return;
     }
 
-    setSavingPosition(true);
+    setModalLoading(true);
 
     try {
-      const payload = {
-        title: positionForm.title.trim(),
-        company: positionForm.company.trim(),
-        description: positionForm.description.trim(),
-        location: positionForm.location.trim(),
-        start: toTimestamp(positionForm.start),
-        end: toTimestamp(positionForm.end),
-      };
+      const payload = buildPayload(entity, formState);
 
-      if (positionModalMode === "add") {
-        await addDoc(collection(db, "positions"), payload);
-      } else if (positionModalMode === "edit" && selectedPosition?.id) {
-        await updateDoc(doc(db, "positions", selectedPosition.id), payload);
+      if (mode === "add") {
+        await addDoc(collection(db, collectionMap[entity]), payload);
+      } else if (mode === "edit" && selectedItem?.id) {
+        await updateDoc(doc(db, collectionMap[entity], selectedItem.id), payload);
       }
 
-      await fetchPositions();
-      handleClosePositionModal();
+      await fetchAllData();
+      handleCloseModal();
     } catch (error) {
-      console.error("Error saving position:", error);
-      alert("There was an error saving the position.");
+      console.error(`Error saving ${entity}:`, error);
+      alert(`There was an error saving the ${entity}.`);
     } finally {
-      setSavingPosition(false);
+      setModalLoading(false);
     }
   };
 
-  const handleOpenDeletePosition = (position) => {
-    setSelectedPosition(position);
-    setOpenDeleteModal(true);
-  };
+  const modalTitle = (() => {
+    if (!modalState.entity || !modalState.mode) return "";
 
-  const handleCloseDeleteModal = () => {
-    if (deletingPosition) return;
+    const entityName = getEntityDisplayName(modalState.entity);
 
-    setOpenDeleteModal(false);
-    setSelectedPosition(null);
-  };
+    if (modalState.mode === "add") return `Add ${entityName}`;
+    if (modalState.mode === "edit") return `Edit ${entityName}`;
+    if (modalState.mode === "delete") return `Delete ${entityName}`;
 
-  const handleDeletePosition = async () => {
-    if (!selectedPosition?.id) return;
+    return entityName;
+  })();
 
-    setDeletingPosition(true);
-
-    try {
-      await deleteDoc(doc(db, "positions", selectedPosition.id));
-      await fetchPositions();
-      handleCloseDeleteModal();
-    } catch (error) {
-      console.error("Error deleting position:", error);
-      alert("There was an error deleting the position.");
-    } finally {
-      setDeletingPosition(false);
+  const modalActionText = (() => {
+    if (modalLoading) {
+      if (modalState.mode === "delete") return "Deleting...";
+      return "Saving...";
     }
-  };
+
+    if (modalState.mode === "add") return `Add ${getEntityDisplayName(modalState.entity)}`;
+    if (modalState.mode === "edit") return "Save Changes";
+    if (modalState.mode === "delete") return "Delete";
+
+    return "Submit";
+  })();
 
   return (
     <Box
@@ -513,9 +789,9 @@ export default function Dashboard() {
               headers={["TITLE", "COMPANY", "DATES", "ACTIONS"]}
               rows={positionRows}
               viewAllText="View all positions"
-              onAdd={handleOpenAddPosition}
-              onEdit={handleOpenEditPosition}
-              onDelete={handleOpenDeletePosition}
+              onAdd={() => handleOpenAdd("position")}
+              onEdit={(item) => handleOpenEdit("position", item)}
+              onDelete={(item) => handleOpenDelete("position", item)}
               emptyMessage="No positions found yet."
             />
           </Grid>
@@ -523,12 +799,12 @@ export default function Dashboard() {
           <Grid item xs={12} md={4}>
             <TableCard
               title="Projects"
-              headers={["PROJECT", "STACK", "DATE", "ACTIONS"]}
+              headers={["PROJECT", "STATUS", "DATE", "ACTIONS"]}
               rows={projectRows}
               viewAllText="View all projects"
-              onAdd={() => alert("Projects CRUD will be added once you send the project structure.")}
-              onEdit={null}
-              onDelete={null}
+              onAdd={() => handleOpenAdd("project")}
+              onEdit={(item) => handleOpenEdit("project", item)}
+              onDelete={(item) => handleOpenDelete("project", item)}
               emptyMessage="No projects found yet."
               addDisabled={false}
             />
@@ -540,9 +816,9 @@ export default function Dashboard() {
               headers={["SKILL", "CATEGORY", "ACTIONS"]}
               rows={skillRows}
               viewAllText="View all skills"
-              onAdd={() => alert("Skills CRUD can be added next.")}
-              onEdit={null}
-              onDelete={null}
+              onAdd={() => handleOpenAdd("skill")}
+              onEdit={(item) => handleOpenEdit("skill", item)}
+              onDelete={(item) => handleOpenDelete("skill", item)}
               emptyMessage="No skills found yet."
               addDisabled={false}
             />
@@ -551,84 +827,33 @@ export default function Dashboard() {
       )}
 
       <Dialog
-        open={openPositionModal}
-        onClose={handleClosePositionModal}
+        open={modalState.open}
+        onClose={handleCloseModal}
         fullWidth
         maxWidth="sm"
         PaperProps={{
-          sx: {
-            backgroundColor: "#0b0b0b",
-            color: "#f3f3f3",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "20px",
-          },
+          sx: modalPaperSx,
         }}
       >
-        <DialogTitle sx={{ fontWeight: 700 }}>
-          {positionModalMode === "add" ? "Add Position" : "Edit Position"}
-        </DialogTitle>
+        <DialogTitle sx={{ fontWeight: 700 }}>{modalTitle}</DialogTitle>
 
         <DialogContent>
-          <Stack spacing={2} sx={{ mt: 1 }}>
-            <TextField
-              label="Title"
-              value={positionForm.title}
-              onChange={(e) => handlePositionFormChange("title", e.target.value)}
-              fullWidth
-              sx={inputSx}
-            />
-
-            <TextField
-              label="Company"
-              value={positionForm.company}
-              onChange={(e) => handlePositionFormChange("company", e.target.value)}
-              fullWidth
-              sx={inputSx}
-            />
-
-            <TextField
-              label="Location"
-              value={positionForm.location}
-              onChange={(e) => handlePositionFormChange("location", e.target.value)}
-              fullWidth
-              sx={inputSx}
-            />
-
-            <TextField
-              label="Start Date"
-              type="date"
-              value={positionForm.start}
-              onChange={(e) => handlePositionFormChange("start", e.target.value)}
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              sx={inputSx}
-            />
-
-            <TextField
-              label="End Date"
-              type="date"
-              value={positionForm.end}
-              onChange={(e) => handlePositionFormChange("end", e.target.value)}
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              sx={inputSx}
-            />
-
-            <TextField
-              label="Description"
-              value={positionForm.description}
-              onChange={(e) => handlePositionFormChange("description", e.target.value)}
-              fullWidth
-              multiline
-              minRows={4}
-              sx={inputSx}
-            />
-          </Stack>
+          {modalState.mode === "delete" ? (
+            <Typography sx={{ color: "rgba(255,255,255,0.72)", mt: 1 }}>
+              Are you sure you want to delete{" "}
+              <Box component="span" sx={{ color: "#f3f3f3", fontWeight: 700 }}>
+                {getItemLabel(modalState.entity, modalState.selectedItem)}
+              </Box>
+              ?
+            </Typography>
+          ) : (
+            renderModalFields(modalState.entity, formState, handleFormChange)
+          )}
         </DialogContent>
 
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button
-            onClick={handleClosePositionModal}
+            onClick={handleCloseModal}
             sx={{
               color: "rgba(255,255,255,0.72)",
               textTransform: "none",
@@ -639,77 +864,24 @@ export default function Dashboard() {
 
           <Button
             variant="contained"
-            onClick={handleSubmitPosition}
-            disabled={savingPosition}
-            sx={{
-              textTransform: "none",
-              borderRadius: "12px",
-              backgroundColor: "#6BA36E",
-              color: "#050505",
-              fontWeight: 700,
-              "&:hover": {
-                backgroundColor: "#7ab47d",
-              },
-            }}
-          >
-            {savingPosition
-              ? "Saving..."
-              : positionModalMode === "add"
-              ? "Add Position"
-              : "Save Changes"}
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Dialog
-        open={openDeleteModal}
-        onClose={handleCloseDeleteModal}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#0b0b0b",
-            color: "#f3f3f3",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "20px",
-            minWidth: 420,
-            maxWidth: "90vw",
-          },
-        }}
-      >
-        <DialogTitle sx={{ fontWeight: 700 }}>Delete Position</DialogTitle>
-
-        <DialogContent>
-          <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
-            Are you sure you want to delete{" "}
-            <Box component="span" sx={{ color: "#f3f3f3", fontWeight: 700 }}>
-              {selectedPosition?.title || "this position"}
-            </Box>
-            ?
-          </Typography>
-        </DialogContent>
-
-        <DialogActions sx={{ px: 3, pb: 3 }}>
-          <Button
-            onClick={handleCloseDeleteModal}
-            sx={{
-              color: "rgba(255,255,255,0.72)",
-              textTransform: "none",
-            }}
-          >
-            Cancel
-          </Button>
-
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleDeletePosition}
-            disabled={deletingPosition}
+            onClick={handleSubmitModal}
+            disabled={modalLoading}
+            color={modalState.mode === "delete" ? "error" : "primary"}
             sx={{
               textTransform: "none",
               borderRadius: "12px",
               fontWeight: 700,
+              backgroundColor: modalState.mode === "delete" ? undefined : "#6BA36E",
+              color: modalState.mode === "delete" ? undefined : "#050505",
+              "&:hover":
+                modalState.mode === "delete"
+                  ? undefined
+                  : {
+                      backgroundColor: "#7ab47d",
+                    },
             }}
           >
-            {deletingPosition ? "Deleting..." : "Delete"}
+            {modalActionText}
           </Button>
         </DialogActions>
       </Dialog>
