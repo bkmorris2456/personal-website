@@ -1,6 +1,5 @@
 import {
   Box,
-  Grid,
   Typography,
   Card,
   CardContent,
@@ -26,6 +25,8 @@ const mutedText = {
   color: "rgba(255,255,255,0.58)",
 };
 
+const ACTIONS_WIDTH = "88px";
+
 export function TableCard({
   title,
   subtitle,
@@ -38,9 +39,26 @@ export function TableCard({
   emptyMessage = "No records yet.",
   addDisabled = false,
 }) {
+  const dataHeaders = headers.slice(0, headers.length - 1);
+
   return (
-    <Card sx={{ ...dashboardCardSx, height: "100%" }}>
-      <CardContent sx={{ p: 0 }}>
+    <Card
+      sx={{
+        ...dashboardCardSx,
+        height: "100%",
+        minHeight: 520,
+        display: "flex",
+      }}
+    >
+      <CardContent
+        sx={{
+          p: 0,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Top Header */}
         <Box
           sx={{
             p: 3,
@@ -48,6 +66,7 @@ export function TableCard({
             justifyContent: "space-between",
             alignItems: "center",
             gap: 2,
+            flexShrink: 0,
           }}
         >
           <Box>
@@ -71,32 +90,88 @@ export function TableCard({
               backgroundColor: "rgba(107,163,110,0.06)",
               px: 1.6,
               whiteSpace: "nowrap",
+              flexShrink: 0,
             }}
           >
             Add
           </Button>
         </Box>
 
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)" }} />
+        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)", flexShrink: 0 }} />
 
-        <Box sx={{ px: 3, py: 2 }}>
-          <Grid container sx={{ mb: 1.5 }}>
-            {headers.map((header) => (
-              <Grid item xs key={header}>
+        {/* Column Headers */}
+        <Box
+          sx={{
+            px: 3,
+            pt: 2,
+            pb: 1.5,
+            flexShrink: 0,
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${dataHeaders.length}, minmax(0, 1fr)) ${ACTIONS_WIDTH}`,
+              alignItems: "center",
+            }}
+          >
+            {dataHeaders.map((header) => (
+              <Box key={header} sx={{ minWidth: 0, pr: 2 }}>
                 <Typography
                   sx={{
                     color: "rgba(255,255,255,0.42)",
                     fontSize: "0.74rem",
                     fontWeight: 600,
                     letterSpacing: "0.04em",
+                    textAlign: "left",
                   }}
                 >
                   {header}
                 </Typography>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
 
+            <Box sx={{ width: ACTIONS_WIDTH, textAlign: "right" }}>
+              <Typography
+                sx={{
+                  color: "rgba(255,255,255,0.42)",
+                  fontSize: "0.74rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                ACTIONS
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Scrollable Body */}
+        <Box
+          sx={{
+            px: 3,
+            pb: 2,
+            flex: 1,
+            minHeight: 0,
+            overflowY: "auto",
+            overflowX: "hidden",
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(255,255,255,0.2) transparent",
+            "&::-webkit-scrollbar": {
+              width: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "transparent",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "rgba(255,255,255,0.16)",
+              borderRadius: "999px",
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: "rgba(255,255,255,0.24)",
+            },
+          }}
+        >
           {rows.length === 0 ? (
             <Typography sx={{ color: "rgba(255,255,255,0.45)", py: 2 }}>
               {emptyMessage}
@@ -104,22 +179,39 @@ export function TableCard({
           ) : (
             rows.map((row, index) => (
               <Box key={row.id ?? index}>
-                <Grid container alignItems="center" sx={{ py: 1.4 }}>
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: `repeat(${dataHeaders.length}, minmax(0, 1fr)) ${ACTIONS_WIDTH}`,
+                    alignItems: "start",
+                    py: 1.4,
+                  }}
+                >
                   {row.columns.map((value, valueIndex) => (
-                    <Grid item xs key={`${row.id}-${valueIndex}`}>
+                    <Box key={`${row.id}-${valueIndex}`} sx={{ minWidth: 0, pr: 2 }}>
                       <Typography
                         sx={{
                           color: valueIndex === 0 ? "#f3f3f3" : "rgba(255,255,255,0.6)",
                           fontSize: "0.92rem",
-                          pr: 1,
+                          textAlign: "left",
+                          lineHeight: 1.4,
+                          overflowWrap: "anywhere",
+                          wordBreak: "break-word",
                         }}
                       >
                         {value}
                       </Typography>
-                    </Grid>
+                    </Box>
                   ))}
 
-                  <Grid item xs>
+                  <Box
+                    sx={{
+                      width: ACTIONS_WIDTH,
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                    }}
+                  >
                     <Stack direction="row" spacing={0.5}>
                       <IconButton
                         size="small"
@@ -139,8 +231,8 @@ export function TableCard({
                         <DeleteOutlineRoundedIcon fontSize="small" />
                       </IconButton>
                     </Stack>
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
 
                 {index !== rows.length - 1 && (
                   <Divider sx={{ borderColor: "rgba(255,255,255,0.05)" }} />
@@ -150,6 +242,9 @@ export function TableCard({
           )}
         </Box>
 
+        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)", flexShrink: 0 }} />
+
+        {/* Footer */}
         <Box
           sx={{
             px: 3,
@@ -158,6 +253,7 @@ export function TableCard({
             alignItems: "center",
             justifyContent: "space-between",
             color: "#6BA36E",
+            flexShrink: 0,
           }}
         >
           <Typography sx={{ fontSize: "0.92rem", fontWeight: 500 }}>

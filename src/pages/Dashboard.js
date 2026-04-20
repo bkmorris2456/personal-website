@@ -127,6 +127,20 @@ function formatDate(value) {
   }
 }
 
+function formatEndDate(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === "" ||
+    value === "Present"
+  ) {
+    return "Present";
+  }
+
+  const formatted = formatDate(value);
+  return formatted || "Present";
+}
+
 // Utility formatter, converting date value to HTML string compatible with HTML date inputs
 function formatDateForInput(value) {
   if (!value) return "";
@@ -517,7 +531,7 @@ export default function Dashboard() {
       columns: [
         item.title || "",
         item.company || "",
-        `${formatDate(item.start)} - ${item.end ? formatDate(item.end) : "Present"}`,
+        `${formatDate(item.start)} - ${formatEndDate(item.end)}`,
       ],
       raw: item,
     }));
@@ -528,7 +542,7 @@ export default function Dashboard() {
       id: item.id,
       columns: [
         item.project || item.title || "Untitled Project",
-        item.stack || item.techStack || item.technologies || item.status || "",
+        item.status || "",
         formatDate(item.date || item.createdAt) || "",
       ],
       raw: item,
@@ -538,7 +552,7 @@ export default function Dashboard() {
   const skillRows = useMemo(() => {
     return skills.slice(0, 5).map((item) => ({
       id: item.id,
-      columns: [item.skill || item.name || "", item.category || "", ""],
+      columns: [item.skill || item.name || "", item.category || ""],
       raw: item,
     }));
   }, [skills]);
@@ -796,7 +810,7 @@ export default function Dashboard() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={12} lg={4}>
             <TableCard
               title="Positions"
               headers={["TITLE", "COMPANY", "DATES", "ACTIONS"]}
@@ -809,7 +823,7 @@ export default function Dashboard() {
             />
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={12} lg={4}>
             <TableCard
               title="Projects"
               headers={["PROJECT", "STATUS", "DATE", "ACTIONS"]}
@@ -823,7 +837,7 @@ export default function Dashboard() {
             />
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={12} lg={4}>
             <TableCard
               title="Skills"
               headers={["SKILL", "CATEGORY", "ACTIONS"]}
