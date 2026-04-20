@@ -14,6 +14,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // Icon Imports
 import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
@@ -30,8 +31,9 @@ import {
   doc,
   Timestamp,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { db, auth } from "../firebase/firebase";
 import { getPositions, getProjects, getSkills } from "../firebase/firestoreService";
+import { signOut } from "firebase/auth";
 
 // Component Imports
 import { StatCard } from "../components/dashboard/StatCard";
@@ -423,7 +425,6 @@ export default function Dashboard() {
   const [projects, setProjects] = useState([]);
   const [skills, setSkills] = useState([]);
   const [activity, setActivity] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [modalLoading, setModalLoading] = useState(false);
 
@@ -435,6 +436,17 @@ export default function Dashboard() {
   });
 
   const [formState, setFormState] = useState({});
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/home");
+    } catch (error) {
+      console.error('Logout error: ', error);
+    }
+  }
 
   // Function retrieving all relevant data from Firestore database
   const fetchAllData = async () => {
@@ -722,6 +734,7 @@ export default function Dashboard() {
                   </Box>
 
                   <Button
+                    onClick={handleLogout}
                     sx={{
                       color: "#f3f3f3",
                       textTransform: "none",
@@ -730,7 +743,7 @@ export default function Dashboard() {
                       px: 2,
                     }}
                   >
-                    This Year
+                    Logout
                   </Button>
                 </Box>
 

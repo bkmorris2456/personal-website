@@ -106,7 +106,7 @@ function Navbar({toggleTheme, mode}) {
 
             {/* ✅ Dashboard (NOT ScrollLink) */}
             <RouterLink
-              to="/dashboard"
+              to="/login"
               style={{
                 textDecoration: "none",
                 color: "inherit",
