@@ -13,7 +13,9 @@ import {
   DialogActions,
   TextField,
   CircularProgress,
+  IconButton,
 } from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useNavigate } from "react-router-dom";
 
 // Icon Imports
@@ -747,152 +749,6 @@ export default function Dashboard() {
               <StatCard {...card} />
             </Grid>
           ))}
-
-          <Grid item xs={12} md={12}>
-            <Card sx={{ ...dashboardCardSx, minHeight: 320 }}>
-              <CardContent sx={{ p: 3 }}>
-                <Box
-                  sx={{
-                    position: "relative",
-                    mb: 3,
-                    minHeight: 48,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Box sx={{ textAlign: "center" }}>
-                    <Typography sx={{ color: "#f3f3f3", fontWeight: 700, fontSize: "1.3rem" }}>
-                      Overview
-                    </Typography>
-                    <Typography sx={{ ...mutedText, fontSize: "0.92rem" }}>
-                      A quick look at your portfolio progress.
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Stack direction="row" spacing={3} sx={{ mb: 2, flexWrap: "wrap" }}>
-                  <Stack direction="row" spacing={1} alignItems="center">
-                    <CircleIcon sx={{ color: "#6BA36E", fontSize: 12 }} />
-                    <Typography sx={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem" }}>
-                      Projects
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" spacing={1} alignItems="center">
-                    <CircleIcon sx={{ color: "#ffffff", fontSize: 12, opacity: 0.7 }} />
-                    <Typography sx={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem" }}>
-                      Positions
-                    </Typography>
-                  </Stack>
-                </Stack>
-                  <Box
-                    sx={{
-                      height: 220,
-                      borderRadius: "18px",
-                      border: "1px solid rgba(255,255,255,0.05)",
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0.01) 100%)",
-                      p: 2,
-                      position: "relative",
-                    }}
-                  >
-                    {/* Y-axis labels */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        left: 16,
-                        top: 24,
-                        bottom: 24,
-                        width: 28,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                        color: "rgba(255,255,255,0.45)",
-                        fontSize: "0.78rem",
-                        fontWeight: 500,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      <Typography sx={{ fontSize: "inherit" }}>15</Typography>
-                      <Typography sx={{ fontSize: "inherit" }}>10</Typography>
-                      <Typography sx={{ fontSize: "inherit" }}>5</Typography>
-                      <Typography sx={{ fontSize: "inherit" }}>0</Typography>
-                    </Box>
-
-                    <svg
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 700 220"
-                      preserveAspectRatio="none"
-                      style={{ display: "block" }}
-                    >
-                      {/* Horizontal guide lines */}
-                      <line x1="55" y1="40" x2="680" y2="40" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                      <line x1="55" y1="90" x2="680" y2="90" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                      <line x1="55" y1="140" x2="680" y2="140" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                      <line x1="55" y1="190" x2="680" y2="190" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-
-                      {/* Lines */}
-                      <polyline
-                        fill="none"
-                        stroke="#6BA36E"
-                        strokeWidth="3"
-                        points={`55,190 160,175 270,155 380,130 500,100 680,${
-                          180 - Math.min(projects.length * 15, 100)
-                        }`}
-                      />
-                      <polyline
-                        fill="none"
-                        stroke="rgba(255,255,255,0.65)"
-                        strokeWidth="3"
-                        points={`55,192 160,184 270,172 380,155 500,135 680,${
-                          185 - Math.min(positions.length * 15, 100)
-                        }`}
-                      />
-                    </svg>
-
-                    {/* End-point values */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        right: 18,
-                        top: 0,
-                        bottom: 0,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          position: "absolute",
-                          right: 0,
-                          top: `${Math.max(18, 78 - projects.length * 3.8)}%`,
-                          color: "#6BA36E",
-                          fontSize: "0.78rem",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {projects.length}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          position: "absolute",
-                          right: 0,
-                          top: `${Math.max(18, 80 - positions.length * 3.8)}%`,
-                          color: "rgba(255,255,255,0.75)",
-                          fontSize: "0.78rem",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {positions.length}
-                      </Typography>
-                    </Box>
-                  </Box>
-              </CardContent>
-            </Card>
-          </Grid>
 
           <Grid item xs={12} md={12} lg={4}>
             <TableCard
