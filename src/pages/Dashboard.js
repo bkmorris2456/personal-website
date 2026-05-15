@@ -35,7 +35,6 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../firebase/firebase";
 import { getPositions, getProjects, getSkills } from "../firebase/firestoreService";
-import { signOut } from "firebase/auth";
 
 // Component Imports
 import { StatCard } from "../components/dashboard/StatCard";
@@ -455,15 +454,6 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/home");
-    } catch (error) {
-      console.error('Logout error: ', error);
-    }
-  }
-
   // Function retrieving all relevant data from Firestore database
   const fetchAllData = async () => {
     setLoading(true);
@@ -715,20 +705,6 @@ export default function Dashboard() {
         >
           Dashboard
         </Typography>
-
-        <Button
-          onClick={handleLogout}
-          sx={{
-            color: "#f3f3f3",
-            textTransform: "none",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            px: 2,
-            height: "fit-content",
-          }}
-        >
-          Sign Out
-        </Button>
       </Box>
 
       {loading ? (
