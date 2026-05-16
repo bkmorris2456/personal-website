@@ -16,16 +16,8 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-const dashboardCardSx = {
-  backgroundColor: "#0b0b0b",
-  border: "1px solid rgba(255,255,255,0.06)",
-  borderRadius: "20px",
-  boxShadow: "none",
-};
-
-const mutedText = {
-  color: "rgba(255,255,255,0.58)",
-};
+// Dashboard Feature Imports
+import { dashboardCardSx, mutedText } from "../styles/dashboardStyles";
 
 const ACTIONS_WIDTH = "88px";
 
@@ -86,9 +78,11 @@ export function TableCard({
             <Typography sx={{ color: "#f3f3f3", fontWeight: 700, fontSize: "1.3rem" }}>
               {title}
             </Typography>
-            <Typography sx={{ ...mutedText, fontSize: "0.92rem" }}>
-              {subtitle}
-            </Typography>
+            {subtitle && (
+              <Typography sx={{ ...mutedText, fontSize: "0.92rem" }}>
+                {subtitle}
+              </Typography>
+            )}
           </Box>
 
           <Button

@@ -1,7 +1,7 @@
 import './App.css';
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './features/dashboard/Dashboard';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
