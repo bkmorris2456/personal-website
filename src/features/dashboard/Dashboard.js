@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Box,
@@ -26,9 +26,6 @@ import { useDashboardDisplayData } from "./hooks/useDashboardDisplayData";
 import { useDashboardModal } from "./hooks/useDashboardModal";
 import { useDashboardCrud } from "./hooks/useDashboardCrud";
 
-// Dashboard Utility Imports
-import { formatDate } from "./utils/dashboardUtils";
-
 // Dashboard Page
 export default function Dashboard() {
   const {
@@ -38,7 +35,6 @@ export default function Dashboard() {
     loading,
     fetchAllData,
   } = useDashboardData();
-  const [activity, setActivity] = useState([]);
 
   const [viewAllState, setViewAllState] = useState({
     open: false,
@@ -82,17 +78,6 @@ export default function Dashboard() {
     fetchAllData,
     handleCloseModal: modal.handleCloseModal,
   });
-
-  useEffect(() => {
-    const generatedActivity = [
-      ...positions.slice(0, 3).map((item) => ({
-        text: `Updated position "${item.title || "Untitled Position"}"`,
-        time: `${formatDate(item.start)} - ${formatDate(item.end)}`,
-      })),
-    ];
-
-    setActivity(generatedActivity);
-  }, [positions]);
 
   return (
     <Box
