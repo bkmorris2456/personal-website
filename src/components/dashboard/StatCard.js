@@ -17,7 +17,7 @@ const mutedText = {
   color: "rgba(255,255,255,0.58)",
 };
 
-export function StatCard({ title, value, subtitle, icon }) {
+export function StatCard({ title, value, icon }) {
   return (
     <Card sx={{ ...dashboardCardSx, height: "100%" }}>
       <CardContent
@@ -28,14 +28,7 @@ export function StatCard({ title, value, subtitle, icon }) {
           alignItems: "center",
         }}
       >
-        <Stack
-          direction="row"
-          spacing={2}
-          alignItems="center"
-          sx={{
-            width: "100%",
-          }}
-        >
+        <Stack direction="row" spacing={2} alignItems="center">
           <Box
             sx={{
               width: 54,
@@ -54,23 +47,18 @@ export function StatCard({ title, value, subtitle, icon }) {
             {icon}
           </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              textAlign: "left",
-              minWidth: 0,
-            }}
+          <Stack
+            direction="row"
+            spacing={1.2}
+            alignItems="baseline"
           >
             <Typography
               sx={{
                 color: "#f3f3f3",
-                fontWeight: 700,
-                fontSize: "2rem",
+                fontWeight: 800,
+                fontSize: "2.4rem",
                 lineHeight: 1,
-                mb: 0.5,
+                letterSpacing: "-0.04em",
               }}
             >
               {value}
@@ -78,26 +66,16 @@ export function StatCard({ title, value, subtitle, icon }) {
 
             <Typography
               sx={{
-                color: "#f3f3f3",
-                fontWeight: 600,
-                fontSize: "1rem",
-                lineHeight: 1.2,
-                mb: 0.35,
+                color: "#d9d9d9",
+                fontWeight: 700,
+                fontSize: "1.55rem",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
               }}
             >
               {title}
             </Typography>
-
-            <Typography
-              sx={{
-                ...mutedText,
-                fontSize: "0.9rem",
-                lineHeight: 1.3,
-              }}
-            >
-              {subtitle}
-            </Typography>
-          </Box>
+          </Stack>
         </Stack>
       </CardContent>
     </Card>

@@ -7,7 +7,9 @@ import {
   Stack,
   Button,
   Divider,
+  Pagination
 } from "@mui/material";
+import { useMemo, useState } from "react";
 
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
@@ -33,13 +35,24 @@ export function TableCard({
   headers,
   rows,
   viewAllText,
+  onViewAll,
   onAdd,
   onEdit,
   onDelete,
   emptyMessage = "No records yet.",
   addDisabled = false,
+  rowsPerPage = 5,
 }) {
   const dataHeaders = headers.slice(0, headers.length - 1);
+
+  const [page, setPage] = useState(1);
+
+  const pageCount = Math.ceil(rows.length / rowsPerPage);
+
+  const paginatedRows = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    return rows.slice(start, start + rowsPerPage);
+  }, [rows, page, rowsPerPage]);
 
   return (
     <Card
@@ -177,7 +190,7 @@ export function TableCard({
               {emptyMessage}
             </Typography>
           ) : (
-            rows.map((row, index) => (
+            paginatedRows.map((row, index) => (
               <Box key={row.id ?? index}>
                 <Box
                   sx={{
@@ -234,7 +247,7 @@ export function TableCard({
                   </Box>
                 </Box>
 
-                {index !== rows.length - 1 && (
+                {index !== paginatedRows.length - 1 && (
                   <Divider sx={{ borderColor: "rgba(255,255,255,0.05)" }} />
                 )}
               </Box>
@@ -252,14 +265,43 @@ export function TableCard({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: 2,
             color: "#6BA36E",
             flexShrink: 0,
           }}
         >
-          <Typography sx={{ fontSize: "0.92rem", fontWeight: 500 }}>
+          <Button
+            onClick={onViewAll}
+            sx={{
+              color: "#6BA36E",
+              textTransform: "none",
+              fontSize: "0.92rem",
+              fontWeight: 500,
+              px: 0,
+              minWidth: "unset",
+            }}
+            endIcon={<ChevronRightRoundedIcon fontSize="small" />}
+          >
             {viewAllText}
-          </Typography>
-          <ChevronRightRoundedIcon fontSize="small" />
+          </Button>
+
+          {pageCount > 1 && (
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={(e, value) => setPage(value)}
+              size="small"
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "rgba(255,255,255,0.7)",
+                },
+                "& .Mui-selected": {
+                  backgroundColor: "rgba(107,163,110,0.22) !important",
+                  color: "#6BA36E",
+                },
+              }}
+            />
+          )}
         </Box>
       </CardContent>
     </Card>

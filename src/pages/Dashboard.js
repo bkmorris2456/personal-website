@@ -14,6 +14,14 @@ import {
   TextField,
   CircularProgress,
   IconButton,
+  Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 import FolderOpenRoundedIcon from "@mui/icons-material/FolderOpenRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import CircleIcon from "@mui/icons-material/Circle";
 
 // Firebase Imports
@@ -101,7 +110,6 @@ const emptyForms = {
     title: "",
     stack: "",
     description: "",
-    date: "",
     status: "",
   },
   skill: {
@@ -109,6 +117,9 @@ const emptyForms = {
     category: "",
   },
 };
+
+const projectStatusOptions = ["Designing", "Ongoing", "Complete"];
+const skillCategoryOptions = ["Frontend", "Backend", "Database", "Framework", "Version Control", "Editor"];
 
 // Formats datetime to something readable
 function formatDate(value) {
@@ -192,7 +203,6 @@ function getEditFormValues(entity, item) {
         description: Array.isArray(item.description)
           ? item.description.join("\n")
           : item.description || "",
-        date: formatDateForInput(item.date || item.createdAt),
         status: item.status || "",
       };
 
@@ -252,7 +262,6 @@ function buildPayload(entity, formState) {
         title: formState.title.trim(),
         stack: formState.stack.trim(),
         description: formState.description.trim(),
-        date: toTimestamp(formState.date),
         status: formState.status.trim(),
       };
 
@@ -296,6 +305,39 @@ function validateForm(entity, formState) {
   }
 
   return "";
+}
+
+function SingleSelectTags({ options, value, onChange }) {
+  return (
+    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+      {options.map((option) => {
+        const selected = value === option;
+
+        return (
+          <Chip
+            key={option}
+            label={option}
+            onClick={() => onChange(option)}
+            sx={{
+              color: selected ? "#050505" : "#f3f3f3",
+              backgroundColor: selected
+                ? "#6BA36E"
+                : "rgba(255,255,255,0.04)",
+              border: selected
+                ? "1px solid #6BA36E"
+                : "1px solid rgba(255,255,255,0.12)",
+              fontWeight: 600,
+              "&:hover": {
+                backgroundColor: selected
+                  ? "#7ab47d"
+                  : "rgba(255,255,255,0.08)",
+              },
+            }}
+          />
+        );
+      })}
+    </Stack>
+  );
 }
 
 function renderModalFields(entity, formState, handleFormChange) {
@@ -378,23 +420,16 @@ function renderModalFields(entity, formState, handleFormChange) {
             sx={inputSx}
           />
 
-          <TextField
-            label="Status"
-            value={formState.status}
-            onChange={(e) => handleFormChange("status", e.target.value)}
-            fullWidth
-            sx={inputSx}
-          />
-
-          <TextField
-            label="Date"
-            type="date"
-            value={formState.date}
-            onChange={(e) => handleFormChange("date", e.target.value)}
-            fullWidth
-            InputLabelProps={{ shrink: true }}
-            sx={inputSx}
-          />
+          <Box>
+            <Typography sx={{ color: "rgba(255,255,255,0.6)", mb: 1 }}>
+              Status
+            </Typography>
+            <SingleSelectTags
+              options={projectStatusOptions}
+              value={formState.status}
+              onChange={(value) => handleFormChange("status", value)}
+            />
+          </Box>
 
           <TextField
             label="Description"
@@ -419,13 +454,16 @@ function renderModalFields(entity, formState, handleFormChange) {
             sx={inputSx}
           />
 
-          <TextField
-            label="Category"
-            value={formState.category}
-            onChange={(e) => handleFormChange("category", e.target.value)}
-            fullWidth
-            sx={inputSx}
-          />
+          <Box>
+            <Typography sx={{ color: "rgba(255,255,255,0.6)", mb: 1 }}>
+              Category
+            </Typography>
+            <SingleSelectTags
+              options={skillCategoryOptions}
+              value={formState.category}
+              onChange={(value) => handleFormChange("category", value)}
+            />
+          </Box>
         </Stack>
       );
 
@@ -451,6 +489,31 @@ export default function Dashboard() {
   });
 
   const [formState, setFormState] = useState({});
+
+  const [viewAllState, setViewAllState] = useState({
+    open: false,
+    title: "",
+    headers: [],
+    rows: [],
+  });
+
+  const handleOpenViewAll = (title, headers, rows) => {
+  setViewAllState({
+    open: true,
+    title,
+    headers,
+    rows,
+  });
+  };
+
+  const handleCloseViewAll = () => {
+    setViewAllState({
+      open: false,
+      title: "",
+      headers: [],
+      rows: [],
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -493,28 +556,31 @@ export default function Dashboard() {
     setActivity(generatedActivity);
   }, [positions]);
 
+  const completedProjectsCount = useMemo(() => {
+    return projects.filter(
+      (project) => project.status?.toLowerCase() === "complete"
+    ).length;
+  }, [projects]);
+
   const statCards = useMemo(
     () => [
       {
-        title: "Positions",
+        title: "Positions Worked",
         value: positions.length,
-        subtitle: "Total work experiences",
         icon: <WorkOutlineRoundedIcon />,
       },
       {
-        title: "Projects",
-        value: projects.length,
-        subtitle: "Projects completed",
+        title: "Projects Completed",
+        value: completedProjectsCount,
         icon: <FolderOpenRoundedIcon />,
       },
       {
-        title: "Skills",
+        title: "Skills Attained",
         value: skills.length,
-        subtitle: "Technologies used",
         icon: <AutoAwesomeRoundedIcon />,
       },
     ],
-    [positions.length, projects.length, skills.length]
+    [positions.length, completedProjectsCount, skills.length]
   );
 
   const positionRows = useMemo(() => {
@@ -530,19 +596,18 @@ export default function Dashboard() {
   }, [positions]);
 
   const projectRows = useMemo(() => {
-    return projects.slice(0, 5).map((item) => ({
+    return projects.map((item) => ({
       id: item.id,
       columns: [
         item.project || item.title || "Untitled Project",
         item.status || "",
-        formatDate(item.date || item.createdAt) || "",
       ],
       raw: item,
     }));
   }, [projects]);
 
   const skillRows = useMemo(() => {
-    return skills.slice(0, 5).map((item) => ({
+    return skills.map((item) => ({
       id: item.id,
       columns: [item.skill || item.name || "", item.category || ""],
       raw: item,
@@ -690,17 +755,39 @@ export default function Dashboard() {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 4,
+          flexDirection: "column",
+          alignItems: "flex-start",
+          mb: 2,
         }}
       >
+        <Button
+          onClick={() => navigate("/home")}
+          startIcon={<ArrowBackRoundedIcon />}
+          sx={{
+            color: "#6BA36E",
+            textTransform: "none",
+            fontWeight: 700,
+            mb: 2,
+            px: 0,
+            minWidth: "unset",
+            justifyContent: "flex-start",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#7ab47d",
+            },
+          }}
+        >
+          Return to Home
+        </Button>
+
         <Typography
           sx={{
             color: "#f3f3f3",
             fontSize: { xs: "2rem", md: "2.4rem" },
             fontWeight: 700,
             letterSpacing: "-0.03em",
+            textAlign: "left",
+            width: "100%",
           }}
         >
           Dashboard
@@ -732,6 +819,9 @@ export default function Dashboard() {
               headers={["TITLE", "COMPANY", "DATES", "ACTIONS"]}
               rows={positionRows}
               viewAllText="View all positions"
+              onViewAll={() =>
+                handleOpenViewAll("Positions", ["TITLE", "COMPANY", "DATES"], positionRows)
+              }
               onAdd={() => handleOpenAdd("position")}
               onEdit={(item) => handleOpenEdit("position", item)}
               onDelete={(item) => handleOpenDelete("position", item)}
@@ -742,9 +832,12 @@ export default function Dashboard() {
           <Grid item xs={12} md={12} lg={4}>
             <TableCard
               title="Projects"
-              headers={["PROJECT", "STATUS", "DATE", "ACTIONS"]}
+              headers={["PROJECT", "STATUS", "ACTIONS"]}
               rows={projectRows}
               viewAllText="View all projects"
+              onViewAll={() =>
+                handleOpenViewAll("Projects", ["PROJECT", "STATUS"], projectRows)
+              }
               onAdd={() => handleOpenAdd("project")}
               onEdit={(item) => handleOpenEdit("project", item)}
               onDelete={(item) => handleOpenDelete("project", item)}
@@ -759,6 +852,9 @@ export default function Dashboard() {
               headers={["SKILL", "CATEGORY", "ACTIONS"]}
               rows={skillRows}
               viewAllText="View all skills"
+              onViewAll={() =>
+                handleOpenViewAll("Skills", ["SKILL", "CATEGORY"], skillRows)
+              }
               onAdd={() => handleOpenAdd("skill")}
               onEdit={(item) => handleOpenEdit("skill", item)}
               onDelete={(item) => handleOpenDelete("skill", item)}
@@ -825,6 +921,102 @@ export default function Dashboard() {
             }}
           >
             {modalActionText}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* View All Modal */}
+      <Dialog
+        open={viewAllState.open}
+        onClose={handleCloseViewAll}
+        fullWidth
+        maxWidth="md"
+        PaperProps={{
+          sx: {
+            ...modalPaperSx,
+            maxHeight: "80vh",
+          },
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: 700 }}>
+          {viewAllState.title}
+        </DialogTitle>
+
+        <DialogContent
+          sx={{
+            maxHeight: "60vh",
+            overflow: "auto",
+          }}
+        >
+          <TableContainer
+            component={Paper}
+            sx={{
+              backgroundColor: "transparent",
+              boxShadow: "none",
+              overflowX: "auto",
+            }}
+          >
+            <Table stickyHeader>
+              <TableHead>
+                <TableRow>
+                  {viewAllState.headers.map((header) => (
+                    <TableCell
+                      key={header}
+                      sx={{
+                        backgroundColor: "#0b0b0b",
+                        color: "rgba(255,255,255,0.55)",
+                        borderColor: "rgba(255,255,255,0.08)",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {header}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {viewAllState.rows.map((row, index) => (
+                  <TableRow key={row.id ?? index}>
+                    {row.columns.map((value, valueIndex) => (
+                      <TableCell
+                        key={`${row.id}-${valueIndex}`}
+                        sx={{
+                          color:
+                            valueIndex === 0
+                              ? "#f3f3f3"
+                              : "rgba(255,255,255,0.65)",
+                          borderColor: "rgba(255,255,255,0.06)",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {value}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </DialogContent>
+
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button
+            onClick={handleCloseViewAll}
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              borderRadius: "12px",
+              fontWeight: 700,
+              backgroundColor: "#6BA36E",
+              color: "#050505",
+              "&:hover": {
+                backgroundColor: "#7ab47d",
+              },
+            }}
+          >
+            Close
           </Button>
         </DialogActions>
       </Dialog>
