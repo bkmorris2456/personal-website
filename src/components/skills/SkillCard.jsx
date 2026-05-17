@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 
-const SkillCard = ({ name, iconClass }) => {
+const SkillCard = ({ name, icon }) => {
   return (
     <Card
       sx={{
@@ -22,13 +22,16 @@ const SkillCard = ({ name, iconClass }) => {
       }}
     >
       <Box
-        component="i"
-        className={iconClass}
         sx={{
           fontSize: { xs: 30, sm: 35, md: 40 },
           mr: 2,
+          display: "flex",
+          alignItems: "center",
         }}
-      />
+      >
+        {icon}
+      </Box>
+
       <CardContent sx={{ p: 0 }}>
         <Typography
           variant="h6"

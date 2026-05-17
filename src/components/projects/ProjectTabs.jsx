@@ -6,9 +6,9 @@ import ProjectCard from "./ProjectCard";
 import { getProjects } from "../../firebase/firestoreService";
 
 // Images
-import roomaryImage from "../../images/roomary-logo.png";
-import moneyMovesImage from "../../images/money-moves-demo.png";
-import cheatDayImage from "../../images/cheat-day-image.png";
+import roomaryImage from "../../images/roomary-logo.webp";
+import moneyMovesImage from "../../images/money-moves-demo.webp";
+import cheatDayImage from "../../images/cheat-day-image.webp";
 
 const ProjectTabs = () => {
 

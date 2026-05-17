@@ -6,7 +6,6 @@ import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import "devicon/devicon.min.css";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

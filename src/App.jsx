@@ -1,11 +1,13 @@
 import './App.css';
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/Home';
-import Dashboard from './features/dashboard/Dashboard';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import './fonts/fonts.css';
+import { lazy, Suspense } from "react";
+
+const Dashboard = lazy(() => import("./features/dashboard/Dashboard.jsx"));
 
 function App() {
 
@@ -20,9 +22,9 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                <ProtectedRoute>
-                  <Dashboard/>
-                </ProtectedRoute>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Dashboard />
+                </Suspense>
               }
             />
             <Route path="*" element={<Navigate to="/home" replace />}/>

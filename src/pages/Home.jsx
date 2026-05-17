@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import UpdatedPhoto from '../images/linkedin-headshot.jpeg';
+import UpdatedPhoto from '../images/linkedin-headshot.webp';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
 import ExperienceNodes from "../components/experience/ExperienceNodes";
@@ -7,17 +7,28 @@ import ContactForm from "../components/contact/ContactForm";
 import SkillsSection from "../components/skills/SkillsSection";
 import ProjectTabs from "../components/projects/ProjectTabs";
 
+import {
+  SiReact,
+  SiJavascript,
+  SiHtml5,
+  SiCss,
+  SiGithub,
+  SiPython,
+  SiNodedotjs,
+  SiMysql
+} from "react-icons/si";
+
 function Home() {
 
     const skills = [
-    { name: "React", iconClass: "devicon-react-original colored" },
-    { name: "JavaScript", iconClass: "devicon-javascript-plain colored" },
-    { name: "HTML5", iconClass: "devicon-html5-plain colored" },
-    { name: "CSS3", iconClass: "devicon-css3-plain colored" },
-    { name: "GitHub", iconClass: "devicon-github-original" },
-    { name: "Python", iconClass: "devicon-python-plain colored" },
-    { name: "Node.js", iconClass: "devicon-nodejs-plain colored" },
-    { name: "MySQL", iconClass: "devicon-mysql-plain colored" },
+        { name: "React", icon: <SiReact /> },
+        { name: "JavaScript", icon: <SiJavascript /> },
+        { name: "HTML5", icon: <SiHtml5 /> },
+        { name: "CSS3", icon: <SiCss /> },
+        { name: "GitHub", icon: <SiGithub /> },
+        { name: "Python", icon: <SiPython /> },
+        { name: "Node.js", icon: <SiNodedotjs /> },
+        { name: "MySQL", icon: <SiMysql /> },
     ];
 
     return (
