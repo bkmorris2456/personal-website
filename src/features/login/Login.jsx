@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Box, Card, CardContent, Typography, Button, Alert, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/firebase";
-import { useAuthContext } from "../context/AuthContext";
+import { auth, googleProvider } from "../../firebase/firebase";
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import './App.css';
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from './pages/Home';
-import Login from './pages/Login';
-import ProtectedRoute from './components/ProtectedRoute';
+import Home from './features/home/Home.jsx';
+import Login from './features/login/Login.jsx';
+import ProtectedRoute from './features/login/ProtectedRoute.jsx';
 import { AuthProvider } from './context/AuthContext';
 import './fonts/fonts.css';
 import { lazy, Suspense } from "react";

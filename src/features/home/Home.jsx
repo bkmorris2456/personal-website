@@ -1,35 +1,15 @@
-import Navbar from "../components/Navbar";
-import UpdatedPhoto from '../images/linkedin-headshot.webp';
 import { Box, Grid, Typography } from "@mui/material";
 import {motion} from 'framer-motion';
-import ExperienceNodes from "../components/experience/ExperienceNodes";
-import ContactForm from "../components/contact/ContactForm";
-import SkillsSection from "../components/skills/SkillsSection";
-import ProjectTabs from "../components/projects/ProjectTabs";
+import Navbar from "../navbar/Navbar.jsx";
+import UpdatedPhoto from "../../images/linkedin-headshot.webp";
+import ExperienceNodes from "./components/experience/ExperienceNodes.jsx";
+import ContactForm from "./components/contact/ContactForm.jsx";
+import SkillsSection from "./components/skills/SkillsSection.jsx";
+import ProjectTabs from "./components/projects/ProjectTabs.jsx";
 
-import {
-  SiReact,
-  SiJavascript,
-  SiHtml5,
-  SiCss,
-  SiGithub,
-  SiPython,
-  SiNodedotjs,
-  SiMysql
-} from "react-icons/si";
+import { skills } from "./constants/skills.jsx";
 
 function Home() {
-
-    const skills = [
-        { name: "React", icon: <SiReact /> },
-        { name: "JavaScript", icon: <SiJavascript /> },
-        { name: "HTML5", icon: <SiHtml5 /> },
-        { name: "CSS3", icon: <SiCss /> },
-        { name: "GitHub", icon: <SiGithub /> },
-        { name: "Python", icon: <SiPython /> },
-        { name: "Node.js", icon: <SiNodedotjs /> },
-        { name: "MySQL", icon: <SiMysql /> },
-    ];
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", alignItems: "center" }}>

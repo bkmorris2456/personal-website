@@ -3,12 +3,12 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { getProjects } from "../../firebase/firestoreService";
+import { getProjects } from "../../../../firebase/firestoreService";
 
 // Images
-import roomaryImage from "../../images/roomary-logo.webp";
-import moneyMovesImage from "../../images/money-moves-demo.webp";
-import cheatDayImage from "../../images/cheat-day-image.webp";
+import roomaryImage from "../../../../images/roomary-logo.webp";
+import moneyMovesImage from "../../../../images/money-moves-demo.webp";
+import cheatDayImage from "../../../../images/cheat-day-image.webp";
 
 const ProjectTabs = () => {
 
