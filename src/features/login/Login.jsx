@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Box, Card, CardContent, Typography, Button, Alert, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
+import {
+  authPageSx,
+  authCardSx,
+  authCardContentSx,
+  authTitleSx,
+  authSubtitleSx,
+  authErrorSx,
+  authButtonSx,
+  authButtonSpinnerSx,
+} from "./styles/authStyles";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -41,38 +59,17 @@ export default function Login() {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundColor: "#050505",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        px: 2,
-      }}
-    >
-      <Card
-        sx={{
-          width: "100%",
-          maxWidth: 420,
-          backgroundColor: "#0b0b0b",
-          color: "#f3f3f3",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: "20px",
-          boxShadow: "none",
-        }}
-      >
-        <CardContent sx={{ p: 4 }}>
-          <Typography sx={{ fontSize: "1.8rem", fontWeight: 700, mb: 1 }}>
-            Admin Login
-          </Typography>
+    <Box sx={authPageSx}>
+      <Card sx={authCardSx}>
+        <CardContent sx={authCardContentSx}>
+          <Typography sx={authTitleSx}>Admin Login</Typography>
 
-          <Typography sx={{ color: "rgba(255,255,255,0.6)", mb: 3 }}>
+          <Typography sx={authSubtitleSx}>
             Sign in with your Google account.
           </Typography>
 
           {error && (
-            <Alert severity="error" sx={{ mb: 2, borderRadius: "12px" }}>
+            <Alert severity="error" sx={authErrorSx}>
               {error}
             </Alert>
           )}
@@ -82,18 +79,13 @@ export default function Login() {
             fullWidth
             onClick={handleGoogleLogin}
             disabled={signingIn || authLoading}
-            sx={{
-              textTransform: "none",
-              borderRadius: "12px",
-              fontWeight: 700,
-              backgroundColor: "#6BA36E",
-              color: "#050505",
-              "&:hover": {
-                backgroundColor: "#7ab47d",
-              },
-            }}
+            sx={authButtonSx}
           >
-            {signingIn || authLoading ? <CircularProgress size={22} sx={{ color: "#050505" }} /> : "Continue with Google"}
+            {signingIn || authLoading ? (
+              <CircularProgress size={22} sx={authButtonSpinnerSx} />
+            ) : (
+              "Continue with Google"
+            )}
           </Button>
         </CardContent>
       </Card>

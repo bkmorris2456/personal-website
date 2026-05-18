@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from "emailjs-com";
-import { TextField, Button, Container } from "@mui/material";
+import { TextField, Button, Container, Box } from "@mui/material";
+import { contactFormContainerSx, contactFormSx } from "../../styles/contactStyles";
 
 const ContactForm = () => {
   const form = useRef();
@@ -10,10 +11,10 @@ const ContactForm = () => {
 
     emailjs
       .sendForm(
-        "service_tuzj8o8",     // from EmailJS dashboard
-        "template_2t3vmyq",    // from EmailJS dashboard
+        "service_tuzj8o8",
+        "template_2t3vmyq",
         form.current,
-        "zMnzBWSWnWqVVBdTV"      // from EmailJS dashboard
+        "zMnzBWSWnWqVVBdTV"
       )
       .then(
         (result) => {
@@ -28,32 +29,10 @@ const ContactForm = () => {
   };
 
   return (
-    <Container maxWidth="md">
-      <form
-        ref={form}
-        onSubmit={sendEmail}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1.5rem",
-          width: "100%",
-          maxWidth: "150vw",
-          margin: "auto",
-          padding: "1rem",
-        }}
-      >
-        <TextField
-          name="name"
-          label="Your Name"
-          required
-          fullWidth
-        />
-        <TextField
-          name="email"
-          label="Your Email"
-          required
-          fullWidth
-        />
+    <Container maxWidth="md" sx={contactFormContainerSx}>
+      <Box component="form" ref={form} onSubmit={sendEmail} sx={contactFormSx}>
+        <TextField name="name" label="Your Name" required fullWidth />
+        <TextField name="email" label="Your Email" required fullWidth />
         <TextField
           name="message"
           label="Your Message"
@@ -62,14 +41,10 @@ const ContactForm = () => {
           required
           fullWidth
         />
-        <Button
-          variant="contained"
-          type="submit"
-          color="primary"
-        >
+        <Button variant="contained" type="submit" color="primary">
           Send Message
         </Button>
-      </form>
+      </Box>
     </Container>
   );
 };

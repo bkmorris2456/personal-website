@@ -1,40 +1,36 @@
-// src/components/ProjectTabs.js
-import React from "react";
-import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Box, Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard";
 import { getProjects } from "../../../../firebase/firestoreService";
+import { projectTabsWrapperSx } from "../../../../styles/projectStyles";
 
-// Images
 import roomaryImage from "../../../../assets/images/roomary-logo.webp";
 import moneyMovesImage from "../../../../assets/images/money-moves-demo.webp";
 import cheatDayImage from "../../../../assets/images/cheat-day-image.webp";
 
+const projectImages = {
+  roomary: roomaryImage,
+  moneymoves: moneyMovesImage,
+  cheatday: cheatDayImage,
+};
+
 const ProjectTabs = () => {
+  const [projects, setProjects] = useState([]);
 
-    const [projects, setProjects] = useState([]);
-
-    const projectImages = {
-      roomary: roomaryImage,
-      moneymoves: moneyMovesImage,
-      cheatday: cheatDayImage,
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getProjects();
+      setProjects(data);
     };
 
-    useEffect(() => {
-        const loadData = async () => {
-            const data = await getProjects();
-            setProjects(data);
-        };
-
-        loadData();
-    }, []);
+    loadData();
+  }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-
+    <Box sx={projectTabsWrapperSx}>
       <Grid container spacing={3} justifyContent="center">
-        {projects.map((project, index) => (
-          <Grid item key={index}>
+        {projects.map((project) => (
+          <Grid item key={project.id || project.title}>
             <ProjectCard
               image={projectImages[project.imageKey]}
               title={project.title}
@@ -46,7 +42,7 @@ const ProjectTabs = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Box>
   );
 };
 

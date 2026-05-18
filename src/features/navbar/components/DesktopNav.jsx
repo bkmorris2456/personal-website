@@ -2,15 +2,15 @@ import { Box } from "@mui/material";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { sectionNavItems } from "../constants/navItems";
+import {
+  desktopNavSx,
+  desktopNavLinkStyle,
+  desktopNavActiveStyle,
+} from "../../../styles/navbarStyles";
 
 function DesktopNav({ sx }) {
   return (
-    <Box
-      sx={{
-        ...sx,
-        display: { xs: "none", md: "flex" },
-      }}
-    >
+    <Box sx={{ ...sx, ...desktopNavSx }}>
       {sectionNavItems.map((item) => (
         <ScrollLink
           key={item.to}
@@ -19,28 +19,14 @@ function DesktopNav({ sx }) {
           duration={500}
           spy
           offset={-70}
-          style={{
-            cursor: "pointer",
-            textDecoration: "none",
-            color: "inherit",
-            fontSize: "18px",
-            fontWeight: "bold",
-          }}
-          activeStyle={{ color: "#4caf50" }}
+          style={desktopNavLinkStyle}
+          activeStyle={desktopNavActiveStyle}
         >
           {item.label}
         </ScrollLink>
       ))}
 
-      <RouterLink
-        to="/login"
-        style={{
-          textDecoration: "none",
-          color: "inherit",
-          fontSize: "18px",
-          fontWeight: "bold",
-        }}
-      >
+      <RouterLink to="/login" style={desktopNavLinkStyle}>
         Dashboard
       </RouterLink>
     </Box>

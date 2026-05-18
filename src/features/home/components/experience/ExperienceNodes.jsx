@@ -3,123 +3,90 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getPositions } from "../../../../firebase/firestoreService";
 
+import {
+  experienceWrapperSx,
+  experienceHeaderSx,
+  experienceTitleSx,
+  experienceGridItemSx,
+  experienceCardSx,
+  experienceCompanySx,
+  experienceMetaSx,
+  experienceDateSx,
+  experienceDescriptionSx,
+} from "../../../../styles/experienceStyles";
+
 export default function ExperienceNodes({ id }) {
+  const [positions, setPositions] = useState([]);
 
-    const [positions, setPositions] = useState([]);
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getPositions();
+      setPositions(data);
+    };
 
-    useEffect(() => {
-        const loadData = async () => {
-            const data = await getPositions();
-            setPositions(data);
-        };
+    loadData();
+  }, []);
 
-        loadData();
-    }, []);
-
-    return (
-        <Box
-            id={id}
-            sx={{ flex: 1, p: { xs: 2, sm: 4, md: 6 }, maxWidth: "100%", mx: "auto", marginTop: "1vh", marginBottom: "1vh" }}
+  return (
+    <Box id={id} sx={experienceWrapperSx}>
+      <Box sx={experienceHeaderSx}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-            <Box sx={{ textAlign: "center", mb: 8 }}>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                >
+          <Typography variant="h2" sx={experienceTitleSx}>
+            Experience
+          </Typography>
+        </motion.div>
+      </Box>
+
+      <Grid container spacing={4} justifyContent="center">
+        {positions.map((exp, idx) => (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            key={exp.id}
+            sx={experienceGridItemSx}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: idx * 0.1 }}
+              style={{ width: "100%" }}
+            >
+              <Box sx={experienceCardSx}>
+                <Typography variant="h4" sx={experienceCompanySx}>
+                  {exp.company}
+                </Typography>
+
+                <Typography variant="h4" sx={experienceMetaSx}>
+                  {exp.title}
+                </Typography>
+
+                <Typography variant="h4" sx={experienceDateSx}>
+                  {exp.start}
+                  {exp.end ? ` - ${exp.end}` : " - Present"}
+                </Typography>
+
+                <Box>
+                  {exp.description.map((desc, i) => (
                     <Typography
-                        variant="h2"
-                        sx={{ fontSize: { xs: "35px", sm: "45px" }, mb: "4vh", mt: "4vh" }}
+                      key={i}
+                      variant="body1"
+                      sx={experienceDescriptionSx}
                     >
-                        Experience
+                      {desc}
                     </Typography>
-                </motion.div>
-            </Box>
-
-            <Grid container spacing={4} justifyContent="center">
-                {positions.map((exp, idx) => (
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        key={exp.id}
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: idx * 0.1 }}
-                            style={{ width: "100%" }}
-                        >
-                            <Box
-                                sx={{
-                                    height: "100%",
-                                    p: 3,
-                                    borderRadius: 4,
-                                    backgroundColor: "rgba(255,255,255,0.03)",
-                                    border: "1px solid rgba(255,255,255,0.08)",
-                                    backdropFilter: "blur(10px)",
-                                }}
-                            >
-                                <Typography
-                                    variant="h4"
-                                    sx={{
-                                        textAlign: "left",
-                                        fontSize: { xs: "24px", sm: "30px" },
-                                        mb: "1vh",
-                                    }}
-                                >
-                                    {exp.company}
-                                </Typography>
-
-                                <Typography
-                                    variant="h4"
-                                    sx={{
-                                        textAlign: "left",
-                                        fontSize: { xs: "14px", sm: "16px" },
-                                        mb: "1vh",
-                                    }}
-                                >
-                                    {exp.title}
-                                </Typography>
-
-                                <Typography
-                                    variant="h4"
-                                    sx={{
-                                        textAlign: "left",
-                                        fontSize: { xs: "14px", sm: "16px" },
-                                        mb: "2vh",
-                                    }}
-                                >
-                                    {exp.start}
-                                    {exp.end ? ` - ${exp.end}` : " - Present"}
-                                </Typography>
-
-                                <Box>
-                                    {exp.description.map((desc, i) => (
-                                        <Typography
-                                            key={i}
-                                            variant="body1"
-                                            sx={{
-                                                textAlign: "justify",
-                                                fontSize: { xs: "12px", sm: "14px" },
-                                                mb: 1,
-                                            }}
-                                        >
-                                            {desc}
-                                        </Typography>
-                                    ))}
-                                </Box>
-                            </Box>
-                        </motion.div>
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
-    );
-
+                  ))}
+                </Box>
+              </Box>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 }

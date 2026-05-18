@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Box,
   IconButton,
   Menu,
   MenuItem,
@@ -15,6 +16,17 @@ import {
   mobileSectionNavItems,
   externalNavItems,
 } from "../constants/navItems";
+import {
+  mobileMenuPaperSx,
+  mobileMenuCloseButtonSx,
+  mobileScrollLinkStyle,
+  mobileContactMenuItemSx,
+  mobileContactPopupMotionStyle,
+  mobileContactPopupSx,
+  mobileContactTextSx,
+  mobileContactPhoneSx,
+  externalLinkStyle,
+} from "../../../styles/navbarStyles";
 
 function MobileNavMenu({ anchorEl, open, onClose }) {
   const [showContactInfo, setShowContactInfo] = useState(false);
@@ -29,19 +41,9 @@ function MobileNavMenu({ anchorEl, open, onClose }) {
       anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
-      PaperProps={{
-        sx: {
-          width: 250,
-          padding: 1,
-          background: "rgba(0, 0, 0, 0.7)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "16px",
-          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-          overflow: "visible",
-        },
-      }}
+      PaperProps={{ sx: mobileMenuPaperSx }}
     >
-      <IconButton onClick={handleClose} sx={{ alignSelf: "flex-end", marginBottom: 1 }}>
+      <IconButton onClick={handleClose} sx={mobileMenuCloseButtonSx}>
         <Close />
       </IconButton>
 
@@ -55,12 +57,7 @@ function MobileNavMenu({ anchorEl, open, onClose }) {
             duration={500}
             spy
             offset={-70}
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-              fontSize: "16px",
-              textTransform: "none",
-            }}
+            style={mobileScrollLinkStyle}
           >
             {item.label}
           </ScrollLink>
@@ -69,13 +66,7 @@ function MobileNavMenu({ anchorEl, open, onClose }) {
 
       <MenuItem
         onClick={() => setShowContactInfo((prev) => !prev)}
-        sx={{
-          position: "relative",
-          textDecoration: "none",
-          color: "inherit",
-          fontSize: "16px",
-          textTransform: "none",
-        }}
+        sx={mobileContactMenuItemSx}
       >
         Contact
 
@@ -87,26 +78,16 @@ function MobileNavMenu({ anchorEl, open, onClose }) {
               animate={{ opacity: 1, x: 10 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "100%",
-                background: "rgba(0, 0, 0, 0.6)",
-                backdropFilter: "blur(10px)",
-                borderRadius: "16px",
-                padding: "16px",
-                zIndex: 10,
-                color: "white",
-                width: "220px",
-                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-              }}
+              style={mobileContactPopupMotionStyle}
             >
-              <Typography sx={{ fontSize: "13px", marginBottom: "4px" }}>
-                Email: bkmorris2024@gmail.com
-              </Typography>
-              <Typography sx={{ fontSize: "13px" }}>
-                Phone: (248) 925-8946
-              </Typography>
+              <Box sx={mobileContactPopupSx}>
+                <Typography sx={mobileContactTextSx}>
+                  Email: bkmorris2024@gmail.com
+                </Typography>
+                <Typography sx={mobileContactPhoneSx}>
+                  Phone: (248) 925-8946
+                </Typography>
+              </Box>
             </motion.div>
           )}
         </AnimatePresence>
@@ -122,7 +103,7 @@ function MobileNavMenu({ anchorEl, open, onClose }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={externalLinkStyle}
             >
               {label}
             </a>
