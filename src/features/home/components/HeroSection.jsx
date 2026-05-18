@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import UpdatedPhoto from "../../../images/linkedin-headshot.webp";
+import UpdatedPhoto from "../../../assets/images/linkedin-headshot.webp";
 
 function HeroSection() {
   return (

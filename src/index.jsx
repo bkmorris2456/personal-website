@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import ReactDOM from 'react-dom/client';
-import './fonts/fonts.css';
+import './assets/fonts/fonts.css';
 import './index.css';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';

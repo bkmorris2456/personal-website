@@ -4,7 +4,7 @@ import Home from './features/home/Home.jsx';
 import Login from './features/login/Login.jsx';
 import ProtectedRoute from './features/login/ProtectedRoute.jsx';
 import { AuthProvider } from './context/AuthContext';
-import './fonts/fonts.css';
+import './assets/fonts/fonts.css';
 import { lazy, Suspense } from "react";
 
 const Dashboard = lazy(() => import("./features/dashboard/Dashboard.jsx"));
