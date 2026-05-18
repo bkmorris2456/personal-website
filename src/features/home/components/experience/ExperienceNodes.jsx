@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getPositions } from "../../../../firebase/firestoreService";
@@ -36,46 +36,89 @@ export default function ExperienceNodes({ id }) {
                 </motion.div>
             </Box>
 
-            {positions.map((exp, idx) => (
-                <Box key={exp.id} sx={{ mb: 8, display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: idx * 0.1 }}
+            <Grid container spacing={4} justifyContent="center">
+                {positions.map((exp, idx) => (
+                    <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        key={exp.id}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
                     >
-                        <Typography
-                            variant="h4"
-                            sx={{ textAlign: "left", fontSize: { xs: "24px", sm: "30px" }, mb: "1vh" }}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: idx * 0.1 }}
+                            style={{ width: "100%" }}
                         >
-                            {exp.company}
-                        </Typography>
-                        <Typography
-                            variant="h4"
-                            sx={{ textAlign: "left", fontSize: { xs: "14px", sm: "16px" }, mb: "1vh" }}
-                        >
-                            {exp.title}
-                        </Typography>
-                        <Typography
-                            variant="h4"
-                            sx={{ textAlign: "left", fontSize: { xs: "14px", sm: "16px" }, mb: "1vh" }}
-                        >
-                            {exp.start}{exp.end ? ` - ${exp.end}` : " - Present"}
-                        </Typography>
-
-                        <Box sx={{ maxWidth: { sm: "25vw" }, minWidth: {sm: "350px"}, mx: "auto" }}>
-                            {exp.description.map((desc, i) => (
+                            <Box
+                                sx={{
+                                    height: "100%",
+                                    p: 3,
+                                    borderRadius: 4,
+                                    backgroundColor: "rgba(255,255,255,0.03)",
+                                    border: "1px solid rgba(255,255,255,0.08)",
+                                    backdropFilter: "blur(10px)",
+                                }}
+                            >
                                 <Typography
-                                    key={i}
-                                    variant="body1"
-                                    sx={{ textAlign: "justify", fontSize: { xs: "12px", sm: "14px" }, mb: 1 }}
+                                    variant="h4"
+                                    sx={{
+                                        textAlign: "left",
+                                        fontSize: { xs: "24px", sm: "30px" },
+                                        mb: "1vh",
+                                    }}
                                 >
-                                    {desc}
+                                    {exp.company}
                                 </Typography>
-                            ))}
-                        </Box>
-                    </motion.div>
-                </Box>
-            ))} 
+
+                                <Typography
+                                    variant="h4"
+                                    sx={{
+                                        textAlign: "left",
+                                        fontSize: { xs: "14px", sm: "16px" },
+                                        mb: "1vh",
+                                    }}
+                                >
+                                    {exp.title}
+                                </Typography>
+
+                                <Typography
+                                    variant="h4"
+                                    sx={{
+                                        textAlign: "left",
+                                        fontSize: { xs: "14px", sm: "16px" },
+                                        mb: "2vh",
+                                    }}
+                                >
+                                    {exp.start}
+                                    {exp.end ? ` - ${exp.end}` : " - Present"}
+                                </Typography>
+
+                                <Box>
+                                    {exp.description.map((desc, i) => (
+                                        <Typography
+                                            key={i}
+                                            variant="body1"
+                                            sx={{
+                                                textAlign: "justify",
+                                                fontSize: { xs: "12px", sm: "14px" },
+                                                mb: 1,
+                                            }}
+                                        >
+                                            {desc}
+                                        </Typography>
+                                    ))}
+                                </Box>
+                            </Box>
+                        </motion.div>
+                    </Grid>
+                ))}
+            </Grid>
         </Box>
     );
 
