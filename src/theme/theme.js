@@ -1,5 +1,10 @@
 import { createTheme } from "@mui/material";
 
+const fonts = {
+  display: '"ClashDisplay", sans-serif',
+  body: '"Satoshi", sans-serif',
+};
+
 export const getAppTheme = (mode = "dark") =>
   createTheme({
     palette: {
@@ -32,13 +37,64 @@ export const getAppTheme = (mode = "dark") =>
           ? "rgba(245,247,242,0.12)"
           : "rgba(28,28,28,0.12)",
     },
+
     typography: {
-      fontFamily: '"ClashDisplay", sans-serif',
-      h1: { fontWeight: 700, fontSize: "2.5rem" },
-      h2: { fontWeight: 700, fontSize: "2rem" },
-      h3: { fontWeight: 700, fontSize: "1.75rem" },
-      body1: { fontWeight: 400, fontSize: "1rem" },
-      body2: { fontWeight: 400, fontSize: "0.9rem" },
-      button: { fontWeight: 700, textTransform: "none" },
+      fontFamily: fonts.body,
+
+      h1: {
+        fontFamily: fonts.display,
+        fontWeight: 700,
+        fontSize: "2.5rem",
+      },
+      h2: {
+        fontFamily: fonts.display,
+        fontWeight: 700,
+        fontSize: "2rem",
+      },
+      h3: {
+        fontFamily: fonts.display,
+        fontWeight: 700,
+        fontSize: "1.75rem",
+      },
+
+      h4: {
+        fontFamily: fonts.display,
+        fontWeight: 700,
+        fontSize: "1.4rem",
+      },
+      h5: {
+        fontFamily: fonts.display,
+        fontWeight: 700,
+        fontSize: "1.2rem",
+      },
+      h6: {
+        fontFamily: fonts.display,
+        fontWeight: 600,
+        fontSize: "1rem",
+      },
+
+      subtitle1: {
+        fontFamily: fonts.body,
+        fontWeight: 500,
+      },
+      subtitle2: {
+        fontFamily: fonts.body,
+        fontWeight: 500,
+      },
+      body1: {
+        fontFamily: fonts.body,
+        fontWeight: 400,
+        fontSize: "1rem",
+      },
+      body2: {
+        fontFamily: fonts.body,
+        fontWeight: 400,
+        fontSize: "0.9rem",
+      },
+      button: {
+        fontFamily: fonts.body,
+        fontWeight: 700,
+        textTransform: "none",
+      },
     },
   });
