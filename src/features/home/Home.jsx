@@ -16,10 +16,10 @@ import {
   contactFormWrapperSx,
 } from "../../styles/homeStyles.js";
 
-function Home() {
+function Home({ toggleTheme, mode }) {
   return (
     <Box sx={homePageSx}>
-      <Navbar />
+      <Navbar toggleTheme={toggleTheme} mode={mode} />
 
       <HeroSection />
 

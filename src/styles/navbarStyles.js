@@ -113,3 +113,19 @@ export const externalLinkStyle = {
   textDecoration: "none",
   color: "inherit",
 };
+
+export const themeToggleButtonSx = {
+  backgroundColor: "rgba(67, 81, 70, 0.75)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "16px",
+  border: "1px solid",
+  borderColor: "divider",
+  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+  color: "text.primary",
+  transition: "all 0.25s ease",
+
+  "&:hover": {
+    backgroundColor: "rgba(67, 81, 70, 0.9)",
+    transform: "translateY(-1px)",
+  },
+};

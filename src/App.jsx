@@ -9,15 +9,15 @@ import { lazy, Suspense } from "react";
 
 const Dashboard = lazy(() => import("./features/dashboard/Dashboard.jsx"));
 
-function App() {
+function App({ toggleTheme, mode }) {
 
   return (
     <div className="App">
       <AuthProvider>
         <HashRouter>
           <Routes>
-            <Route index element={<Home/>}/>
-            <Route path="/home" element={<Home/>}/>
+            <Route index element={<Home toggleTheme={toggleTheme} mode={mode} />}/>
+            <Route path="/home" element={<Home toggleTheme={toggleTheme} mode={mode} />}/>
             <Route path="/login" element={<Login/>}/>
             <Route
               path="/dashboard"

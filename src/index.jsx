@@ -11,22 +11,23 @@ import { getAppTheme } from "./theme/theme";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function RootComponent() {
-  // Load dark mode preference from localStorage
-  const storedTheme = localStorage.getItem("themeMode") || "dark";
-  const [mode, setMode] = useState(storedTheme);
+  const [mode, setMode] = useState(() => {
+    return localStorage.getItem("themeMode") || "dark";
+  });
 
   const theme = useMemo(() => getAppTheme(mode), [mode]);
 
-  // Function to toggle theme
   const toggleTheme = () => {
-    const newMode = mode === "light" ? "dark" : "light";
-    setMode(newMode);
-    localStorage.setItem("themeMode", newMode);
+    setMode((prevMode) => {
+      const newMode = prevMode === "light" ? "dark" : "light";
+      localStorage.setItem("themeMode", newMode);
+      return newMode;
+    });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Ensures default MUI styles for dark mode */}
+      <CssBaseline />
       <App toggleTheme={toggleTheme} mode={mode} />
     </ThemeProvider>
   );
