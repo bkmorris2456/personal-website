@@ -26,6 +26,16 @@ import { useDashboardDisplayData } from "./hooks/useDashboardDisplayData";
 import { useDashboardModal } from "./hooks/useDashboardModal";
 import { useDashboardCrud } from "./hooks/useDashboardCrud";
 
+// Dashboard Styling Imports
+import {
+  dashboardPageSx,
+  dashboardHeaderSx,
+  returnButtonSx,
+  dashboardTitleSx,
+  loadingContainerSx,
+  loadingSpinnerSx,
+} from "./styles/dashboardStyles";
+
 // Dashboard Page
 export default function Dashboard() {
   const {
@@ -80,67 +90,26 @@ export default function Dashboard() {
   });
 
   return (
-    <Box
-      className="dashboard-container"
-      sx={{
-        minHeight: "100vh",
-        backgroundColor: "#050505",
-        px: { xs: 2, md: 4, lg: 6 },
-        py: { xs: 3, md: 4 },
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          mb: 2,
-        }}
-      >
+    <Box className="dashboard-container" sx={dashboardPageSx}>
+      <Box sx={dashboardHeaderSx}>
         <Button
           onClick={() => navigate("/home")}
           startIcon={<ArrowBackRoundedIcon />}
-          sx={{
-            color: "#6BA36E",
-            textTransform: "none",
-            fontWeight: 700,
-            mb: 2,
-            px: 0,
-            minWidth: "unset",
-            justifyContent: "flex-start",
-            "&:hover": {
-              backgroundColor: "transparent",
-              color: "#7ab47d",
-            },
-          }}
+          sx={returnButtonSx}
         >
           Return to Home
         </Button>
 
         <Typography
-          sx={{
-            color: "#f3f3f3",
-            fontSize: { xs: "2rem", md: "2.4rem" },
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            textAlign: "left",
-            width: "100%",
-          }}
+          sx={dashboardTitleSx}
         >
           Dashboard
         </Typography>
       </Box>
 
       {loading ? (
-        <Box
-          sx={{
-            minHeight: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CircularProgress sx={{ color: "#6BA36E" }} />
+        <Box sx={loadingContainerSx}>
+          <CircularProgress sx={loadingSpinnerSx} />
         </Box>
       ) : (
         <Grid container spacing={3}>

@@ -5,7 +5,11 @@ import {
   Typography,
 } from "@mui/material";
 
-import { inputSx } from "../styles/dashboardStyles";
+import { 
+  inputSx,
+  formFieldsStackSx,
+  formFieldLabelSx,
+} from "../styles/dashboardStyles";
 
 import {
   projectStatusOptions,
@@ -25,7 +29,7 @@ export function DashboardFormFields({
   switch (entity) {
     case "position":
       return (
-        <Stack spacing={2} sx={{ mt: 1 }}>
+        <Stack spacing={2} sx={formFieldsStackSx}>
           <TextField
             label="Title"
             value={formState.title}
@@ -84,7 +88,7 @@ export function DashboardFormFields({
 
     case "project":
       return (
-        <Stack spacing={2} sx={{ mt: 1 }}>
+        <Stack spacing={2} sx={formFieldsStackSx}>
           <TextField
             label="Project Title"
             value={formState.title}
@@ -102,7 +106,7 @@ export function DashboardFormFields({
           />
 
           <Box>
-            <Typography sx={{ color: "rgba(255,255,255,0.6)", mb: 1 }}>
+            <Typography sx={formFieldLabelSx}>
               Status
             </Typography>
             <SingleSelectTags
@@ -126,7 +130,7 @@ export function DashboardFormFields({
 
     case "skill":
       return (
-        <Stack spacing={2} sx={{ mt: 1 }}>
+        <Stack spacing={2} sx={formFieldsStackSx}>
           <TextField
             label="Skill Name"
             value={formState.name}
@@ -136,7 +140,7 @@ export function DashboardFormFields({
           />
 
           <Box>
-            <Typography sx={{ color: "rgba(255,255,255,0.6)", mb: 1 }}>
+            <Typography sx={formFieldLabelSx}>
               Category
             </Typography>
             <SingleSelectTags

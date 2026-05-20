@@ -7,8 +7,9 @@ import {
   Stack,
   Button,
   Divider,
-  Pagination
+  Pagination,
 } from "@mui/material";
+
 import { useMemo, useState } from "react";
 
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -16,8 +17,21 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-// Dashboard Feature Imports
-import { dashboardCardSx, mutedText } from "../styles/dashboardStyles";
+import {
+  tableCardSx,
+  tableCardContentSx,
+  tableHeaderContainerSx,
+  tableTitleSx,
+  tableSubtitleSx,
+  tableAddButtonSx,
+  tableDividerSx,
+  tableColumnHeaderSx,
+  tableRowPrimaryTextSx,
+  tableRowTextSx,
+  tableIconButtonSx,
+  tableFooterButtonSx,
+  tablePaginationSx,
+} from "../styles/dashboardStyles";
 
 const ACTIONS_WIDTH = "88px";
 
@@ -46,40 +60,28 @@ export function TableCard({
     return rows.slice(start, start + rowsPerPage);
   }, [rows, page, rowsPerPage]);
 
+  const gridTemplateColumns = `repeat(${dataHeaders.length}, minmax(0, 1fr)) ${ACTIONS_WIDTH}`;
+
+  const tableCellSx = {
+    minWidth: 0,
+    pr: 2,
+    display: "flex",
+    justifyContent: "flex-start",
+    textAlign: "left",
+  };
+
   return (
-    <Card
-      sx={{
-        ...dashboardCardSx,
-        height: "100%",
-        minHeight: 520,
-        display: "flex",
-      }}
-    >
-      <CardContent
-        sx={{
-          p: 0,
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <Card sx={tableCardSx}>
+      <CardContent sx={tableCardContentSx}>
         {/* Top Header */}
-        <Box
-          sx={{
-            p: 3,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 2,
-            flexShrink: 0,
-          }}
-        >
+        <Box sx={tableHeaderContainerSx}>
           <Box>
-            <Typography sx={{ color: "#f3f3f3", fontWeight: 700, fontSize: "1.3rem" }}>
+            <Typography sx={tableTitleSx}>
               {title}
             </Typography>
+
             {subtitle && (
-              <Typography sx={{ ...mutedText, fontSize: "0.92rem" }}>
+              <Typography sx={tableSubtitleSx}>
                 {subtitle}
               </Typography>
             )}
@@ -89,22 +91,13 @@ export function TableCard({
             startIcon={<AddRoundedIcon />}
             onClick={onAdd}
             disabled={addDisabled}
-            sx={{
-              color: addDisabled ? "rgba(255,255,255,0.35)" : "#6BA36E",
-              textTransform: "none",
-              borderRadius: "12px",
-              border: "1px solid rgba(107,163,110,0.18)",
-              backgroundColor: "rgba(107,163,110,0.06)",
-              px: 1.6,
-              whiteSpace: "nowrap",
-              flexShrink: 0,
-            }}
+            sx={tableAddButtonSx(addDisabled)}
           >
             Add
           </Button>
         </Box>
 
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)", flexShrink: 0 }} />
+        <Divider sx={tableDividerSx} />
 
         {/* Column Headers */}
         <Box
@@ -118,35 +111,20 @@ export function TableCard({
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: `repeat(${dataHeaders.length}, minmax(0, 1fr)) ${ACTIONS_WIDTH}`,
+              gridTemplateColumns,
               alignItems: "center",
             }}
           >
             {dataHeaders.map((header) => (
-              <Box key={header} sx={{ minWidth: 0, pr: 2 }}>
-                <Typography
-                  sx={{
-                    color: "rgba(255,255,255,0.42)",
-                    fontSize: "0.74rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                    textAlign: "left",
-                  }}
-                >
+              <Box key={header} sx={tableCellSx}>
+                <Typography sx={tableColumnHeaderSx}>
                   {header}
                 </Typography>
               </Box>
             ))}
 
             <Box sx={{ width: ACTIONS_WIDTH, textAlign: "right" }}>
-              <Typography
-                sx={{
-                  color: "rgba(255,255,255,0.42)",
-                  fontSize: "0.74rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.04em",
-                }}
-              >
+              <Typography sx={tableColumnHeaderSx}>
                 ACTIONS
               </Typography>
             </Box>
@@ -180,7 +158,12 @@ export function TableCard({
           }}
         >
           {rows.length === 0 ? (
-            <Typography sx={{ color: "rgba(255,255,255,0.45)", py: 2 }}>
+            <Typography
+              sx={{
+                color: "rgba(255,255,255,0.45)",
+                py: 2,
+              }}
+            >
               {emptyMessage}
             </Typography>
           ) : (
@@ -189,22 +172,22 @@ export function TableCard({
                 <Box
                   sx={{
                     display: "grid",
-                    gridTemplateColumns: `repeat(${dataHeaders.length}, minmax(0, 1fr)) ${ACTIONS_WIDTH}`,
+                    gridTemplateColumns,
                     alignItems: "start",
                     py: 1.4,
                   }}
                 >
                   {row.columns.map((value, valueIndex) => (
-                    <Box key={`${row.id}-${valueIndex}`} sx={{ minWidth: 0, pr: 2 }}>
+                    <Box
+                      key={`${row.id}-${valueIndex}`}
+                      sx={tableCellSx}
+                    >
                       <Typography
-                        sx={{
-                          color: valueIndex === 0 ? "#f3f3f3" : "rgba(255,255,255,0.6)",
-                          fontSize: "0.92rem",
-                          textAlign: "left",
-                          lineHeight: 1.4,
-                          overflowWrap: "anywhere",
-                          wordBreak: "break-word",
-                        }}
+                        sx={
+                          valueIndex === 0
+                            ? tableRowPrimaryTextSx
+                            : tableRowTextSx
+                        }
                       >
                         {value}
                       </Typography>
@@ -222,7 +205,7 @@ export function TableCard({
                     <Stack direction="row" spacing={0.5}>
                       <IconButton
                         size="small"
-                        sx={{ color: "rgba(255,255,255,0.65)" }}
+                        sx={tableIconButtonSx}
                         onClick={() => onEdit?.(row.raw)}
                         disabled={!onEdit}
                       >
@@ -231,7 +214,7 @@ export function TableCard({
 
                       <IconButton
                         size="small"
-                        sx={{ color: "rgba(255,255,255,0.65)" }}
+                        sx={tableIconButtonSx}
                         onClick={() => onDelete?.(row.raw)}
                         disabled={!onDelete}
                       >
@@ -242,14 +225,18 @@ export function TableCard({
                 </Box>
 
                 {index !== paginatedRows.length - 1 && (
-                  <Divider sx={{ borderColor: "rgba(255,255,255,0.05)" }} />
+                  <Divider
+                    sx={{
+                      borderColor: "rgba(255,255,255,0.05)",
+                    }}
+                  />
                 )}
               </Box>
             ))
           )}
         </Box>
 
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.06)", flexShrink: 0 }} />
+        <Divider sx={tableDividerSx} />
 
         {/* Footer */}
         <Box
@@ -266,14 +253,7 @@ export function TableCard({
         >
           <Button
             onClick={onViewAll}
-            sx={{
-              color: "#6BA36E",
-              textTransform: "none",
-              fontSize: "0.92rem",
-              fontWeight: 500,
-              px: 0,
-              minWidth: "unset",
-            }}
+            sx={tableFooterButtonSx}
             endIcon={<ChevronRightRoundedIcon fontSize="small" />}
           >
             {viewAllText}
@@ -285,15 +265,7 @@ export function TableCard({
               page={page}
               onChange={(e, value) => setPage(value)}
               size="small"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  color: "rgba(255,255,255,0.7)",
-                },
-                "& .Mui-selected": {
-                  backgroundColor: "rgba(107,163,110,0.22) !important",
-                  color: "#6BA36E",
-                },
-              }}
+              sx={tablePaginationSx}
             />
           )}
         </Box>

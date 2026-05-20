@@ -13,7 +13,17 @@ import {
   Paper,
 } from "@mui/material";
 
-import { modalPaperSx } from "../styles/dashboardStyles";
+import {
+  modalTitleSx,
+  modalActionsSx,
+  viewAllModalPaperSx,
+  viewAllModalContentSx,
+  viewAllTableContainerSx,
+  viewAllTableHeaderCellSx,
+  viewAllTablePrimaryCellSx,
+  viewAllTableCellSx,
+  viewAllCloseButtonSx,
+} from "../styles/dashboardStyles";
 
 export function ViewAllModal({ open, title, headers, rows, onClose }) {
   return (
@@ -23,27 +33,17 @@ export function ViewAllModal({ open, title, headers, rows, onClose }) {
       fullWidth
       maxWidth="md"
       PaperProps={{
-        sx: {
-          ...modalPaperSx,
-          maxHeight: "80vh",
-        },
+        sx: viewAllModalPaperSx,
       }}
     >
-      <DialogTitle sx={{ fontWeight: 700 }}>{title}</DialogTitle>
+      <DialogTitle sx={modalTitleSx}>
+        {title}
+      </DialogTitle>
 
-      <DialogContent
-        sx={{
-          maxHeight: "60vh",
-          overflow: "auto",
-        }}
-      >
+      <DialogContent sx={viewAllModalContentSx}>
         <TableContainer
           component={Paper}
-          sx={{
-            backgroundColor: "transparent",
-            boxShadow: "none",
-            overflowX: "auto",
-          }}
+          sx={viewAllTableContainerSx}
         >
           <Table stickyHeader>
             <TableHead>
@@ -51,13 +51,7 @@ export function ViewAllModal({ open, title, headers, rows, onClose }) {
                 {headers.map((header) => (
                   <TableCell
                     key={header}
-                    sx={{
-                      backgroundColor: "#0b0b0b",
-                      color: "rgba(255,255,255,0.55)",
-                      borderColor: "rgba(255,255,255,0.08)",
-                      fontWeight: 700,
-                      whiteSpace: "nowrap",
-                    }}
+                    sx={viewAllTableHeaderCellSx}
                   >
                     {header}
                   </TableCell>
@@ -71,14 +65,11 @@ export function ViewAllModal({ open, title, headers, rows, onClose }) {
                   {row.columns.map((value, valueIndex) => (
                     <TableCell
                       key={`${row.id}-${valueIndex}`}
-                      sx={{
-                        color:
-                          valueIndex === 0
-                            ? "#f3f3f3"
-                            : "rgba(255,255,255,0.65)",
-                        borderColor: "rgba(255,255,255,0.06)",
-                        whiteSpace: "nowrap",
-                      }}
+                      sx={
+                        valueIndex === 0
+                          ? viewAllTablePrimaryCellSx
+                          : viewAllTableCellSx
+                      }
                     >
                       {value}
                     </TableCell>
@@ -90,20 +81,11 @@ export function ViewAllModal({ open, title, headers, rows, onClose }) {
         </TableContainer>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, pb: 3 }}>
+      <DialogActions sx={modalActionsSx}>
         <Button
           onClick={onClose}
           variant="contained"
-          sx={{
-            textTransform: "none",
-            borderRadius: "12px",
-            fontWeight: 700,
-            backgroundColor: "#6BA36E",
-            color: "#050505",
-            "&:hover": {
-              backgroundColor: "#7ab47d",
-            },
-          }}
+          sx={viewAllCloseButtonSx}
         >
           Close
         </Button>
