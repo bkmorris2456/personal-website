@@ -14,7 +14,7 @@ import {
   contactSectionSx,
   sectionTitleSx,
   contactFormWrapperSx,
-} from "../../styles/homeStyles.js";
+} from "./styles/homeStyles.js";
 
 function Home({ toggleTheme, mode }) {
   return (

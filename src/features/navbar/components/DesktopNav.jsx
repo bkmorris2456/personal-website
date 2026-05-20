@@ -6,7 +6,7 @@ import {
   desktopNavSx,
   desktopNavLinkStyle,
   desktopNavActiveStyle,
-} from "../../../styles/navbarStyles";
+} from "../styles/navbarStyles";
 
 function DesktopNav({ sx }) {
   return (

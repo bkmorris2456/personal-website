@@ -26,7 +26,7 @@ import {
   mobileContactTextSx,
   mobileContactPhoneSx,
   externalLinkStyle,
-} from "../../../styles/navbarStyles";
+} from "../styles/navbarStyles";
 
 function MobileNavMenu({ anchorEl, open, onClose }) {
   const [showContactInfo, setShowContactInfo] = useState(false);

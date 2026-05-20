@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard";
 import { getProjects } from "../../../../firebase/firestoreService";
-import { projectTabsWrapperSx } from "../../../../styles/projectStyles";
+import { projectTabsWrapperSx } from "../../styles/projectStyles";
 
 import roomaryImage from "../../../../assets/images/roomary-logo.webp";
 import moneyMovesImage from "../../../../assets/images/money-moves-demo.webp";

@@ -11,7 +11,7 @@ import {
   projectCardSx,
   projectImageSx,
   projectDescriptionSx,
-} from "../../../../styles/projectStyles";
+} from "../../styles/projectStyles";
 
 const ProjectCard = ({
   image,

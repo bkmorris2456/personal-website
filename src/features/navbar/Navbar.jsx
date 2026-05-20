@@ -12,7 +12,7 @@ import {
   getFrostedGlassBoxSx,
   mobileMenuButtonSx,
   themeToggleButtonSx,
-} from "../../styles/navbarStyles.js";
+} from "./styles/navbarStyles.js";
 
 function Navbar({ toggleTheme, mode }) {
   const [scrolled, setScrolled] = React.useState(false);

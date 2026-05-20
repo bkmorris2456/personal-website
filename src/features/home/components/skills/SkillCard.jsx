@@ -5,7 +5,7 @@ import {
   skillIconSx,
   skillContentSx,
   skillTitleSx,
-} from "../../../../styles/skillsStyles";
+} from "../../styles/skillsStyles";
 
 const SkillCard = ({ name, icon }) => {
   return (

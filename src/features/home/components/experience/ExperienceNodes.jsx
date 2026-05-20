@@ -13,7 +13,7 @@ import {
   experienceMetaSx,
   experienceDateSx,
   experienceDescriptionSx,
-} from "../../../../styles/experienceStyles";
+} from "../../styles/experienceStyles";
 
 export default function ExperienceNodes({ id }) {
   const [positions, setPositions] = useState([]);

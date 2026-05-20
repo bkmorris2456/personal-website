@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Container } from "@mui/material";
 import SkillCard from "./SkillCard";
-import { skillsContainerSx, skillsGridSx } from "../../../../styles/skillsStyles";
+import { skillsContainerSx, skillsGridSx } from "../../styles/skillsStyles";
 
 const SkillsSection = ({ skills }) => {
   return (
