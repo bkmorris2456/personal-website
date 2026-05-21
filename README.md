@@ -1,9 +1,9 @@
-# 🧑‍💻 Blake's Portfolio
+# 🧑‍💻 My Personal Portfolio
 
-Welcome to my personal portfolio website!  
-This site showcases my background, technical skills, and projects I've built as a software developer.
+Welcome to my website!  
+This site showcases my background, technical skills, projects, and my journey towards becoming better as a software developer!
 
-👉 **Live Site:** [portfolio website](https://bkmorris2456.github.io/personal-website/)
+👉 **Visit Portfolio Here:** [portfolio website](https://bkmorris2456.github.io/personal-website/)
 
 ## ✨ Features
 
