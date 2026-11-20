@@ -37,6 +37,19 @@ export const desktopNavSx = {
   display: { xs: "none", md: "flex" },
 };
 
+export const toolbarActionsSx = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: { xs: "100%", md: "auto" },
+  gap: 2,
+};
+
+export const desktopSocialLinksSx = {
+  ...desktopNavSx,
+  gap: 2,
+};
+
 export const desktopNavLinkStyle = {
   cursor: "pointer",
   textDecoration: "none",

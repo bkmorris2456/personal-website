@@ -1,14 +1,18 @@
 import * as React from "react";
-import { AppBar, Toolbar, IconButton } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 
 import DesktopNav from "./components/DesktopNav";
 import MobileNavMenu from "./components/MobileNavMenu.jsx";
+import { externalNavItems } from "./constants/navItems";
 import {
   appBarSx,
   toolbarSx,
+  toolbarActionsSx,
+  desktopSocialLinksSx,
+  desktopNavLinkStyle,
   getFrostedGlassBoxSx,
   mobileMenuButtonSx,
   themeToggleButtonSx,
@@ -42,22 +46,37 @@ function Navbar({ toggleTheme, mode }) {
         <Toolbar sx={toolbarSx}>
           <DesktopNav sx={getFrostedGlassBoxSx(scrolled)} />
 
-          {/* separate theme toggle */}
-          <IconButton
-            onClick={toggleTheme}
-            sx={themeToggleButtonSx}
-            aria-label="Toggle light and dark mode"
-          >
-            {mode === "dark" ? (
-              <DarkModeRoundedIcon />
-            ) : (
-              <LightModeRoundedIcon />
-            )}
-          </IconButton>
+          <Box sx={toolbarActionsSx}>
+            <Box sx={desktopSocialLinksSx}>
+              {externalNavItems.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={desktopNavLinkStyle}
+                >
+                  {label}
+                </a>
+              ))}
+            </Box>
 
-          <IconButton sx={mobileMenuButtonSx} onClick={handleMenuOpen}>
-            <MenuIcon />
-          </IconButton>
+            <IconButton
+              onClick={toggleTheme}
+              sx={themeToggleButtonSx}
+              aria-label="Toggle light and dark mode"
+            >
+              {mode === "dark" ? (
+                <DarkModeRoundedIcon />
+              ) : (
+                <LightModeRoundedIcon />
+              )}
+            </IconButton>
+
+            <IconButton sx={mobileMenuButtonSx} onClick={handleMenuOpen}>
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
 

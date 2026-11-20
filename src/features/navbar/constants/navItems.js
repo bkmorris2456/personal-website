@@ -1,5 +1,4 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import ComputerIcon from "@mui/icons-material/Computer";
 
 export const sectionNavItems = [
   { label: "Home", to: "home" },
@@ -18,17 +17,12 @@ export const mobileSectionNavItems = [
 export const externalNavItems = [
   {
     label: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/bkmorris2456",
     Icon: GitHub,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/",
+    href: "https://www.linkedin.com/in/bkmorris2024/",
     Icon: LinkedIn,
-  },
-  {
-    label: "Leetcode",
-    href: "https://leetcode.com/u/bmorris56/",
-    Icon: ComputerIcon,
   },
 ];
