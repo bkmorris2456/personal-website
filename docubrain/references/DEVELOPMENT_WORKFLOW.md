@@ -1,7 +1,7 @@
 ---
 title: Development workflow
 created: 2026-11-19T23:27:18-05:00
-last_updated: 2026-11-19T23:27:18-05:00
+last_updated: 2026-11-20T14:28:28-05:00
 status: active
 ---
 
@@ -11,4 +11,4 @@ status: active
 
 [Package scripts](../../package.json) configure `npm run deploy` to run the build and publish dist using gh-pages. GitHub Pages publication settings and currently deployed revision are unknown. Running deploy is a publication operation.
 
-There is no npm test script. [Legacy test](../../src/App.test.js) and [setup](../../src/setupTests.js) remain, and no current runner is configured. See the [session index](../sessions/SESSION_INDEX.md) for actual validation results. Live Firebase and EmailJS workflows require authorized service configuration. Repository-local emulator and staging procedures were not found.
+Run `npm test` (Vitest, nine route/data contract tests), `npm run typecheck` (TypeScript noEmit/allowJs; checkJs disabled), and `npm run lint` (ESLint syntax/core correctness rules) before `npm run build`. The JavaScript application has no strict type-checking coverage. See the [security ledger](../development/DEPENDABOT_REMEDIATION.md) for batch validation and limitations. Live Firebase and EmailJS workflows require authorized service configuration. Repository-local emulator and staging procedures were not found.
