@@ -7,7 +7,7 @@ export default function HeroSection() {
     <section className="u-hero" id="home" tabIndex={-1} aria-labelledby="overview-heading">
       <div className="u-entry">
         <h1 id="overview-heading">Blake Morris</h1>
-        <p className="u-hero-role">Software Developer</p>
+        <p className="u-hero-role">Developer. Thinker. Builder.</p>
         <p className="u-hero-intro">
           I design and build practical applications that solve everyday problems.
         </p>
