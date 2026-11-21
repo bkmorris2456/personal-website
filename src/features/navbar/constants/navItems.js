@@ -1,7 +1,9 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
+export const overviewSectionId = "overview";
+
 export const sectionNavItems = [
-  { label: "Overview", to: "home" },
+  { label: "Overview", to: overviewSectionId },
   { label: "Experience", to: "experience" },
   { label: "Projects", to: "projects" },
   { label: "About", to: "about" },

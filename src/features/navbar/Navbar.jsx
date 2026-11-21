@@ -2,10 +2,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Close, DarkModeRounded, DashboardOutlined, LightModeRounded, Menu } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/ursus-logo.png";
-import { externalNavItems, sectionNavItems, sectionPath } from "./constants/navItems";
+import { externalNavItems, overviewSectionId, sectionNavItems, sectionPath } from "./constants/navItems";
 
 function useActiveSection() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState(overviewSectionId);
 
   useEffect(() => {
     let frame;
@@ -17,7 +17,7 @@ function useActiveSection() {
       const visible = sections.findLast((section) => section.getBoundingClientRect().top <= boundary);
       const atBottom = window.scrollY > 0 &&
         window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-      setActive(atBottom ? "contact" : visible?.id ?? "home");
+      setActive(atBottom ? "contact" : visible?.id ?? overviewSectionId);
     };
     const schedule = () => {
       cancelAnimationFrame(frame);
@@ -110,9 +110,9 @@ export default function Navbar({ toggleTheme, mode }) {
 
   return (
     <header className="u-header" ref={header}>
-      <Link className="u-button u-skip" to={sectionPath("home")}>Skip to content</Link>
+      <Link className="u-button u-skip" to={sectionPath(overviewSectionId)}>Skip to content</Link>
       <div className="u-container u-bar">
-        <Link className="u-brand" to={sectionPath("home")} aria-label="Ursus overview">
+        <Link className="u-brand" to={sectionPath(overviewSectionId)} aria-label="Ursus overview">
           <img src={logo} alt="" width="48" height="46" />
           <span>URSUS</span>
         </Link>

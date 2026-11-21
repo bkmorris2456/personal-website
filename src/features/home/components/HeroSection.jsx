@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/ursus-logo.png";
-import { sectionPath } from "../../navbar/constants/navItems";
+import { overviewSectionId, sectionPath } from "../../navbar/constants/navItems";
 
 export default function HeroSection() {
   return (
-    <section className="u-hero" id="home" tabIndex={-1} aria-labelledby="overview-heading">
+    <section className="u-hero" id={overviewSectionId} tabIndex={-1} aria-labelledby="overview-heading">
       <div className="u-entry">
         <h1 id="overview-heading">Blake Morris</h1>
         <p className="u-hero-role">Developer. Thinker. Builder.</p>
