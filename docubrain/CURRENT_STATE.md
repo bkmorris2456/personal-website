@@ -1,7 +1,7 @@
 ---
 title: Current state
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-20T14:28:28-05:00
+last_updated: 2026-11-20T19:37:59-05:00
 status: active
 ---
 
@@ -24,6 +24,8 @@ No committed application roadmap or active implementation effort was established
 The deployed Pages revision, Firestore rules, live document shapes, Google provider settings and claim administration, and EmailJS delivery are unknown. These limit conclusions about production behavior. No checked-in emulator or staging process was found.
 
 ## Local baseline
+
+**Project edit validation, 2026-11-20.** The Tech Stack editor supports legacy strings and arrays, and project updates include only changed fields. The current working tree passed 24 tests, lint and a production build. See the [implementation session](sessions/2026-11-20_19-36-development-session.md).
 
 **Verified 2026-11-20.** Clean `npm ci --fetch-retries=0` succeeds on Node 24.21.0/npm 12.2.1. All 56 original Dependabot advisory ranges are eliminated from the local lockfile (2 critical, 21 high, 30 medium, 3 low), and npm audit reports zero vulnerabilities. GitHub closure awaits an approved push and rescan. See the [complete ledger](development/DEPENDABOT_REMEDIATION.md).
 

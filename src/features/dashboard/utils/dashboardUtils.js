@@ -58,6 +58,16 @@ export function toTimestamp(dateString) {
   return Timestamp.fromDate(date);
 }
 
+function getStackText(item) {
+  const stack = [item.stack, item.techStack, item.technologies].find(
+    (value) => typeof value === "string" || Array.isArray(value),
+  );
+
+  return Array.isArray(stack)
+    ? stack.filter((entry) => typeof entry === "string").join(", ")
+    : stack ?? "";
+}
+
 export function getEditFormValues(entity, item) {
   switch (entity) {
     case "position":
@@ -75,7 +85,7 @@ export function getEditFormValues(entity, item) {
     case "project":
       return {
         title: item.title || item.project || "",
-        stack: item.stack || item.techStack || item.technologies || "",
+        stack: getStackText(item),
         description: Array.isArray(item.description)
           ? item.description.join("\n")
           : item.description || "",

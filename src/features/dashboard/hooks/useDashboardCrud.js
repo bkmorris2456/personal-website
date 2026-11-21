@@ -9,7 +9,11 @@ import {
 
 import { db } from "../../../firebase/firebase";
 import { collectionMap } from "../config/dashboardConfig";
-import { buildPayload, validateForm } from "../utils/dashboardUtils";
+import {
+  buildPayload,
+  getEditFormValues,
+  validateForm,
+} from "../utils/dashboardUtils";
 
 export function useDashboardCrud({
   modalState,
@@ -56,7 +60,15 @@ export function useDashboardCrud({
       if (mode === "add") {
         await addDoc(collection(db, collectionMap[entity]), payload);
       } else if (mode === "edit" && selectedItem?.id) {
-        await updateDoc(doc(db, collectionMap[entity], selectedItem.id), payload);
+        if (entity === "project") {
+          const initialValues = getEditFormValues(entity, selectedItem);
+          for (const field of Object.keys(payload)) {
+            if (formState[field] === initialValues[field]) delete payload[field];
+          }
+        }
+        if (Object.keys(payload).length > 0) {
+          await updateDoc(doc(db, collectionMap[entity], selectedItem.id), payload);
+        }
       }
 
       await fetchAllData();
