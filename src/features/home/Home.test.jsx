@@ -92,8 +92,9 @@ test("Firestore projects render links and technology tags from both supported sh
   const first = (await screen.findByRole("heading", { name: "First test project" })).closest("article");
   expect(within(first).getAllByRole("listitem")).toHaveLength(2);
   expect(within(first).getByRole("link", { name: "GitHub" })).toHaveAttribute("href", "https://example.com/code");
-  expect(screen.getByText("Vite")).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Demo" })).toHaveAttribute("href", "https://example.com/demo");
+  const second = screen.getByRole("heading", { name: "Second test project" }).closest("article");
+  expect(within(second).getByText("Vite")).toBeInTheDocument();
+  expect(within(second).getByRole("link", { name: "Demo" })).toHaveAttribute("href", "https://example.com/demo");
   expect(await screen.findByText("Unable to load positions right now.")).toBeInTheDocument();
 });
 

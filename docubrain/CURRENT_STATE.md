@@ -1,7 +1,7 @@
 ---
 title: Current state
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-20T21:04:19-05:00
+last_updated: 2026-11-21T08:05:00-05:00
 status: active
 ---
 
@@ -9,7 +9,7 @@ status: active
 
 ## Verified in the repository
 
-- Public homepage with responsive navigation, persisted light/dark theme, experience and project reads, static skills, and EmailJS contact form.
+- Public homepage with responsive navigation, persisted light/dark theme, experience and project reads, a categorized Technologies Used section backed by bundled data, and EmailJS contact form.
 - Google sign-in and admin-claim handling. Dashboard counts, tables, pagination, view-all and Firestore create, edit and delete paths exist.
 - The Vite build and GitHub Pages publication commands are configured. The latest application or script commit found was 2c57d8e at 2026-05-19T22:16:49-04:00. Starting HEAD was 0403faf, a README update dated 2026-05-20T22:15:08-04:00. The latest verified work is [dependency security remediation](sessions/2026-11-20_14-14-development-session.md), pending review without a push.
 

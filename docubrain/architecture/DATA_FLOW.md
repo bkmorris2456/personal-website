@@ -1,13 +1,13 @@
 ---
 title: Data flow and document shapes
 created: 2026-11-19T23:27:18-05:00
-last_updated: 2026-11-20T22:30:20-05:00
+last_updated: 2026-11-21T08:05:00-05:00
 status: active
 ---
 
 # Data flow and document shapes
 
-**Verified.** [Shared readers](../../src/firebase/firestoreService.js) use one-shot unfiltered Firestore collection reads and return document IDs with fields. Experience and Projects fetch independently at mount. Skills renders a bundled constant. Dashboard reads all collections together, derives counts and table rows, and refreshes after a mutation. Google sign-in feeds an auth observer, which refreshes token claims and supplies state to login and the available guard. Contact sends the form directly to EmailJS.
+**Verified.** [Shared readers](../../src/firebase/firestoreService.js) use one-shot unfiltered Firestore collection reads and return document IDs with fields. Experience and Projects fetch independently at mount. Technologies Used renders four categories from bundled data. Dashboard reads all collections together, derives counts and table rows, and refreshes after a mutation. Google sign-in feeds an auth observer, which refreshes token claims and supplies state to login and the available guard. Contact sends the form directly to EmailJS.
 
 | Collection | Dashboard payload | Reader details |
 | --- | --- | --- |

@@ -8,6 +8,7 @@ export default function ExperienceNodes({ id }) {
   return (
     <section className="u-section" id={id} tabIndex={-1} aria-labelledby="experience-heading">
       <h2 className="u-section-title" id="experience-heading">Experience</h2>
+      <p className="u-muted u-section-description">My professional experience, both past and present.</p>
       <UrsusStatus state={state} subject="positions" />
       {state === "ready" && (
         <div className="u-experience">

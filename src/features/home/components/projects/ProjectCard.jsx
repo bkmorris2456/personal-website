@@ -16,11 +16,6 @@ export default function ProjectCard({ project }) {
     <article className="u-card u-project">
       <h3>{title || project.project}</h3>
       {description && <p className="u-muted">{Array.isArray(description) ? description.join(" ") : description}</p>}
-      {tags.length > 0 && (
-        <ul className="u-tags" aria-label="Technologies">
-          {tags.map((tag) => <li className="u-tag" key={tag}>{tag}</li>)}
-        </ul>
-      )}
       {(githubLink || demoLink) && (
         <div className="u-actions">
           {githubLink && (
@@ -34,6 +29,11 @@ export default function ProjectCard({ project }) {
             </a>
           )}
         </div>
+      )}
+      {tags.length > 0 && (
+        <ul className="u-tags" aria-label="Technologies">
+          {tags.map((tag) => <li className="u-tag" key={tag}>{tag}</li>)}
+        </ul>
       )}
     </article>
   );

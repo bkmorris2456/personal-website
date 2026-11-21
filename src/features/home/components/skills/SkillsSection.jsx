@@ -1,9 +1,18 @@
-import SkillCard from "./SkillCard";
+import { technologyCategories } from "../../constants/skills.jsx";
 
-export default function SkillsSection({ skills }) {
+export default function SkillsSection() {
   return (
-    <ul className="u-skills">
-      {skills.map((skill) => <SkillCard key={skill.name} {...skill} />)}
-    </ul>
+    <div className="u-skills">
+      {technologyCategories.map(({ title, technologies }) => (
+        <div className="u-card u-skill-category" key={title}>
+          <h3>{title}</h3>
+          <ul className="u-tags">
+            {technologies.map((technology) => (
+              <li className="u-tag" key={technology}>{technology}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }

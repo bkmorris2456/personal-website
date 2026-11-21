@@ -6,7 +6,6 @@ import ContactForm from "./components/contact/ContactForm.jsx";
 import SkillsSection from "./components/skills/SkillsSection.jsx";
 import ProjectTabs from "./components/projects/ProjectTabs.jsx";
 import HeroSection from "./components/HeroSection.jsx";
-import { skills } from "./constants/skills.jsx";
 import portrait from "../../assets/images/linkedin-headshot.webp";
 import "../brand/ursus.css";
 
@@ -53,13 +52,13 @@ function Home({ toggleTheme, mode }) {
       <main className="u-container u-main">
         <HeroSection />
 
+        <ExperienceNodes id="experience" />
+
         <section className="u-section" id="projects" tabIndex={-1} aria-labelledby="projects-heading">
           <h2 className="u-section-title" id="projects-heading">Featured Projects</h2>
-          <p className="u-muted u-section-description">A selection of my development work and personal projects.</p>
+          <p className="u-muted u-section-description">A collection of the software projects that I've worked on.</p>
           <ProjectTabs />
         </section>
-
-        <ExperienceNodes id="experience" />
 
         <section className="u-section" id="about" tabIndex={-1} aria-labelledby="about-heading">
           <h2 className="u-section-title" id="about-heading">About</h2>
@@ -67,16 +66,28 @@ function Home({ toggleTheme, mode }) {
             <div className="u-about">
               <img src={portrait} alt="Blake Morris" width="1428" height="2016" loading="lazy" />
               <div className="u-muted">
-                <p>I build applications that make everyday tasks easier. I enjoy tackling problems that push me to learn and improve as a developer.</p>
-                <p>My experience includes studying at Michigan State University, working with Ally Financial, and developing software for clients. Client projects give me opportunities to explore new technologies while solving practical problems. Outside that work, I spend time on personal projects, study data structures and algorithms, and pursue my hobbies.</p>
+                <p>
+                  I'm a software developer who enjoys building practical, reliable applications that solve real problems. I approach development with an emphasis on thoughtful design, maintainability, 
+                  and continuous improvement. Whether I'm developing something from scratch or improving an existing system, I enjoy understanding how things work and finding ways to make them better and more
+                  efficient.
+                </p>
+                <p>
+                  My background includes a degree in Computer Science from Michigan State University (Go Green!), experience working with professional companies like Ally Financial and Results at Hand Software,
+                  and experience building and maintaining mobile and web applications for personal use and for clients. These experiences have given me opportunities to work across different technologies, 
+                  troubleshoot complex issues, and contribute to software throughout its development lifecycle.
+                </p>
+                <p>
+                  Outside of my professional work, I spend time exploring new technologies, building more personal tools and projects to help with my day-to-day, and expanding my knowledge of system design and 
+                  software engineering. When I am not working on software, I primarily enjoy my hobbies of gaming, weightlifting, running, and custom mechanical keyboards!
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         <section className="u-section" id="skills" tabIndex={-1} aria-labelledby="skills-heading">
-          <h2 className="u-section-title" id="skills-heading">Skills</h2>
-          <SkillsSection skills={skills} />
+          <h2 className="u-section-title" id="skills-heading">Technologies Used</h2>
+          <SkillsSection />
         </section>
 
         <section className="u-section u-contact" id="contact" tabIndex={-1} aria-labelledby="contact-heading">
