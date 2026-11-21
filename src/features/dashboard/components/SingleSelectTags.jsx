@@ -24,6 +24,7 @@ export function SingleSelectTags({
           <Chip
             key={option}
             label={option}
+            aria-pressed={selected}
             onClick={() => onChange(option)}
             sx={selectTagChipSx(selected)}
           />

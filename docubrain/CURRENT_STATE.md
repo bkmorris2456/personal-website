@@ -1,7 +1,7 @@
 ---
 title: Current state
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-20T19:37:59-05:00
+last_updated: 2026-11-20T21:04:19-05:00
 status: active
 ---
 
@@ -24,6 +24,10 @@ No committed application roadmap or active implementation effort was established
 The deployed Pages revision, Firestore rules, live document shapes, Google provider settings and claim administration, and EmailJS delivery are unknown. These limit conclusions about production behavior. No checked-in emulator or staging process was found.
 
 ## Local baseline
+
+**Ursus refinement pass 1, 2026-11-20.** Home and dashboard are branded in both themes. One public admin entry remains. All 35 tests and local checks passed. See the [refinement section](development/URSUS_BRAND_REDESIGN.md#refinement-pass-1).
+
+**Ursus redesign, 2026-11-20.** Public Home and Login use the Ursus design system. The dashboard uses its existing theme and routes. All 29 tests, lint, the compiler and an isolated build passed. See the [redesign record](development/URSUS_BRAND_REDESIGN.md) for Chromium verification and provider limits.
 
 **Project edit validation, 2026-11-20.** The Tech Stack editor supports legacy strings and arrays, and project updates include only changed fields. The current working tree passed 24 tests, lint and a production build. See the [implementation session](sessions/2026-11-20_19-36-development-session.md).
 

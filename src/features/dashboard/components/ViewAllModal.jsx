@@ -25,9 +25,12 @@ import {
   viewAllCloseButtonSx,
 } from "../styles/dashboardStyles";
 
-export function ViewAllModal({ open, title, headers, rows, onClose }) {
+export function ViewAllModal({ open, title, headers, rows, onClose, mode, transitionDuration }) {
   return (
     <Dialog
+      className="ursus-dialog"
+      data-mode={mode}
+      transitionDuration={transitionDuration}
       open={open}
       onClose={onClose}
       fullWidth
@@ -60,6 +63,9 @@ export function ViewAllModal({ open, title, headers, rows, onClose }) {
             </TableHead>
 
             <TableBody>
+              {rows.length === 0 && (
+                <TableRow><TableCell colSpan={headers.length} sx={viewAllTableCellSx}>No records yet.</TableCell></TableRow>
+              )}
               {rows.map((row, index) => (
                 <TableRow key={row.id ?? index}>
                   {row.columns.map((value, valueIndex) => (

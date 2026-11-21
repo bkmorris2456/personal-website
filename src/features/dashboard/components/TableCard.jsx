@@ -28,12 +28,13 @@ import {
   tableColumnHeaderSx,
   tableRowPrimaryTextSx,
   tableRowTextSx,
+  tableStatusSx,
   tableIconButtonSx,
   tableFooterButtonSx,
   tablePaginationSx,
 } from "../styles/dashboardStyles";
 
-const ACTIONS_WIDTH = "88px";
+const ACTIONS_WIDTH = "92px";
 
 export function TableCard({
   title,
@@ -64,7 +65,7 @@ export function TableCard({
 
   const tableCellSx = {
     minWidth: 0,
-    pr: 2,
+    pr: { xs: 0.75, sm: 2 },
     display: "flex",
     justifyContent: "flex-start",
     textAlign: "left",
@@ -76,7 +77,7 @@ export function TableCard({
         {/* Top Header */}
         <Box sx={tableHeaderContainerSx}>
           <Box>
-            <Typography sx={tableTitleSx}>
+            <Typography component="h2" sx={tableTitleSx}>
               {title}
             </Typography>
 
@@ -91,7 +92,7 @@ export function TableCard({
             startIcon={<AddRoundedIcon />}
             onClick={onAdd}
             disabled={addDisabled}
-            sx={tableAddButtonSx(addDisabled)}
+            sx={tableAddButtonSx}
           >
             Add
           </Button>
@@ -102,7 +103,7 @@ export function TableCard({
         {/* Column Headers */}
         <Box
           sx={{
-            px: 3,
+            px: { xs: 1.5, sm: 2 },
             pt: 2,
             pb: 1.5,
             flexShrink: 0,
@@ -134,14 +135,14 @@ export function TableCard({
         {/* Scrollable Body */}
         <Box
           sx={{
-            px: 3,
+            px: { xs: 1.5, sm: 2 },
             pb: 2,
             flex: 1,
             minHeight: 0,
             overflowY: "auto",
             overflowX: "hidden",
             scrollbarWidth: "thin",
-            scrollbarColor: "rgba(255,255,255,0.2) transparent",
+            scrollbarColor: "var(--input-border) transparent",
             "&::-webkit-scrollbar": {
               width: "8px",
             },
@@ -149,18 +150,18 @@ export function TableCard({
               background: "transparent",
             },
             "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "rgba(255,255,255,0.16)",
+              backgroundColor: "var(--input-border)",
               borderRadius: "999px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              backgroundColor: "rgba(255,255,255,0.24)",
+              backgroundColor: "var(--muted)",
             },
           }}
         >
           {rows.length === 0 ? (
             <Typography
               sx={{
-                color: "rgba(255,255,255,0.45)",
+                color: "var(--muted)",
                 py: 2,
               }}
             >
@@ -186,7 +187,9 @@ export function TableCard({
                         sx={
                           valueIndex === 0
                             ? tableRowPrimaryTextSx
-                            : tableRowTextSx
+                            : dataHeaders[valueIndex] === "STATUS" && value
+                              ? tableStatusSx
+                              : tableRowTextSx
                         }
                       >
                         {value}
@@ -206,6 +209,7 @@ export function TableCard({
                       <IconButton
                         size="small"
                         sx={tableIconButtonSx}
+                        aria-label={`Edit ${row.columns[0]}`}
                         onClick={() => onEdit?.(row.raw)}
                         disabled={!onEdit}
                       >
@@ -215,6 +219,7 @@ export function TableCard({
                       <IconButton
                         size="small"
                         sx={tableIconButtonSx}
+                        aria-label={`Delete ${row.columns[0]}`}
                         onClick={() => onDelete?.(row.raw)}
                         disabled={!onDelete}
                       >
@@ -227,7 +232,7 @@ export function TableCard({
                 {index !== paginatedRows.length - 1 && (
                   <Divider
                     sx={{
-                      borderColor: "rgba(255,255,255,0.05)",
+                      borderColor: "var(--border)",
                     }}
                   />
                 )}
@@ -241,13 +246,13 @@ export function TableCard({
         {/* Footer */}
         <Box
           sx={{
-            px: 3,
+            px: { xs: 1.5, sm: 2 },
             py: 2,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             gap: 2,
-            color: "#6BA36E",
+            flexWrap: "wrap",
             flexShrink: 0,
           }}
         >

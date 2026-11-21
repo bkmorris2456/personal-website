@@ -1,52 +1,37 @@
-import React, { useRef } from "react";
+import { useState } from "react";
 import emailjs from "emailjs-com";
-import { TextField, Button, Container, Box } from "@mui/material";
-import { contactFormContainerSx, contactFormSx } from "../../styles/contactStyles";
+import { UrsusLoader } from "../../../brand/UrsusStatus";
 
-const ContactForm = () => {
-  const form = useRef();
+export default function ContactForm() {
+  const [state, setState] = useState("idle");
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
+  const sendEmail = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setState("loading");
+    try {
+      await emailjs.sendForm(
         "service_tuzj8o8",
         "template_2t3vmyq",
-        form.current,
+        form,
         "zMnzBWSWnWqVVBdTV"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          e.target.reset();
-        },
-        (error) => {
-          console.log(error.text);
-          alert("Something went wrong. Please try again.");
-        }
       );
+      form.reset();
+      setState("sent");
+    } catch {
+      setState("error");
+    }
   };
 
   return (
-    <Container maxWidth="md" sx={contactFormContainerSx}>
-      <Box component="form" ref={form} onSubmit={sendEmail} sx={contactFormSx}>
-        <TextField name="name" label="Your Name" required fullWidth />
-        <TextField name="email" label="Your Email" required fullWidth />
-        <TextField
-          name="message"
-          label="Your Message"
-          multiline
-          rows={8}
-          required
-          fullWidth
-        />
-        <Button variant="contained" type="submit" color="primary">
-          Send Message
-        </Button>
-      </Box>
-    </Container>
+    <form className="u-card u-form" onSubmit={sendEmail}>
+      <label>Your Name<input name="name" autoComplete="name" required /></label>
+      <label>Your Email<input name="email" type="email" autoComplete="email" required /></label>
+      <label>Your Message<textarea name="message" rows="5" required /></label>
+      <button className="u-button u-primary" type="submit" disabled={state === "loading"}>Send Message</button>
+      {state === "loading" && <p role="status" className="u-status u-muted"><UrsusLoader /> Sending message…</p>}
+      {state === "sent" && <p role="status" className="u-muted">Message sent.</p>}
+      {state === "error" && <p role="alert" className="u-error">Something went wrong. Please try again.</p>}
+    </form>
   );
-};
-
-export default ContactForm;
+}

@@ -1,0 +1,173 @@
+.ursus, .ursus-dialog {
+  --obsidian: #0b0f0e;
+  --charcoal: #151c19;
+  --graphite: #222b27;
+  --nordic: #527d65;
+  --sage: #80a98b;
+  --silver: #d6d9d5;
+  --text: #e9ede9;
+  --muted: #9aa6a0;
+  --border: #35433b;
+  --input-border: #65776c;
+  --action-text: #fff;
+  --on-sage: #0b0f0e;
+  --accent-text: var(--sage);
+  --focus: var(--sage);
+  --radius: .75rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --header: 4.5rem;
+  --gap: clamp(1rem, 2vw, 1.5rem);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --quick: 150ms;
+  --danger: #ffb4ad;
+  --danger-bg: #351d1d;
+  --card-motion: 180ms;
+  --indicator-motion: 220ms;
+  --entry-motion: 240ms;
+  color-scheme: dark;
+}
+.ursus {
+  min-height: 100vh;
+  background: var(--obsidian);
+  color: var(--text);
+  font: 400 1rem/1.55 Satoshi, system-ui, sans-serif;
+  text-align: left;
+}
+.ursus[data-mode="light"], .ursus-dialog[data-mode="light"] {
+  --obsidian: #f2f5f1;
+  --charcoal: #fff;
+  --graphite: #e3ebe4;
+  --silver: #35433b;
+  --text: #18231d;
+  --muted: #475b50;
+  --border: #bac8be;
+  --accent-text: #315a44;
+  --focus: #315a44;
+  --danger: #8f2724;
+  --danger-bg: #fcebea;
+  color-scheme: light;
+}
+.ursus .u-container { width: min(100%, 84rem); margin-inline: auto; padding-inline: var(--gutter); }
+.ursus h1, .ursus h2, .ursus h3, .ursus p { margin: 0; }
+.ursus h1, .ursus h2, .ursus h3 { font-family: ClashDisplay, Satoshi, sans-serif; font-weight: 700; line-height: 1.12; }
+.ursus h2 { font-size: clamp(1.8rem, 3vw, 2.45rem); }
+.ursus h3 { font-size: 1.32rem; }
+.ursus a { color: inherit; }
+.ursus :focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.ursus [tabindex="-1"]:focus { outline: none; }
+.ursus .u-muted { color: var(--muted); }
+.ursus .u-entry { animation: ursus-enter var(--entry-motion) var(--ease) both; }
+@keyframes ursus-enter { from { opacity: .45; transform: translateY(5px); } }
+.ursus .u-section { padding-block: clamp(1.8rem, 4vw, 3.6rem); border-top: 1px solid var(--border); }
+.ursus [id][tabindex="-1"] { scroll-margin-top: calc(var(--header) + 1rem); }
+.ursus .u-section-title { text-align: center; margin-block-end: var(--gap); }
+.ursus .u-section-description { margin-block-end: var(--gap); }
+.ursus .u-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; }
+.ursus .u-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 2.85rem; padding: .55rem 1.1rem; border: 1px solid var(--input-border);
+  border-radius: .5rem; background: transparent; color: var(--text);
+  font: 700 .9375rem/1.3 Satoshi, system-ui, sans-serif; text-align: center;
+  text-decoration: none; cursor: pointer;
+  transition: background var(--quick) var(--ease), border-color var(--quick) var(--ease), color var(--quick) var(--ease);
+}
+.ursus .u-button:hover { background: var(--graphite); border-color: var(--accent-text); }
+.ursus .u-primary { background: var(--nordic); border-color: var(--nordic); color: var(--action-text); }
+.ursus .u-primary:hover { background: var(--sage); border-color: var(--sage); color: var(--on-sage); }
+.ursus .u-button:active { background: var(--border); color: var(--text); }
+.ursus .u-button:disabled { opacity: .55; cursor: default; }
+.ursus .u-card { min-width: 0; padding: var(--gap); border: 1px solid var(--border); border-radius: var(--radius); background: var(--charcoal); overflow-wrap: anywhere; }
+.ursus .u-project {
+  display: flex; flex-direction: column; gap: .75rem;
+  transition: border-color var(--card-motion) var(--ease), background var(--card-motion) var(--ease), transform var(--card-motion) var(--ease);
+}
+.ursus .u-project:focus-within { border-color: var(--accent-text); }
+@media (hover: hover) {
+  .ursus .u-project:hover { background: var(--graphite); border-color: var(--nordic); transform: translateY(-2px); }
+}
+.ursus .u-project:active { transform: translateY(0); }
+.ursus .u-project:first-child { border-inline-start: 3px solid var(--nordic); }
+.ursus .u-tags { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0; margin: 0; list-style: none; }
+.ursus .u-tag { padding: .15rem .6rem; border-radius: 999px; background: var(--graphite); color: var(--text); font-size: .8125rem; }
+.ursus .u-project .u-actions { margin-top: auto; padding-top: .15rem; }
+.ursus .u-project-link { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.75rem; font-size: .9rem; text-underline-offset: .22em; }
+.ursus .u-project-link:hover { color: var(--accent-text); }
+.ursus .u-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.ursus .u-experience { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.ursus .u-position { display: grid; align-content: start; gap: .5rem; }
+.ursus .u-position ul { margin: .25rem 0 0; padding-inline-start: 1.15rem; }
+.ursus .u-position li + li { margin-top: .35rem; }
+.ursus .u-skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr)); gap: .65rem; margin: 0; padding: 0; list-style: none; }
+.ursus .u-skill { display: flex; align-items: center; gap: .55rem; min-height: 3rem; padding: .55rem .75rem; font-size: .9375rem; overflow-wrap: anywhere; }
+.ursus .u-skill :is(i, svg) { font-size: 1.2rem; }
+.ursus .u-status { display: flex; align-items: center; gap: .65rem; min-height: 4.5rem; }
+.ursus .u-loader { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid var(--border); border-radius: 50%; position: relative; flex: none; }
+.ursus .u-loader::after { content: ""; position: absolute; inset: -1px; border: 1px solid transparent; border-top-color: var(--accent-text); border-radius: 50%; animation: ursus-spin 1s linear infinite; }
+.ursus .u-loader img { width: 80%; }
+@keyframes ursus-spin { to { transform: rotate(1turn); } }
+
+.ursus .u-header { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--border); background: var(--obsidian); }
+.ursus .u-bar { display: flex; align-items: center; min-height: var(--header); gap: clamp(.75rem, 2.5vw, 2.25rem); }
+.ursus .u-brand { display: inline-flex; align-items: center; gap: .45rem; flex: none; text-decoration: none; font-weight: 700; letter-spacing: .26em; color: var(--silver); }
+.ursus .u-brand img { width: 3rem; height: auto; }
+.ursus .u-nav { position: relative; display: flex; align-self: stretch; align-items: stretch; gap: .2rem; }
+.ursus .u-nav a { display: flex; align-items: center; padding: .4rem .55rem; color: var(--muted); font-size: .9rem; text-decoration: none; }
+.ursus .u-nav a:hover, .ursus .u-nav [aria-current] { color: var(--text); }
+.ursus .u-indicator { position: absolute; pointer-events: none; bottom: -1px; left: 0; height: 3px; width: 1px; border-radius: 999px; background: var(--accent-text); transform-origin: left; opacity: 0; transition: transform var(--indicator-motion) var(--ease), opacity var(--quick) var(--ease); }
+.ursus .u-header-actions { display: flex; align-items: center; gap: .2rem; margin-left: auto; }
+.ursus .u-icon { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; color: var(--silver); background: transparent; border: 1px solid transparent; border-radius: .5rem; cursor: pointer; transition: background var(--quick) var(--ease), color var(--quick) var(--ease); }
+.ursus .u-icon:hover { color: var(--text); background: var(--graphite); }
+.ursus .u-icon svg { width: 1.25rem; height: 1.25rem; }
+.ursus .u-menu-toggle, .ursus .u-mobile { display: none; }
+.ursus .u-skip { position: absolute; top: .5rem; left: var(--gutter); z-index: 1; }
+.ursus .u-skip:not(:focus) { clip-path: inset(50%); width: 1px; height: 1px; padding: 0; overflow: hidden; }
+
+.ursus .u-hero { display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: var(--gap); min-height: 24rem; padding-block: clamp(1.8rem, 3vw, 2.65rem); }
+.ursus .u-hero h1 { font-size: clamp(3rem, 6.5vw, 4.65rem); letter-spacing: -.025em; margin: 0 0 .4rem; }
+.ursus .u-hero-role { color: var(--silver); font-size: clamp(1.1rem, 2vw, 1.35rem); }
+.ursus .u-hero-intro { max-width: 46ch; margin-block: 1rem 1.35rem; color: var(--muted); font-size: 1.05rem; }
+.ursus .u-hero-mark { display: block; width: min(100%, 22rem); height: auto; margin-inline: auto; }
+.ursus[data-mode="light"] :is(.u-hero-mark, .u-brand img, .u-loader img) { filter: grayscale(1) contrast(4) invert(1); mix-blend-mode: multiply; opacity: 1; }
+.ursus .u-about-content { max-width: 56.25rem; margin-inline: auto; }
+.ursus .u-about { display: grid; grid-template-columns: minmax(8rem, 13rem) minmax(0, 1fr); align-items: center; gap: clamp(2.5rem, 4vw, 3rem); }
+.ursus .u-about img { width: 100%; height: auto; border-radius: var(--radius); }
+.ursus .u-about p + p { margin-top: .8rem; }
+.ursus .u-contact-content { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 43rem; margin-inline: auto; gap: var(--gap); }
+.ursus .u-contact-intro { text-align: center; }
+.ursus .u-contact address { color: var(--muted); font-style: normal; overflow-wrap: anywhere; }
+.ursus .u-contact address a:hover { color: var(--accent-text); }
+.ursus .u-form { display: grid; gap: 1rem; }
+.ursus .u-form label { display: grid; gap: .35rem; font-size: .9375rem; font-weight: 700; }
+.ursus .u-form :is(input, textarea) { min-width: 0; width: 100%; padding: .65rem .75rem; border: 1px solid var(--input-border); border-radius: .5rem; background: var(--obsidian); color: var(--text); font: inherit; font-weight: 400; }
+.ursus .u-form textarea { resize: vertical; }
+.ursus .u-form button { justify-self: start; }
+.ursus .u-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; padding-block: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .875rem; }
+.ursus .u-login { width: min(100%, 27rem); margin: clamp(2rem, 12vh, 8rem) auto 0; display: grid; gap: 1rem; }
+.ursus .u-login-brand { min-height: var(--header); }
+.ursus .u-login button { width: 100%; }
+.ursus .u-error { color: var(--text); border-inline-start: 2px solid var(--input-border); padding-inline-start: .65rem; }
+
+@media (max-width: 66rem) {
+  .ursus .u-menu-toggle { display: inline-grid; }
+  .ursus .u-nav, .ursus .u-desktop-action { display: none; }
+  .ursus .u-mobile:not([hidden]) { display: block; position: absolute; inset: 100% 0 auto; max-height: calc(100dvh - var(--header)); overflow: auto; border-bottom: 1px solid var(--border); background: var(--obsidian); }
+  .ursus .u-mobile nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2rem .65rem; padding-block: .65rem; }
+  .ursus .u-mobile a { display: flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding-inline: .55rem; border-radius: .45rem; text-decoration: none; }
+  .ursus .u-mobile a:hover, .ursus .u-mobile [aria-current] { background: var(--graphite); }
+  .ursus .u-mobile [aria-current] { border-inline-start: 2px solid var(--accent-text); }
+}
+@media (max-width: 56rem) {
+  .ursus .u-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 38rem) {
+  .ursus { --header: 3.75rem; }
+  .ursus .u-grid, .ursus .u-experience { grid-template-columns: minmax(0, 1fr); }
+  .ursus .u-hero { grid-template-columns: minmax(0, 1fr); min-height: auto; }
+  .ursus .u-hero-mark { grid-row: 1; justify-self: start; width: 7rem; margin: -1rem 0 -1rem -.65rem; }
+  .ursus .u-about { grid-template-columns: minmax(0, 1fr); gap: var(--gap); }
+  .ursus .u-about img { max-width: 9rem; justify-self: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ursus *, .ursus *::before, .ursus *::after { animation-duration: 0s !important; transition-duration: 0s !important; }
+  .ursus .u-project:hover { transform: none; }
+}

@@ -10,9 +10,11 @@ export function useDashboardData() {
   const [projects, setProjects] = useState([]);
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   const fetchAllData = async () => {
     setLoading(true);
+    setLoadError(false);
 
     try {
       const [positionsData, projectsData, skillsData] = await Promise.all([
@@ -25,6 +27,7 @@ export function useDashboardData() {
       setProjects(projectsData);
       setSkills(skillsData);
     } catch (error) {
+      setLoadError(true);
       console.error("Error fetching dashboard data:", error);
       setPositions([]);
       setProjects([]);
@@ -43,6 +46,7 @@ export function useDashboardData() {
     projects,
     skills,
     loading,
+    loadError,
     fetchAllData,
   };
 }

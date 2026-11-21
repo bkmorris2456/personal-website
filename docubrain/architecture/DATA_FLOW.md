@@ -1,7 +1,7 @@
 ---
 title: Data flow and document shapes
 created: 2026-11-19T23:27:18-05:00
-last_updated: 2026-11-20T19:37:59-05:00
+last_updated: 2026-11-20T22:30:20-05:00
 status: active
 ---
 
@@ -12,7 +12,7 @@ status: active
 | Collection | Dashboard payload | Reader details |
 | --- | --- | --- |
 | positions | title, company, description, location, start and end | Writes use Firestore timestamps or null. Shared reads format dates as month and year, fill missing end with Present, and normalize description strings to arrays. |
-| projects | Adds write title, stack, description and status. Edits write only changed fields. | The dashboard displays stack strings and arrays from the canonical field or legacy aliases. Stack text writes use the canonical field. Public cards read title, description, imageKey, demoLink and githubLink. The technologies prop is passed but unused. |
+| projects | Adds write title, stack, description and status. Edits write only changed fields. | The dashboard displays stack strings and arrays from the canonical field or legacy aliases. Stack text writes use the canonical field. Public cards read title, description, demoLink, githubLink and supported technology values from stack, techStack or technologies. |
 | skills | name, category | Dashboard also reads legacy skill. Home uses [its own constants](../../src/features/home/constants/skills.jsx). |
 
 [CRUD](../../src/features/dashboard/hooks/useDashboardCrud.js) uses addDoc, updateDoc and deleteDoc. [Dashboard utilities](../../src/features/dashboard/utils/dashboardUtils.js) validate and construct payloads. These shapes come from code. Deployed schema and constraints are **unknown**. See [dashboard](../features/ADMIN_DASHBOARD.md) and [known issues](../development/KNOWN_ISSUES.md).

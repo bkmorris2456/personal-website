@@ -1,29 +1,13 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
-import {
-  authPageSx,
-  authCardSx,
-  authCardContentSx,
-  authTitleSx,
-  authSubtitleSx,
-  authErrorSx,
-  authButtonSx,
-  authButtonSpinnerSx,
-} from "./styles/authStyles";
+import logo from "../../assets/images/ursus-logo.png";
+import { UrsusLoader } from "../brand/UrsusStatus";
+import "../brand/ursus.css";
 
-export default function Login() {
+export default function Login({ mode }) {
   const navigate = useNavigate();
   const { user, isAdmin, authLoading } = useAuthContext();
 
@@ -59,36 +43,33 @@ export default function Login() {
   };
 
   return (
-    <Box sx={authPageSx}>
-      <Card sx={authCardSx}>
-        <CardContent sx={authCardContentSx}>
-          <Typography sx={authTitleSx}>Admin Login</Typography>
+    <div className="ursus" data-mode={mode}>
+      <header className="u-header">
+        <div className="u-container u-bar u-login-brand">
+          <Link className="u-brand" to="/home" aria-label="Ursus overview">
+            <img src={logo} alt="" width="48" height="46" />
+            <span>URSUS</span>
+          </Link>
+        </div>
+      </header>
+      <main className="u-container">
+        <section className="u-card u-login u-entry" aria-labelledby="login-heading">
+          <h1 id="login-heading">Admin Login</h1>
+          <p className="u-muted">Sign in with your Google account.</p>
 
-          <Typography sx={authSubtitleSx}>
-            Sign in with your Google account.
-          </Typography>
-
-          {error && (
-            <Alert severity="error" sx={authErrorSx}>
-              {error}
-            </Alert>
+          {error && <p className="u-error" role="alert">{error}</p>}
+          {(authLoading || signingIn) && (
+            <p role="status" className="u-status u-muted">
+              <UrsusLoader /> {signingIn ? "Signing in…" : "Checking sign-in…"}
+            </p>
           )}
 
-          <Button
-            variant="contained"
-            fullWidth
-            onClick={handleGoogleLogin}
-            disabled={signingIn || authLoading}
-            sx={authButtonSx}
-          >
-            {signingIn || authLoading ? (
-              <CircularProgress size={22} sx={authButtonSpinnerSx} />
-            ) : (
-              "Continue with Google"
-            )}
-          </Button>
-        </CardContent>
-      </Card>
-    </Box>
+          <button className="u-button u-primary" type="button" onClick={handleGoogleLogin}
+            disabled={signingIn || authLoading}>
+            Continue with Google
+          </button>
+        </section>
+      </main>
+    </div>
   );
 }

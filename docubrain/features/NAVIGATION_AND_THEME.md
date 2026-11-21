@@ -1,14 +1,14 @@
 ---
 title: Navigation and theme
 created: 2026-11-19T23:27:18-05:00
-last_updated: 2026-11-19T23:51:12-05:00
+last_updated: 2026-11-20T21:04:19-05:00
 status: active
 ---
 
 # Navigation and theme
 
-**Verified by source.** [Navbar](../../src/features/navbar/Navbar.jsx) switches between desktop links and a mobile menu via [responsive styles](../../src/features/navbar/styles/navbarStyles.js). Desktop smooth-scrolls to five sections and routes Dashboard to Login. At the MUI md breakpoint and above, GitHub and LinkedIn text links appear in the top-right beside the theme toggle. Below md, the links appear in the hamburger menu alongside Home, Projects, Experience and Contact. Both layouts use the same GitHub and LinkedIn URLs and open them in new tabs. Both links open the owner's profiles. The mobile menu has no login entry. Scroll past 50 pixels changes the desktop nav styling. Closing the mobile menu resets its contact disclosure.
+**Verified.** [Navbar](../../src/features/navbar/Navbar.jsx) uses a sticky desktop bar or mobile disclosure with the same public destinations. The desktop indicator follows scrolling and slides between links. Section links update the HashRouter fragment, honor reduced motion, and move focus to the selected section. The desktop bar and mobile disclosure expose GitHub, LinkedIn and Contact. The sole Admin dashboard link is next to the top-bar theme toggle at all widths. Escape closes the mobile disclosure and restores focus to its button.
 
-[Root state](../../src/index.jsx) loads themeMode from localStorage or defaults to dark. The toggle switches between dark and light, saves the mode, and rebuilds the [MUI theme](../../src/theme/theme.js). Local storage access has no error fallback.
+[Root state](../../src/index.jsx) loads and saves themeMode in localStorage. The [Ursus stylesheet](../../src/features/brand/ursus.css) supplies the scoped public dark and light palettes. The dashboard shares the Ursus palette with Home and Login, including its MUI dialogs.
 
-See [static hosting ADR](../decisions/ADR-0001-static-hosting.md). No dedicated navigation or theme tests were found. See the [navigation session](../sessions/2026-11-19_23-39-development-session.md) for the Chromium smoke test.
+See the [redesign record](../development/URSUS_BRAND_REDESIGN.md) for browser and keyboard validation.

@@ -1,386 +1,150 @@
-// ===== Page Layout =====
+const text = "var(--text)";
+const muted = "var(--muted)";
+const accent = "var(--accent-text)";
+const border = "var(--border)";
+const surface = "var(--charcoal)";
+const elevated = "var(--graphite)";
+const displayFont = "ClashDisplay, Satoshi, sans-serif";
 
-export const dashboardPageSx = {
-  minHeight: "100vh",
-  backgroundColor: "#050505",
-  px: { xs: 2, md: 4, lg: 6 },
-  py: { xs: 3, md: 4 },
+const focusSx = {
+  "&:focus-visible, &.Mui-focusVisible": {
+    outline: "2px solid var(--focus)",
+    outlineOffset: 2,
+  },
 };
-
-export const dashboardHeaderSx = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  mb: 2,
-};
-
-export const returnButtonSx = {
-  color: "#6BA36E",
+const buttonSx = {
+  ...focusSx,
+  minHeight: 44,
+  borderRadius: ".5rem",
+  fontWeight: 700,
   textTransform: "none",
-  fontWeight: 700,
-  mb: 2,
-  px: 0,
-  minWidth: "unset",
-  justifyContent: "flex-start",
-
-  "&:hover": {
-    backgroundColor: "transparent",
-    color: "#7ab47d",
-  },
+  transition: "background var(--quick) var(--ease), border-color var(--quick) var(--ease)",
+  "@media (prefers-reduced-motion: reduce)": { transition: "none" },
+};
+const secondaryButtonSx = {
+  ...buttonSx,
+  color: text,
+  border: "1px solid var(--input-border)",
+  "&:hover": { bgcolor: elevated, borderColor: accent },
+};
+const primaryButtonSx = {
+  ...buttonSx,
+  bgcolor: "var(--nordic)",
+  color: "var(--action-text)",
+  boxShadow: "none",
+  "&:hover": { bgcolor: "var(--sage)", color: "var(--on-sage)", boxShadow: "none" },
 };
 
-export const dashboardTitleSx = {
-  color: "#f3f3f3",
-  fontSize: {
-    xs: "2rem",
-    md: "2.4rem",
-  },
-  fontWeight: 700,
-  letterSpacing: "-0.03em",
-  textAlign: "left",
-  width: "100%",
-};
-
-export const loadingContainerSx = {
-  minHeight: "50vh",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-export const loadingSpinnerSx = {
-  color: "#6BA36E",
-};
-
-// ===== Shared Components =====
+export const dashboardPageSx = { py: { xs: 3, md: 4 } };
+export const dashboardHeaderSx = { mb: 3, display: "grid", gap: 0.5 };
+export const dashboardTitleSx = { fontFamily: displayFont, fontSize: { xs: "2rem", md: "2.5rem" }, fontWeight: 700 };
+export const loadingContainerSx = { minHeight: "35vh", display: "grid", placeItems: "center" };
 
 export const dashboardCardSx = {
-  backgroundColor: "#0b0b0b",
-  border: "1px solid rgba(255,255,255,0.06)",
-  borderRadius: "20px",
+  bgcolor: surface,
+  backgroundImage: "none",
+  color: text,
+  border: "1px solid var(--border)",
+  borderRadius: "var(--radius)",
   boxShadow: "none",
 };
-
-export const mutedText = {
-  color: "rgba(255,255,255,0.58)",
-};
-
-// ===== Inputs / Forms =====
-
+export const mutedText = { color: muted };
 export const inputSx = {
   "& .MuiOutlinedInput-root": {
-    color: "#f3f3f3",
-    borderRadius: "12px",
-    backgroundColor: "rgba(255,255,255,0.02)",
-
-    "& fieldset": {
-      borderColor: "rgba(255,255,255,0.1)",
-    },
-
-    "&:hover fieldset": {
-      borderColor: "rgba(255,255,255,0.18)",
-    },
-
-    "&.Mui-focused fieldset": {
-      borderColor: "#6BA36E",
-    },
+    color: text,
+    borderRadius: ".5rem",
+    bgcolor: "var(--obsidian)",
+    "& fieldset": { borderColor: "var(--input-border)" },
+    "&:hover fieldset": { borderColor: accent },
+    "&.Mui-focused fieldset": { borderColor: "var(--focus)" },
   },
-
-  "& .MuiInputLabel-root": {
-    color: "rgba(255,255,255,0.6)",
-  },
-
-  "& .MuiInputLabel-root.Mui-focused": {
-    color: "#6BA36E",
-  },
+  "& .MuiInputLabel-root": { color: muted },
+  "& .MuiInputLabel-root.Mui-focused": { color: accent },
 };
-
-// ===== Modals =====
 
 export const modalPaperSx = {
-  backgroundColor: "#0b0b0b",
-  color: "#f3f3f3",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "20px",
+  ...dashboardCardSx,
+  m: { xs: 1, sm: 4 },
+  width: { xs: "calc(100% - 16px)", sm: undefined },
+  "& .MuiDialogContent-root": { px: { xs: 2, sm: 3 } },
 };
+export const formFieldsStackSx = { mt: 1 };
+export const formFieldLabelSx = { color: muted, mb: 1, fontWeight: 700 };
+export const modalTitleSx = { fontFamily: displayFont, fontWeight: 700 };
+export const modalDescriptionSx = { color: muted, mt: 1 };
+export const modalHighlightedTextSx = { color: text, fontWeight: 700 };
+export const modalActionsSx = { px: { xs: 2, sm: 3 }, pb: { xs: 2, sm: 3 } };
+export const modalCancelButtonSx = secondaryButtonSx;
+export const modalSubmitButtonSx = (isDelete) => isDelete
+  ? { ...secondaryButtonSx, color: "var(--danger)", bgcolor: "var(--danger-bg)",
+      "&:hover": { bgcolor: "var(--danger-bg)", borderColor: "var(--danger)" } }
+  : primaryButtonSx;
 
-export const formFieldsStackSx = {
-  mt: 1,
-};
-
-export const formFieldLabelSx = {
-  color: "rgba(255,255,255,0.6)",
-  mb: 1,
-};
-
-// ===== Modal Content =====
-
-export const modalTitleSx = {
-  fontWeight: 700,
-};
-
-export const modalDescriptionSx = {
-  color: "rgba(255,255,255,0.72)",
-  mt: 1,
-};
-
-export const modalHighlightedTextSx = {
-  color: "#f3f3f3",
-  fontWeight: 700,
-};
-
-export const modalActionsSx = {
-  px: 3,
-  pb: 3,
-};
-
-export const modalCancelButtonSx = {
-  color: "rgba(255,255,255,0.72)",
-  textTransform: "none",
-};
-
-export const modalSubmitButtonSx = (isDelete = false) => ({
-  textTransform: "none",
-  borderRadius: "12px",
-  fontWeight: 700,
-
-  ...(isDelete
-    ? {}
-    : {
-        backgroundColor: "#6BA36E",
-        color: "#050505",
-
-        "&:hover": {
-          backgroundColor: "#7ab47d",
-        },
-      }),
+export const dashboardFeedbackSx = (isError) => ({
+  mb: 2,
+  border: "1px solid",
+  borderColor: isError ? "var(--danger)" : border,
+  borderRadius: "var(--radius)",
+  bgcolor: isError ? "var(--danger-bg)" : elevated,
+  color: isError ? "var(--danger)" : text,
+  "& .MuiAlert-icon": { color: isError ? "var(--danger)" : accent },
 });
-
-// ===== Tag Selection =====
-
-export const selectTagsContainerSx = {
-  flexWrap: "wrap",
-};
-
-export const selectTagChipSx = (selected = false) => ({
-  color: selected ? "#050505" : "#f3f3f3",
-
-  backgroundColor: selected
-    ? "#6BA36E"
-    : "rgba(255,255,255,0.04)",
-
-  border: selected
-    ? "1px solid #6BA36E"
-    : "1px solid rgba(255,255,255,0.12)",
-
-  fontWeight: 600,
-
-  "&:hover": {
-    backgroundColor: selected
-      ? "#7ab47d"
-      : "rgba(255,255,255,0.08)",
+export const selectTagsContainerSx = { flexWrap: "wrap" };
+export const selectTagChipSx = (selected) => ({
+  ...focusSx,
+  minHeight: 44,
+  fontWeight: 700,
+  color: selected ? "var(--action-text)" : text,
+  bgcolor: selected ? "var(--nordic)" : surface,
+  border: "1px solid",
+  borderColor: selected ? "var(--nordic)" : "var(--input-border)",
+  "&:hover, &.Mui-focusVisible": {
+    bgcolor: selected ? "var(--sage)" : elevated,
+    color: selected ? "var(--on-sage)" : text,
   },
 });
 
-// ===== Stat Cards =====
-
-export const statCardSx = {
-  ...dashboardCardSx,
-  height: "100%",
-};
-
-export const statCardContentSx = {
-  p: 3,
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-};
-
+export const statCardSx = { ...dashboardCardSx, height: "100%" };
+export const statCardContentSx = { p: 2, "&:last-child": { pb: 2 } };
 export const statCardIconSx = {
-  width: 54,
-  height: 54,
-  minWidth: 54,
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#6BA36E",
-  backgroundColor: "rgba(107,163,110,0.08)",
-  border: "1px solid rgba(107,163,110,0.18)",
-  flexShrink: 0,
+  width: 44, height: 44, flexShrink: 0, borderRadius: ".5rem",
+  display: "grid", placeItems: "center", color: accent, bgcolor: elevated,
 };
+export const statCardValueSx = { color: text, fontFamily: displayFont, fontWeight: 700, fontSize: "1.9rem", lineHeight: 1 };
+export const statCardTitleSx = { color: muted, fontWeight: 700, fontSize: ".95rem", lineHeight: 1.3 };
 
-export const statCardValueSx = {
-  color: "#f3f3f3",
-  fontWeight: 800,
-  fontSize: "2.4rem",
-  lineHeight: 1,
-  letterSpacing: "-0.04em",
-};
-
-export const statCardTitleSx = {
-  color: "#d9d9d9",
-  fontWeight: 700,
-  fontSize: "1.55rem",
-  lineHeight: 1.1,
-  letterSpacing: "-0.03em",
-};
-
-// ===== Table Cards =====
-
-export const tableCardSx = {
-  ...dashboardCardSx,
-  height: "100%",
-  minHeight: 520,
-  display: "flex",
-};
-
-export const tableCardContentSx = {
-  p: 0,
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-};
-
+export const tableCardSx = { ...dashboardCardSx, height: "100%", display: "flex", minWidth: 0 };
+export const tableCardContentSx = { p: 0, "&:last-child": { pb: 0 }, width: "100%", display: "flex", flexDirection: "column" };
 export const tableHeaderContainerSx = {
-  p: 3,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: 2,
-  flexShrink: 0,
+  p: 2, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, flexShrink: 0,
 };
-
-export const tableTitleSx = {
-  color: "#f3f3f3",
-  fontWeight: 700,
-  fontSize: "1.3rem",
-};
-
-export const tableSubtitleSx = {
-  ...mutedText,
-  fontSize: "0.92rem",
-};
-
-export const tableAddButtonSx = (disabled = false) => ({
-  color: disabled
-    ? "rgba(255,255,255,0.35)"
-    : "#6BA36E",
-
-  textTransform: "none",
-  borderRadius: "12px",
-  border: "1px solid rgba(107,163,110,0.18)",
-  backgroundColor: "rgba(107,163,110,0.06)",
-  px: 1.6,
-  whiteSpace: "nowrap",
-  flexShrink: 0,
-});
-
-export const tableDividerSx = {
-  borderColor: "rgba(255,255,255,0.06)",
-  flexShrink: 0,
-};
-
-export const tableColumnHeaderSx = {
-  color: "rgba(255,255,255,0.42)",
-  fontSize: "0.74rem",
-  fontWeight: 600,
-  letterSpacing: "0.04em",
-  textAlign: "left",
-};
-
+export const tableTitleSx = { color: text, fontFamily: displayFont, fontWeight: 700, "&&": { fontSize: "1.35rem" } };
+export const tableSubtitleSx = { ...mutedText, fontSize: ".9375rem" };
+export const tableAddButtonSx = { ...secondaryButtonSx, whiteSpace: "nowrap", flexShrink: 0, px: 1.25 };
+export const tableDividerSx = { borderColor: border, flexShrink: 0 };
+export const tableColumnHeaderSx = { color: muted, fontSize: ".8125rem", fontWeight: 700, textAlign: "left", overflowWrap: "anywhere" };
 export const tableRowPrimaryTextSx = {
-  color: "#f3f3f3",
-  fontSize: "0.92rem",
-  lineHeight: 1.4,
-  textAlign: "left",
-  width: "100%",
-  overflowWrap: "anywhere",
-  wordBreak: "break-word",
+  color: text, fontSize: ".9375rem", lineHeight: 1.4, textAlign: "left", overflowWrap: "anywhere",
 };
-
-export const tableRowTextSx = {
-  color: "rgba(255,255,255,0.6)",
-  fontSize: "0.92rem",
-  lineHeight: 1.4,
-  textAlign: "left",
-  width: "100%",
-  overflowWrap: "anywhere",
-  wordBreak: "break-word",
+export const tableRowTextSx = { ...tableRowPrimaryTextSx, color: muted };
+export const tableStatusSx = {
+  ...tableRowTextSx, bgcolor: elevated, color: text, borderRadius: "999px",
+  px: { xs: 0.5, sm: 1 }, py: 0.25, fontSize: ".8125rem",
 };
-
 export const tableIconButtonSx = {
-  color: "rgba(255,255,255,0.65)",
+  ...focusSx, minWidth: 44, minHeight: 44, borderRadius: ".5rem", color: muted,
+  "&:hover": { bgcolor: elevated, color: text },
 };
-
-export const tableFooterButtonSx = {
-  color: "#6BA36E",
-  textTransform: "none",
-  fontSize: "0.92rem",
-  fontWeight: 500,
-  px: 0,
-  minWidth: "unset",
-};
-
+export const tableFooterButtonSx = { ...buttonSx, color: accent, px: 0, minWidth: 0 };
 export const tablePaginationSx = {
-  "& .MuiPaginationItem-root": {
-    color: "rgba(255,255,255,0.7)",
-  },
-
-  "& .Mui-selected": {
-    backgroundColor:
-      "rgba(107,163,110,0.22) !important",
-
-    color: "#6BA36E",
-  },
+  "& .MuiPaginationItem-root": { ...focusSx, color: muted },
+  "& .MuiPaginationItem-root.Mui-selected": { bgcolor: elevated, color: accent },
 };
 
-// ===== View All Modal =====
-
-export const viewAllModalPaperSx = {
-  ...modalPaperSx,
-  maxHeight: "80vh",
-};
-
-export const viewAllModalContentSx = {
-  maxHeight: "60vh",
-  overflow: "auto",
-};
-
-export const viewAllTableContainerSx = {
-  backgroundColor: "transparent",
-  boxShadow: "none",
-  overflowX: "auto",
-};
-
-export const viewAllTableHeaderCellSx = {
-  backgroundColor: "#0b0b0b",
-  color: "rgba(255,255,255,0.55)",
-  borderColor: "rgba(255,255,255,0.08)",
-  fontWeight: 700,
-  whiteSpace: "nowrap",
-};
-
-export const viewAllTablePrimaryCellSx = {
-  color: "#f3f3f3",
-  borderColor: "rgba(255,255,255,0.06)",
-  whiteSpace: "nowrap",
-};
-
-export const viewAllTableCellSx = {
-  color: "rgba(255,255,255,0.65)",
-  borderColor: "rgba(255,255,255,0.06)",
-  whiteSpace: "nowrap",
-};
-
-export const viewAllCloseButtonSx = {
-  textTransform: "none",
-  borderRadius: "12px",
-  fontWeight: 700,
-  backgroundColor: "#6BA36E",
-  color: "#050505",
-
-  "&:hover": {
-    backgroundColor: "#7ab47d",
-  },
-};
+export const viewAllModalPaperSx = { ...modalPaperSx, maxHeight: "85dvh" };
+export const viewAllModalContentSx = { maxHeight: "65dvh", overflow: "auto" };
+export const viewAllTableContainerSx = { bgcolor: "transparent", boxShadow: "none", overflowX: "auto" };
+export const viewAllTableHeaderCellSx = { bgcolor: surface, color: muted, borderColor: border, fontWeight: 700, whiteSpace: "nowrap" };
+export const viewAllTableCellSx = { color: muted, borderColor: border, overflowWrap: "anywhere" };
+export const viewAllTablePrimaryCellSx = { ...viewAllTableCellSx, color: text };
+export const viewAllCloseButtonSx = primaryButtonSx;

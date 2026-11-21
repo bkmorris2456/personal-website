@@ -20,6 +20,9 @@ export function useDashboardCrud({
   formState,
   fetchAllData,
   handleCloseModal,
+  reportFeedback = (severity, message) => {
+    if (severity === "error") alert(message);
+  },
 }) {
   const [modalLoading, setModalLoading] = useState(false);
 
@@ -36,9 +39,10 @@ export function useDashboardCrud({
         await deleteDoc(doc(db, collectionMap[entity], selectedItem.id));
         await fetchAllData();
         handleCloseModal({ force: true });
+        reportFeedback("success", "Record deleted.");
       } catch (error) {
         console.error(`Error deleting ${entity}:`, error);
-        alert(`There was an error deleting the ${entity}.`);
+        reportFeedback("error", `There was an error deleting the ${entity}.`);
       } finally {
         setModalLoading(false);
       }
@@ -48,7 +52,7 @@ export function useDashboardCrud({
 
     const validationError = validateForm(entity, formState);
     if (validationError) {
-      alert(validationError);
+      reportFeedback("error", validationError);
       return;
     }
 
@@ -73,9 +77,10 @@ export function useDashboardCrud({
 
       await fetchAllData();
       handleCloseModal({ force: true });
+      reportFeedback("success", Object.keys(payload).length ? "Record saved." : "No changes to save.");
     } catch (error) {
       console.error(`Error saving ${entity}:`, error);
-      alert(`There was an error saving the ${entity}.`);
+      reportFeedback("error", `There was an error saving the ${entity}.`);
     } finally {
       setModalLoading(false);
     }

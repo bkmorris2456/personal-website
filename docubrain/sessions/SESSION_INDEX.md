@@ -1,7 +1,7 @@
 ---
 title: Session index
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-20T19:37:59-05:00
+last_updated: 2026-11-20T22:30:20-05:00
 status: active
 ---
 
@@ -9,6 +9,11 @@ status: active
 
 | Local start | Session | Outcome |
 | --- | --- | --- |
+| 2026-11-20, ~22:29-05:00 | [Featured Projects card artwork removal](2026-11-20_22-29-development-session.md) | Verified title alignment and preserved links and hover in both themes |
+| 2026-11-20, ~21:19-05:00 | [Homepage section heading alignment](2026-11-20_21-19-development-session.md) | Verified all five headings share a centerline and spacing across themes and widths |
+| 2026-11-20, ~21:13-05:00 | [Ursus About and Contact layout](2026-11-20_21-13-development-session.md) | Verified centered layouts and mocked contact submission in both themes |
+| 2026-11-20, ~20:58-05:00 | [Ursus refinement pass 1](2026-11-20_20-58-development-session.md) | Branded dashboard, simplified public layout and 35 passing tests |
+| 2026-11-20, ~20:39-05:00 | [Ursus brand redesign](2026-11-20_20-39-development-session.md) | Responsive local redesign, 29 passing tests and Chromium verification |
 | 2026-11-20, ~19:36-05:00 | [Project Tech Stack edit fix](2026-11-20_19-36-development-session.md) | Legacy stacks display safely and unchanged fields are omitted from writes. Tests, lint and build passed |
 | 2026-11-20, ~18:36-05:00 | [Project stack save investigation](2026-11-20_18-36-development-session.md) | Reproduced failure with non-string edit values and proposed a compatibility-preserving fix |
 | 2026-11-20, ~14:14-05:00 | [Dependabot security remediation](2026-11-20_14-14-development-session.md) | All 56 original advisory ranges fixed locally; clean audit and batch validation; awaiting review |

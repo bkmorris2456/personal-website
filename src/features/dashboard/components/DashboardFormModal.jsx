@@ -1,5 +1,6 @@
 import {
   Box,
+  Alert,
   Typography,
   Button,
   Dialog,
@@ -16,6 +17,7 @@ import {
   modalActionsSx,
   modalCancelButtonSx,
   modalSubmitButtonSx,
+  dashboardFeedbackSx,
 } from "../styles/dashboardStyles";
 import { getItemLabel } from "../utils/dashboardUtils";
 
@@ -28,9 +30,15 @@ export function DashboardFormModal({
   onClose,
   onSubmit,
   renderFields,
+  mode,
+  transitionDuration,
+  error,
 }) {
   return (
     <Dialog
+      className="ursus-dialog"
+      data-mode={mode}
+      transitionDuration={transitionDuration}
       open={open}
       onClose={onClose}
       fullWidth
@@ -42,6 +50,7 @@ export function DashboardFormModal({
       <DialogTitle sx={modalTitleSx}>{modalTitle}</DialogTitle>
 
       <DialogContent>
+        {error && <Alert severity="error" sx={dashboardFeedbackSx(true)}>{error}</Alert>}
         {modalState.mode === "delete" ? (
           <Typography sx={modalDescriptionSx}>
             Are you sure you want to delete{" "}
