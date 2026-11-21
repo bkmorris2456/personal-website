@@ -1,7 +1,7 @@
 ---
 title: Ursus brand redesign
 created: 2026-11-20T20:44:36-05:00
-last_updated: 2026-11-20T22:30:20-05:00
+last_updated: 2026-11-20T22:41:39-05:00
 status: active
 ---
 
@@ -121,3 +121,9 @@ Chromium confirmed heading alignment, typography and spacing and checked for ove
 Project cards now start with a text title aligned with the description below. The unused title artwork and image-key mapping were removed from the card implementation. Source artwork, project records, technology tags, links and hover behavior were preserved.
 
 All 35 tests, ESLint and an isolated production build passed. Chromium checked title alignment, tags, links and hover behavior at 1440 and 390 px in both themes using fixture records. The existing chunk-size warning remains.
+
+## Browser tab identity
+
+The document title is **Portfolio | Blake Morris**. The installable app retains its Ursus name and the original 64 px install icon, now referenced as `app-icon-64.png` with its correct PNG type. The 16 and 32 px PNG tab icons and the two-resolution ICO fallback use the original Ursus bear's extracted silhouette. A near-black green fill and silver edge provide contrast against light and dark tab backgrounds. The full bear-and-orbit site asset was preserved byte for byte.
+
+All 35 tests and the isolated production build passed. Chromium confirmed the tab title and decoded the PNG assets in both color schemes. Headless screenshots checked legibility at real favicon sizes on representative browser chrome backgrounds. HTTP checks and FFmpeg separately verified the ICO fallback and its two image sizes. The existing chunk-size warning remains.
