@@ -1,7 +1,7 @@
 ---
 title: Current state
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-21T08:05:00-05:00
+last_updated: 2026-11-21T08:58:27-05:00
 status: active
 ---
 
@@ -10,20 +10,25 @@ status: active
 ## Verified in the repository
 
 - Public homepage with responsive navigation, persisted light/dark theme, experience and project reads, a categorized Technologies Used section backed by bundled data, and EmailJS contact form.
-- Google sign-in and admin-claim handling. Dashboard counts, tables, pagination, view-all and Firestore create, edit and delete paths exist.
+- Canonical section hash paths address one continuous portfolio under the Pages base. Section clicks replace the current URL within the portfolio history entry. Manual scrolling updates the active highlight and leaves the URL and history intact. Legacy URLs redirect with replacement.
+- Google sign-in and admin-claim handling gate the lazy dashboard. The auth provider rejects stale claim results after a session change. Dashboard counts, tables, pagination, view-all and Firestore create, edit and delete paths exist.
 - The Vite build and GitHub Pages publication commands are configured. The latest application or script commit found was 2c57d8e at 2026-05-19T22:16:49-04:00. Starting HEAD was 0403faf, a README update dated 2026-05-20T22:15:08-04:00. The latest verified work is [dependency security remediation](sessions/2026-11-20_14-14-development-session.md), pending review without a push.
 
 ## Partial implementation
 
-Admin login works as a code path, and direct dashboard routing omits the available UI guard. Project form fields cover a subset of public card data. Dashboard Skill edits are disconnected from the bundled public skills list. See [known issues](development/KNOWN_ISSUES.md).
+Project form fields cover a subset of public card data. Dashboard Skill edits are disconnected from the bundled public skills list. See [known issues](development/KNOWN_ISSUES.md).
 
 ## Planned, proposed, and unknown
 
-No committed application roadmap or active implementation effort was established. Proposed priorities, in order, are to confirm the authorization boundary and wire the guard, preserve original position dates through editing, align public and admin data contracts, and expand automated coverage. These are proposals without a recorded commitment.
+Proposed priorities are to verify the deployed authorization boundary, preserve original position dates through editing, align public and admin data contracts, and expand automated coverage.
 
 The deployed Pages revision, Firestore rules, live document shapes, Google provider settings and claim administration, and EmailJS delivery are unknown. These limit conclusions about production behavior. No checked-in emulator or staging process was found.
 
 ## Local baseline
+
+**Portfolio history, 2026-11-21.** See the [section history session](sessions/2026-11-21_08-58-development-session.md) for the replacement navigation checks.
+
+**Routing and dashboard gate, 2026-11-21.** See the [routing session](sessions/2026-11-21_08-48-development-session.md) for automated and Chromium verification.
 
 **Ursus refinement pass 1, 2026-11-20.** Home and dashboard are branded in both themes. One public admin entry remains. All 35 tests and local checks passed. See the [refinement section](development/URSUS_BRAND_REDESIGN.md#refinement-pass-1).
 

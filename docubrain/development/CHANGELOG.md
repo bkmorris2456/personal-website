@@ -1,7 +1,7 @@
 ---
 title: Application changelog
 created: 2026-11-19T23:27:18-05:00
-last_updated: 2026-11-20T14:28:28-05:00
+last_updated: 2026-11-21T08:58:27-05:00
 status: active
 ---
 
@@ -11,6 +11,8 @@ Selected milestones verified against Git history and session records. Historical
 
 | Timestamp | Commit | Change |
 | --- | --- | --- |
+| 2026-11-21T08:58:27-05:00 | [Working tree](../sessions/2026-11-21_08-58-development-session.md) | Portfolio section links replace the current history entry while page navigation retains history. |
+| 2026-11-21T08:48:19-05:00 | [Working tree](../sessions/2026-11-21_08-48-development-session.md) | Added canonical section hash paths, predictable navigation history, legacy redirects, and an admin gate for the lazy dashboard. |
 | 2026-11-20T14:28:28-05:00 | Working tree | Resolved all 56 original vulnerable advisory ranges locally, added validation tooling and documented the [security batches](DEPENDABOT_REMEDIATION.md). No push. |
 | 2026-11-19T23:42:22-05:00 | [Working tree](../sessions/2026-11-19_23-39-development-session.md) | Added desktop GitHub and LinkedIn links beside the theme toggle and removed LeetCode from navigation. [Navigation](../features/NAVIGATION_AND_THEME.md) |
 | 2026-05-19T22:16:49-04:00 | 2c57d8e | Updated [deployment scripts](../../package.json). |

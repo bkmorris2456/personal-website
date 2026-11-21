@@ -1,3 +1,4 @@
+import { routes } from "../../routing/routes";
 import { useState } from "react";
 
 import {
@@ -98,12 +99,12 @@ export default function Dashboard({ mode, toggleTheme }) {
     <div className="ursus" data-mode={mode}>
       <header className="u-header">
         <div className="u-container u-bar">
-          <Link className="u-brand" to="/home" aria-label="Ursus overview">
+          <Link className="u-brand" to={routes.overview} aria-label="Ursus overview">
             <img src={logo} alt="" width="48" height="46" />
             <span>URSUS</span>
           </Link>
           <div className="u-header-actions">
-            <Link className="u-button" to="/home">Return to Home</Link>
+            <Link className="u-button" to={routes.overview}>Return to Overview</Link>
             <button className="u-icon" type="button" onClick={toggleTheme}
               aria-label="Toggle light and dark mode" aria-pressed={mode === "light"}>
               {mode === "light" ? <LightModeRounded /> : <DarkModeRounded />}

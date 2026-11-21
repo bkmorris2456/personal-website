@@ -1,26 +1,25 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
-import { Box, CircularProgress } from "@mui/material";
 import { useAuthContext } from "../../context/AuthContext";
-import { authPageSx, authSpinnerSx } from "./styles/authStyles";
+import { routes } from "../../routing/routes";
+import UrsusStatus from "../brand/UrsusStatus";
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children, mode }) {
   const { user, isAdmin, authLoading } = useAuthContext();
 
   if (authLoading) {
     return (
-      <Box sx={authPageSx}>
-        <CircularProgress sx={authSpinnerSx} />
-      </Box>
+      <div className="ursus" data-mode={mode}>
+        <div className="u-container"><UrsusStatus state="loading" subject="authorization" /></div>
+      </div>
     );
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={routes.login} state={{ from: routes.dashboard }} replace />;
   }
 
   if (!isAdmin) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to={routes.overview} replace />;
   }
 
   return children;

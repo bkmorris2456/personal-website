@@ -1,5 +1,6 @@
+import { routes } from "../../routing/routes";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
@@ -8,7 +9,7 @@ import { UrsusLoader } from "../brand/UrsusStatus";
 import "../brand/ursus.css";
 
 export default function Login({ mode }) {
-  const navigate = useNavigate();
+  const { state } = useLocation();
   const { user, isAdmin, authLoading } = useAuthContext();
 
   const [error, setError] = useState("");
@@ -17,16 +18,11 @@ export default function Login({ mode }) {
   useEffect(() => {
     if (authLoading) return;
 
-    if (user && isAdmin) {
-      navigate("/dashboard", { replace: true });
-      return;
-    }
-
     if (user && !isAdmin) {
-      signOut(auth);
+      signOut(auth).catch((err) => console.error("Google sign-out error:", err));
       setError("This account does not have dashboard access.");
     }
-  }, [user, isAdmin, authLoading, navigate]);
+  }, [user, isAdmin, authLoading]);
 
   const handleGoogleLogin = async () => {
     setError("");
@@ -42,11 +38,16 @@ export default function Login({ mode }) {
     }
   };
 
+  if (!authLoading && user && isAdmin) {
+    const destination = state?.from === routes.dashboard ? state.from : routes.dashboard;
+    return <Navigate to={destination} replace />;
+  }
+
   return (
     <div className="ursus" data-mode={mode}>
       <header className="u-header">
         <div className="u-container u-bar u-login-brand">
-          <Link className="u-brand" to="/home" aria-label="Ursus overview">
+          <Link className="u-brand" to={routes.overview} aria-label="Ursus overview">
             <img src={logo} alt="" width="48" height="46" />
             <span>URSUS</span>
           </Link>

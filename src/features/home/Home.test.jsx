@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
-import { MemoryRouter, useLocation } from "react-router-dom";
+import { MemoryRouter, useLocation, useNavigationType } from "react-router-dom";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import emailjs from "emailjs-com";
 import { getPositions, getProjects } from "../../firebase/firestoreService";
@@ -13,13 +13,19 @@ vi.mock("emailjs-com", () => ({ default: { sendForm: vi.fn() } }));
 
 function Location() {
   const { pathname, hash } = useLocation();
-  return <output data-testid="location">{pathname}{hash}</output>;
+  const navigationType = useNavigationType();
+  return <output data-testid="location" data-navigation={navigationType}>{pathname}{hash}</output>;
 }
 
-function renderHome(initialEntry = "/home") {
+function RoutedHome() {
+  const { pathname } = useLocation();
+  return <Home section={pathname.slice(1)} mode="dark" toggleTheme={vi.fn()} />;
+}
+
+function renderHome(initialEntry = "/overview") {
   return render(
     <MemoryRouter initialEntries={[initialEntry]}>
-      <Home mode="dark" toggleTheme={vi.fn()} />
+      <RoutedHome />
       <Location />
     </MemoryRouter>,
   );
@@ -48,15 +54,47 @@ test("project navigation updates the section URL, focus and scroll behavior", as
   renderHome();
   fireEvent.click(screen.getByRole("link", { name: "View Projects" }));
 
-  expect(screen.getByTestId("location")).toHaveTextContent("/home#projects");
+  expect(screen.getByTestId("location")).toHaveTextContent("/projects");
+  expect(screen.getByTestId("location")).toHaveAttribute("data-navigation", "REPLACE");
   expect(screen.getByRole("region", { name: "Featured Projects" })).toHaveFocus();
   expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
   await screen.findByText("No projects to show yet.");
 });
 
+test("portfolio navigation and overview shortcuts replace the current history entry", async () => {
+  renderHome();
+  const navigation = screen.getByRole("navigation", { name: "Primary" });
+  const destinations = [
+    ["Experience", "experience"],
+    ["Projects", "projects"],
+    ["About", "about"],
+    ["Technologies Used", "technologies"],
+    ["Contact", "contact"],
+    ["Overview", "overview"],
+  ];
+
+  for (const [name, id] of destinations) {
+    fireEvent.click(within(navigation).getByRole("link", { name }));
+    expect(screen.getByTestId("location")).toHaveTextContent(`/${id}`);
+    expect(screen.getByTestId("location")).toHaveAttribute("data-navigation", "REPLACE");
+  }
+
+  for (const name of ["Ursus overview", "Skip to content"]) {
+    fireEvent.click(within(navigation).getByRole("link", { name: "Projects" }));
+    fireEvent.click(screen.getByRole("link", { name }));
+    expect(screen.getByTestId("location")).toHaveTextContent("/overview");
+    expect(screen.getByTestId("location")).toHaveAttribute("data-navigation", "REPLACE");
+  }
+
+  fireEvent.click(screen.getByRole("link", { name: "Admin dashboard" }));
+  expect(screen.getByTestId("location")).toHaveTextContent("/login");
+  expect(screen.getByTestId("location")).toHaveAttribute("data-navigation", "PUSH");
+  await screen.findByText("No projects to show yet.");
+});
+
 test("section links are instant with reduced motion and support direct entry", async () => {
   window.matchMedia.mockReturnValue({ matches: true });
-  renderHome("/home#experience");
+  renderHome("/experience");
   expect(screen.getByRole("region", { name: "Experience" })).toHaveFocus();
   expect(scrollIntoView).toHaveBeenLastCalledWith({ behavior: "instant" });
 
@@ -72,7 +110,7 @@ test("mobile disclosure closes on Escape with focus restored", async () => {
   expect(toggle).toHaveAttribute("aria-expanded", "true");
   const mobile = screen.getByRole("navigation", { name: "Mobile" });
   expect(within(mobile).queryByRole("link", { name: /dashboard/i })).not.toBeInTheDocument();
-  expect(within(mobile).getByRole("link", { name: "Skills" })).toHaveAttribute("href", "/home#skills");
+  expect(within(mobile).getByRole("link", { name: "Technologies Used" })).toHaveAttribute("href", "/technologies");
 
   fireEvent.keyDown(mobile, { key: "Escape" });
   expect(toggle).toHaveAttribute("aria-expanded", "false");
@@ -107,7 +145,7 @@ test("contact submits the original form fields and reports success", async () =>
     });
     return Promise.resolve();
   });
-  renderHome("/home#contact");
+  renderHome("/contact");
   fireEvent.change(screen.getByLabelText("Your Name"), { target: { value: "Test visitor" } });
   fireEvent.change(screen.getByLabelText("Your Email"), { target: { value: "visitor@example.com" } });
   fireEvent.change(screen.getByLabelText("Your Message"), { target: { value: "Test message" } });

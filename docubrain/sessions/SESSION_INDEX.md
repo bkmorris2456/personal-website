@@ -1,7 +1,7 @@
 ---
 title: Session index
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-21T08:31:50-05:00
+last_updated: 2026-11-21T08:58:27-05:00
 status: active
 ---
 
@@ -9,6 +9,8 @@ status: active
 
 | Local start | Session | Outcome |
 | --- | --- | --- |
+| 2026-11-21T08:58:27-05:00 | [Portfolio section history](2026-11-21_08-58-development-session.md) | Switched in-page links to replacement navigation |
+| 2026-11-21T08:48:19-05:00 | [Canonical routing and dashboard authorization](2026-11-21_08-48-development-session.md) | Implemented section destinations, history semantics, and the guarded admin flow |
 | 2026-11-21T08:30:33-05:00 | [Overview navigation anchor](2026-11-21_08-30-development-session.md) | Verified the new deep link and section navigation on desktop and mobile |
 | 2026-11-21T08:06:55-05:00 | [Homepage section order](2026-11-21_08-06-development-session.md) | Experience precedes Projects on the homepage and in both menus |
 | 2026-11-21T08:00:47-05:00 | [Technologies Used section](2026-11-21_08-00-development-session.md) | Verified 27 badges in four categories across three widths in both themes |

@@ -2,44 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Close, DarkModeRounded, DashboardOutlined, LightModeRounded, Menu } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/ursus-logo.png";
-import { externalNavItems, overviewSectionId, sectionNavItems, sectionPath } from "./constants/navItems";
-
-function useActiveSection() {
-  const [active, setActive] = useState(overviewSectionId);
-
-  useEffect(() => {
-    let frame;
-    const update = () => {
-      const header = document.querySelector(".u-header");
-      const boundary = (header?.getBoundingClientRect().bottom ?? 0) + 24;
-      const sections = sectionNavItems.map(({ to }) => document.getElementById(to)).filter(Boolean);
-      // Navigation order matches the page, so the last heading above the header wins.
-      const visible = sections.findLast((section) => section.getBoundingClientRect().top <= boundary);
-      const atBottom = window.scrollY > 0 &&
-        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-      setActive(atBottom ? "contact" : visible?.id ?? overviewSectionId);
-    };
-    const schedule = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    const content = document.querySelector(".u-main");
-    const observer = typeof ResizeObserver === "function" && content ? new ResizeObserver(schedule) : null;
-    observer?.observe(content);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      observer?.disconnect();
-    };
-  }, []);
-
-  return active;
-}
+import { externalNavItems } from "./constants/navItems";
+import { routes, sectionLinkOptions, sectionNavItems, sectionPath } from "../../routing/routes";
 
 function ProfileLinks({ iconsOnly }) {
   return externalNavItems.map(({ label, href, Icon }) => (
@@ -51,9 +15,8 @@ function ProfileLinks({ iconsOnly }) {
   ));
 }
 
-export default function Navbar({ toggleTheme, mode }) {
+export default function Navbar({ toggleTheme, mode, active }) {
   const [open, setOpen] = useState(false);
-  const active = useActiveSection();
   const desktop = useRef(null);
   const indicator = useRef(null);
   const menuButton = useRef(null);
@@ -101,8 +64,8 @@ export default function Navbar({ toggleTheme, mode }) {
     };
   }, [open]);
 
-  const links = (mobile = false) => sectionNavItems.map(({ label, to }) => (
-    <Link key={to} to={sectionPath(to)} aria-current={active === to ? "location" : undefined}
+  const links = (mobile = false) => sectionNavItems.map(({ label, id }) => (
+    <Link key={id} to={sectionPath(id)} {...sectionLinkOptions} aria-current={active === id ? "location" : undefined}
       onClick={mobile ? () => setOpen(false) : undefined}>
       {label}
     </Link>
@@ -110,9 +73,9 @@ export default function Navbar({ toggleTheme, mode }) {
 
   return (
     <header className="u-header" ref={header}>
-      <Link className="u-button u-skip" to={sectionPath(overviewSectionId)}>Skip to content</Link>
+      <Link className="u-button u-skip" to={routes.overview} {...sectionLinkOptions}>Skip to content</Link>
       <div className="u-container u-bar">
-        <Link className="u-brand" to={sectionPath(overviewSectionId)} aria-label="Ursus overview">
+        <Link className="u-brand" to={routes.overview} {...sectionLinkOptions} aria-label="Ursus overview">
           <img src={logo} alt="" width="48" height="46" />
           <span>URSUS</span>
         </Link>
@@ -122,7 +85,7 @@ export default function Navbar({ toggleTheme, mode }) {
         </nav>
         <div className="u-header-actions">
           <ProfileLinks iconsOnly />
-          <Link className="u-icon" to="/login" aria-label="Admin dashboard" title="Admin dashboard">
+          <Link className="u-icon" to={routes.login} aria-label="Admin dashboard" title="Admin dashboard">
             <DashboardOutlined aria-hidden="true" />
           </Link>
           <button className="u-icon" type="button" onClick={toggleTheme}

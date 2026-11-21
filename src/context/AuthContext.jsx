@@ -1,46 +1,48 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 const AuthContext = createContext();
+const signedOut = { user: null, isAdmin: false, authLoading: false };
+const checking = { ...signedOut, authLoading: true };
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [authLoading, setAuthLoading] = useState(true);
+  const [session, setSession] = useState(checking);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setAuthLoading(true);
-
-      if (!firebaseUser) {
-        setUser(null);
-        setIsAdmin(false);
-        setAuthLoading(false);
+    let revision = 0;
+    let subscribed = true;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!subscribed) return;
+      const currentRevision = ++revision;
+      if (!user) {
+        setSession(signedOut);
         return;
       }
 
+      setSession(checking);
+      let isAdmin = false;
       try {
-        const tokenResult = await firebaseUser.getIdTokenResult(true);
-        setUser(firebaseUser);
-        setIsAdmin(tokenResult.claims.admin === true);
+        const token = await user.getIdTokenResult(true);
+        isAdmin = token.claims.admin === true;
       } catch (error) {
-        console.error("Error reading admin claim:", error);
-        setUser(firebaseUser);
-        setIsAdmin(false);
-      } finally {
-        setAuthLoading(false);
+        if (subscribed && revision === currentRevision) {
+          console.error("Error reading admin claim:", error);
+        }
+      }
+
+      if (subscribed && revision === currentRevision) {
+        setSession({ user, isAdmin, authLoading: false });
       }
     });
 
-    return unsubscribe;
+    return () => {
+      subscribed = false;
+      unsubscribe();
+    };
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, isAdmin, authLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={session}>{children}</AuthContext.Provider>;
 }
 
 export function useAuthContext() {
