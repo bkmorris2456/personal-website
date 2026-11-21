@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Close, DarkModeRounded, DashboardOutlined, LightModeRounded, MailOutline, Menu } from "@mui/icons-material";
+import { Close, DarkModeRounded, DashboardOutlined, LightModeRounded, Menu } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/ursus-logo.png";
 import { externalNavItems, sectionNavItems, sectionPath } from "./constants/navItems";
@@ -122,9 +122,6 @@ export default function Navbar({ toggleTheme, mode }) {
         </nav>
         <div className="u-header-actions">
           <ProfileLinks iconsOnly />
-          <Link className="u-icon u-desktop-action" to={sectionPath("contact")} aria-label="Contact Blake" title="Contact Blake">
-            <MailOutline />
-          </Link>
           <Link className="u-icon" to="/login" aria-label="Admin dashboard" title="Admin dashboard">
             <DashboardOutlined aria-hidden="true" />
           </Link>

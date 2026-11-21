@@ -1,7 +1,7 @@
 ---
 title: Session index
 created: 2026-11-19T23:29:36-05:00
-last_updated: 2026-11-20T22:41:39-05:00
+last_updated: 2026-11-20T22:48:10-05:00
 status: active
 ---
 
@@ -9,6 +9,7 @@ status: active
 
 | Local start | Session | Outcome |
 | --- | --- | --- |
+| 2026-11-20, ~22:47-05:00 | [Remove duplicate contact icon](2026-11-20_22-47-development-session.md) | Kept the Contact nav link and hero action |
 | 2026-11-20, ~22:38-05:00 | [Portfolio tab title and Ursus favicon](2026-11-20_22-38-development-session.md) | Verified title and bear favicon in both Chromium color schemes |
 | 2026-11-20, ~22:29-05:00 | [Featured Projects card artwork removal](2026-11-20_22-29-development-session.md) | Verified title alignment and preserved links and hover in both themes |
 | 2026-11-20, ~21:19-05:00 | [Homepage section heading alignment](2026-11-20_21-19-development-session.md) | Verified all five headings share a centerline and spacing across themes and widths |
